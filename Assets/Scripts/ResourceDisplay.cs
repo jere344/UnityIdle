@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Shows the resources obtained
 
@@ -35,10 +36,7 @@ public class ResourceDisplay : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DisplayResource();
-        }
+
     }
 
     public void DisplayResource()
@@ -55,11 +53,10 @@ public class ResourceDisplay : MonoBehaviour
         else
         {
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
-                        _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
-            resourcePriceText = _newResource.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>(); 
 
-            resourcePriceText.text = "" + resourcePrice;
-
+            _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
+            resourceText.text = "" + resourcePrice;
         }
     }
 }

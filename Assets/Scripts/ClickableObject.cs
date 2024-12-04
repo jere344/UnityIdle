@@ -33,8 +33,10 @@ public class ClickableObject : MonoBehaviour
 
     [SerializeField]
     private float _workerCompetence;
-    private bool isWorkerActive = false;
+    private bool isWorkerActive;
+    private bool workerResource;
     private Coroutine workerCoroutine;
+
 
     void Start()
     {
@@ -76,6 +78,12 @@ public class ClickableObject : MonoBehaviour
     private IEnumerator restartClicker()
     {
         _barAmountText.text = "Terminé !";
+
+        if (!workerResource)
+        {
+            resourceDisplay.DisplayResource();
+        }
+
         yield return new WaitForSeconds(0.5f);
         _fillAmount = minFillAmount;
         _barAmountText.text = "";
@@ -119,10 +127,13 @@ public class ClickableObject : MonoBehaviour
 
                 if (_fillAmount >= _maxFillAmount)
                 {
+                    workerResource = true;
                     _barAmountText.text = "Terminé !";
+                    resourceDisplay.DisplayResource();
                     yield return new WaitForSeconds(_workerCompetence);
                     _fillAmount = minFillAmount;
                     _barAmountText.text = "";
+                    workerResource = false;
                 }
 
                 if (remainingAmount > 1)

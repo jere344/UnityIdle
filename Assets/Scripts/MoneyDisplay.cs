@@ -7,13 +7,15 @@ public class MoneyDisplay : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _goldAmountText;
+    public float GoldAmount;
 
-    private float goldAmount;
+    private GoalDisplay goalDisplay;
 
     void Start()
     {
-        goldAmount = 0;
-        _goldAmountText.text = "Or : " + goldAmount.ToString("");
+        goalDisplay = FindObjectOfType<GoalDisplay>();
+        GoldAmount = 0;
+        _goldAmountText.text = "Or : " + GoldAmount.ToString("");
     }
 
     void Update()
@@ -23,7 +25,8 @@ public class MoneyDisplay : MonoBehaviour
 
     public void GainGold(float GainAmount)
     {
-        goldAmount += GainAmount;
-        _goldAmountText.text = "Or : " + goldAmount.ToString("");
+        goalDisplay.PlayerGoalAmount += GainAmount;
+        GoldAmount += GainAmount;
+        _goldAmountText.text = "Or : " + GoldAmount.ToString("");
     }
 }
