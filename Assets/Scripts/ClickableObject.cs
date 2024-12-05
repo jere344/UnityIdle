@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// Clickable object behavior
-// When clicked, increases a bar
-// Gives a resource when the bar reaches its maximum
-
-// The player can improve the value of his click 
-// Worker can improve his own speed
-
 public class ClickableObject : MonoBehaviour
 {
+    private ResourcesGestion resourceGestion;
     private ResourceDisplay resourceDisplay;
+    private ResourceScriptable actualResource;
+
+    public float ResourcePrice;
+    public bool ResourceIsFood;
+    public bool ResourceIsLaundry;
+    public bool ResourceIsDryer;
+    private string resourceName;
 
     [SerializeField]
     private TextMeshProUGUI _barAmountText;
@@ -21,15 +22,12 @@ public class ClickableObject : MonoBehaviour
     private Image _barAmountImage;
 
     [SerializeField]
-    private string _objectText;
+    private float _playerCompetence;
 
     [SerializeField]
-    private float _playerCompetence;
-    [SerializeField]
     private float _maxFillAmount;
-    private float minFillAmount = 0;
-    private float _fillAmount;
-    private float remainingAmount;
+    [SerializeField]
+    private float _fillAmount = 0;
 
     [SerializeField]
     private float _workerCompetence;
@@ -37,13 +35,12 @@ public class ClickableObject : MonoBehaviour
     private bool workerResource;
     private Coroutine workerCoroutine;
 
-
     void Start()
     {
         resourceDisplay = FindObjectOfType<ResourceDisplay>();
+        resourceGestion = FindObjectOfType<ResourcesGestion>();
 
-        _fillAmount = minFillAmount;
-        remainingAmount = _fillAmount;
+        ChangeResource();
     }
 
     void Update()
@@ -54,20 +51,15 @@ public class ClickableObject : MonoBehaviour
 
     public void Clicker()
     {
+        _fillAmount += _playerCompetence;
+        _barAmountText.text = resourceName + "\n" + _fillAmount + "/" + _maxFillAmount;
+    }
+
+    public void PlayerClicker()
+    {
         if (_fillAmount < _maxFillAmount)
         {
-            _fillAmount += _playerCompetence;
-            remainingAmount = _maxFillAmount - _fillAmount;
-
-            if (remainingAmount == 1)
-            {
-                _barAmountText.text = _objectText + " dans : " + remainingAmount.ToString("") + " clic";
-            }
-            else
-            {
-                _barAmountText.text = _objectText + " dans : " + remainingAmount.ToString("") + " clics";
-            }
-
+            Clicker();
             if (_fillAmount >= _maxFillAmount)
             {
                 StartCoroutine(restartClicker());
@@ -85,9 +77,13 @@ public class ClickableObject : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.5f);
-        _fillAmount = minFillAmount;
+        ChangeResource();
+        _fillAmount = 0;
         _barAmountText.text = "";
     }
+
+
+    //########################## Auto-Clicker Behaviour ##########################//
 
     public void Worker()
     {
@@ -110,20 +106,14 @@ public class ClickableObject : MonoBehaviour
         }
     }
 
-   private IEnumerator workerRoutine()
-   {
+    private IEnumerator workerRoutine()
+    {
         while (true)
         {
             if (_fillAmount < _maxFillAmount)
             {
-                _fillAmount++;
-                remainingAmount = _maxFillAmount - _fillAmount;
-
-                if (remainingAmount == 1)
-                {
-                    _barAmountText.text = _objectText + " dans : " + remainingAmount.ToString("") + " clic";
-                    yield return new WaitForSeconds(_workerCompetence);
-                }
+                Clicker();
+                yield return new WaitForSeconds(_workerCompetence);
 
                 if (_fillAmount >= _maxFillAmount)
                 {
@@ -131,19 +121,36 @@ public class ClickableObject : MonoBehaviour
                     _barAmountText.text = "Terminé !";
                     resourceDisplay.DisplayResource();
                     yield return new WaitForSeconds(_workerCompetence);
-                    _fillAmount = minFillAmount;
+                    ChangeResource();
+                    _fillAmount = 0;
                     _barAmountText.text = "";
                     workerResource = false;
                 }
-
-                if (remainingAmount > 1)
-                {
-                    _barAmountText.text = _objectText + " dans : " + remainingAmount.ToString("") + " clics";
-                    yield return new WaitForSeconds(_workerCompetence);
-                }
-
             }
         }
-   }
+    }
+
+    private void ChangeResource()
+    {
+        if (ResourceIsFood)
+        {
+            actualResource = resourceGestion.seasonResource[Random.Range(0, resourceGestion.seasonResource.Count)];
+        }
+
+        if (ResourceIsLaundry)
+        {
+            actualResource = resourceGestion.AllLaundryResources[Random.Range(0, resourceGestion.AllLaundryResources.Count)];
+        }
+
+        if (ResourceIsDryer)
+        {
+            actualResource = resourceGestion.AllDryerResources[Random.Range(0, resourceGestion.AllDryerResources.Count)];
+        }
+
+        _maxFillAmount = actualResource.resourceClick;
+        resourceName = actualResource.resourceName;
+        ResourcePrice = actualResource.resourcePrice;
+    }
 
 }
+

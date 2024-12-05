@@ -6,6 +6,9 @@ using TMPro;
 
 public class GoalDisplay : MonoBehaviour
 {
+    private ResourcesGestion randomResource;
+    private ResourceScriptable resourceScriptable;
+
     [SerializeField]
     private Image _seasonDisplay;
     [SerializeField]
@@ -22,17 +25,18 @@ public class GoalDisplay : MonoBehaviour
     private bool goalCompleted = false;
 
     public float PlayerGoalAmount;
-
     void Start()
     {
+        randomResource = FindObjectOfType<ResourcesGestion>();
+
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
 
         PlayerGoalAmount = 0;
-        seasonGoal = 10;
+        seasonGoal = 50;
+
+        randomResource.ChangeRandomResourcesList();
     }
-
-
     void Update()
     {
         if (goalCompleted == false)
@@ -55,6 +59,14 @@ public class GoalDisplay : MonoBehaviour
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
 
+        resourceScriptable.multiplicatorValue *= Random.Range(1.8f, 2);
+        randomResource.ChangeRandomResourcesList();
+
         goalCompleted = false;
+    }
+
+    private void IncreaseDifficulty()
+    {
+
     }
 }

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Collect the money earned
-
 public class ResourceBehaviour : MonoBehaviour
 {
     public float MoneyAmount;

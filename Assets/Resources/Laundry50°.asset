@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceImage: {fileID: 0}
   resourceName: "Lavage 50\xB0"
-  resourcePrice: 15
+  timeClick: 1
+  resourcePrice: 10
   resourceClick: 20
-  type: 1

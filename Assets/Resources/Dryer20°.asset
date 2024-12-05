@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceImage: {fileID: 0}
   resourceName: "S\xE9chage 20\xB0"
+  timeClick: 0
   resourcePrice: 5
   resourceClick: 10
-  type: 2

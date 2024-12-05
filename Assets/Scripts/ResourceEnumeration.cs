@@ -1,8 +1,7 @@
-// Enumeration of different types of resources
 
-public enum ResourceType
+public enum ResourceTimeClick
 {
-    Food,
-    Laundry,
-    Dryer
+    Short,
+    Medium,
+    Long
 }

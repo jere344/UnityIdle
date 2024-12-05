@@ -4,17 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Shows the resources obtained
-
 public class ResourceDisplay : MonoBehaviour
 {
-    [SerializeField]
-    private List<ResourceScriptable> _resources = new List<ResourceScriptable>();
+    public ClickableObject clickableObject;
+
     [SerializeField]
     private GameObject _resourcePrefab;
     [SerializeField]
     private Transform _resourceContainer;
-    private TextMeshProUGUI resourcePriceText;
     private float resourcePrice;
     private float maxResources = 8;
 
@@ -24,9 +21,6 @@ public class ResourceDisplay : MonoBehaviour
     private GameObject _extraMoneyGO;
     public float ExtraMoney;
 
-
-
-    private ResourceScriptable _randomResource;
     private GameObject _newResource;
 
     void Start()
@@ -36,13 +30,12 @@ public class ResourceDisplay : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     public void DisplayResource()
     {
-        _randomResource = _resources[Random.Range(0, _resources.Count)];
-        resourcePrice = _randomResource.resourcePrice;
+        resourcePrice = clickableObject.ResourcePrice;
 
         if (_resourceContainer.childCount >= maxResources)
         {
@@ -53,7 +46,7 @@ public class ResourceDisplay : MonoBehaviour
         else
         {
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
-            TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>(); 
+            TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>();
 
             _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
             resourceText.text = "" + resourcePrice;
