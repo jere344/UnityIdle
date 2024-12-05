@@ -4,6 +4,5 @@ public enum ResourceType
 {
     Food,
     Laundry,
-    Furniture,
-    Goodies
+    Dryer
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e75b728fd2bf2a4a81393d863e6a1ee, type: 3}
-  m_Name: Eclair
+  m_Name: Cookies
   m_EditorClassIdentifier: 
-  resourceImage: {fileID: 0}
-  resourceName: Eclairs
-  resourceDescription: 
-  resourcePrice: 3
+  resourceImage: {fileID: 21300000, guid: a64e62eb1a105fd4e9336ff8b2a81e4a, type: 3}
+  resourceName: Cookies natures
+  resourcePrice: 5
+  resourceClick: 10
   type: 0

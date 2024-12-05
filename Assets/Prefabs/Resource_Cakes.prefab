@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 2567992776205331859}
   - component: {fileID: 7556803328446837043}
   m_Layer: 0
-  m_Name: Cake_Group
+  m_Name: Resource_Cakes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
