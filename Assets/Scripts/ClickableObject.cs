@@ -8,9 +8,10 @@ public class ClickableObject : MonoBehaviour
 {
     private ResourcesGestion resourceGestion;
     private ResourceDisplay resourceDisplay;
-    private ResourceScriptable actualResource;
+    public ResourceScriptable actualResource;
+    private GoalDisplay goalDisplay;
 
-    public float ResourcePrice;
+    public int ResourcePrice;
     public bool ResourceIsFood;
     public bool ResourceIsLaundry;
     public bool ResourceIsDryer;
@@ -39,6 +40,7 @@ public class ClickableObject : MonoBehaviour
     {
         resourceDisplay = FindObjectOfType<ResourceDisplay>();
         resourceGestion = FindObjectOfType<ResourcesGestion>();
+        goalDisplay = FindObjectOfType<GoalDisplay>();
 
         ChangeResource();
     }
@@ -147,9 +149,9 @@ public class ClickableObject : MonoBehaviour
             actualResource = resourceGestion.AllDryerResources[Random.Range(0, resourceGestion.AllDryerResources.Count)];
         }
 
-        _maxFillAmount = actualResource.resourceClick;
-        resourceName = actualResource.resourceName;
-        ResourcePrice = actualResource.resourcePrice;
+        _maxFillAmount = actualResource.GetResourceClick() * goalDisplay.Multiplicator;
+        resourceName = actualResource.ResourceName;
+        ResourcePrice = actualResource.GetResourcePrice() * goalDisplay.Multiplicator;
     }
 
 }

@@ -12,14 +12,14 @@ public class ResourceDisplay : MonoBehaviour
     private GameObject _resourcePrefab;
     [SerializeField]
     private Transform _resourceContainer;
-    private float resourcePrice;
+    private int resourcePrice;
     private float maxResources = 8;
 
     [SerializeField]
     private TextMeshProUGUI _extraMoneyText;
     [SerializeField]
     private GameObject _extraMoneyGO;
-    public float ExtraMoney;
+    public int ExtraMoney;
 
     private GameObject _newResource;
 
@@ -30,7 +30,12 @@ public class ResourceDisplay : MonoBehaviour
 
     void Update()
     {
-        
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    string resourceTag = clickableObject.actualResource.ResourceTag;
+        //    GameObject resourceImage = GameObject.FindWithTag(resourceTag);
+        //    resourceImage.Image.SetActive(true);
+        //}
     }
 
     public void DisplayResource()

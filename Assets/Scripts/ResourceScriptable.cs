@@ -5,34 +5,52 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new_resource", menuName = "Clickers/Resource", order = 0)]
 public class ResourceScriptable : ScriptableObject
 {
-    public Sprite resourceImage;
-    public string resourceName;
-    public float resourcePrice;
-    public float resourceClick;
+    public Sprite ResourceImage;
+    public string ResourceName;
+    public string ResourceTag;
+    
     public ResourceTimeClick timeClick;
 
-    public float multiplicatorValue = 1;
-    public void TimeClickValue()
+    public int GetResourcePrice()
     {
+        var ret = 0;
         switch (timeClick)
         {
             case ResourceTimeClick.Short:
-                resourcePrice = 5 * multiplicatorValue;
-                resourceClick = 10 * multiplicatorValue;
+                ret = 5;
                 break;
             case ResourceTimeClick.Medium:
-                resourcePrice = 10 * multiplicatorValue;
-                resourceClick = 20 * multiplicatorValue;
+                ret = 10;
                 break;
             case ResourceTimeClick.Long:
-                resourcePrice = 20 * multiplicatorValue;
-                resourceClick = 30 * multiplicatorValue;
+                ret = 15;
+                break;
+            default:
                 break;
         }
+
+        return ret;
+    }
+    public int GetResourceClick()
+    {
+
+        var ret = 0;
+        switch (timeClick)
+        {
+            case ResourceTimeClick.Short:
+                ret = 10;
+                break;
+            case ResourceTimeClick.Medium:
+                ret = 20;
+                break;
+            case ResourceTimeClick.Long:
+                ret = 30;
+                break;
+            default:
+                break;
+        }
+
+        return ret;
     }
 
-    private void OnEnable()
-    {
-        TimeClickValue();
-    }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ResourceBehaviour : MonoBehaviour
 {
-    public float MoneyAmount;
-    private float _extraMoneyAmount;
+    public int MoneyAmount;
+    private int _extraMoneyAmount;
     private MoneyDisplay moneyDisplay;
     private ResourceDisplay resourceDisplay;
 

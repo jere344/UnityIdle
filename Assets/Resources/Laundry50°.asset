@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e75b728fd2bf2a4a81393d863e6a1ee, type: 3}
   m_Name: "Laundry50\xB0"
   m_EditorClassIdentifier: 
-  resourceImage: {fileID: 0}
-  resourceName: "Lavage 50\xB0"
+  ResourceImage: {fileID: 0}
+  ResourceName: "Lavage 50\xB0"
+  ResourceTag: Cake
   timeClick: 1
-  resourcePrice: 10
-  resourceClick: 20

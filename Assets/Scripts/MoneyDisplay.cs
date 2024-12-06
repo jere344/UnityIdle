@@ -23,7 +23,7 @@ public class MoneyDisplay : MonoBehaviour
         
     }
 
-    public void GainGold(float GainAmount)
+    public void GainGold(int GainAmount)
     {
         goalDisplay.PlayerGoalAmount += GainAmount;
         GoldAmount += GainAmount;

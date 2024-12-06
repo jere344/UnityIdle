@@ -12,19 +12,27 @@ public class GoalDisplay : MonoBehaviour
     [SerializeField]
     private Image _seasonDisplay;
     [SerializeField]
+    private Image _menuDisplay;
+    [SerializeField]
     private Sprite[] _seasonsSprites;
+    [SerializeField]
+    private Sprite[] _menuSprites;
     [SerializeField]
     private TextMeshProUGUI _seasonText;
     private string[] seasonsText = { "Printemps", "Été", "Automne", "Hiver" };
 
     private int currentIndex = 0;
-    private float seasonGoal;
+    private int seasonGoal;
+
+    public int PlayerGoalAmount;
+    public int Multiplicator;
+
 
     [SerializeField]
     private TextMeshProUGUI _goalText;
     private bool goalCompleted = false;
 
-    public float PlayerGoalAmount;
+
     void Start()
     {
         randomResource = FindObjectOfType<ResourcesGestion>();
@@ -34,6 +42,9 @@ public class GoalDisplay : MonoBehaviour
 
         PlayerGoalAmount = 0;
         seasonGoal = 50;
+
+        Multiplicator = 1;
+
 
         randomResource.ChangeRandomResourcesList();
     }
@@ -55,18 +66,23 @@ public class GoalDisplay : MonoBehaviour
     {
         PlayerGoalAmount = 0;
 
+        if (Multiplicator == 1)
+        {
+            Multiplicator = 0;
+        }
+
+        Multiplicator += 2;
+        seasonGoal *= Multiplicator;
+
         currentIndex = (currentIndex + 1) % seasonsText.Length;
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
+        _menuDisplay.sprite = _menuSprites[currentIndex];
 
-        resourceScriptable.multiplicatorValue *= Random.Range(1.8f, 2);
+
         randomResource.ChangeRandomResourcesList();
 
         goalCompleted = false;
-    }
-
-    private void IncreaseDifficulty()
-    {
 
     }
 }
