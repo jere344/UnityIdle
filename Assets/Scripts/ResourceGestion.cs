@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ResourcesGestion : MonoBehaviour
+public class ResourceGestion : MonoBehaviour
 {
     public List<ResourceScriptable> AllLaundryResources;
     public List<ResourceScriptable> AllDryerResources;
@@ -23,6 +23,7 @@ public class ResourcesGestion : MonoBehaviour
     {
         resources = new List<ResourceScriptable>();
         copyResources = new List<ResourceScriptable>(AllFoodResources);
+
 
         for (index = 0; index < 4; index++)
         {

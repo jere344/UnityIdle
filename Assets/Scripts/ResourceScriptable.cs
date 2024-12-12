@@ -11,7 +11,7 @@ public class ResourceScriptable : ScriptableObject
     
     public ResourceTimeClick timeClick;
 
-    public int GetResourcePrice()
+    public int GetResourceMoney()
     {
         var ret = 0;
         switch (timeClick)

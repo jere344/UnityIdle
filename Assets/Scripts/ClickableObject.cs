@@ -6,32 +6,35 @@ using TMPro;
 
 public class ClickableObject : MonoBehaviour
 {
-    private ResourcesGestion resourceGestion;
+    private UpgradeManager upgradeManager;
+    private ResourceGestion resourceGestion;
     private ResourceDisplay resourceDisplay;
-    public ResourceScriptable actualResource;
     private GoalDisplay goalDisplay;
+    public ResourceScriptable actualResource;
 
-    public int ResourcePrice;
+    private float resourceMoneyBase;
+    private float resourceClickBase;
+    public int ResourceMoney;
     public bool ResourceIsFood;
     public bool ResourceIsLaundry;
     public bool ResourceIsDryer;
     private string resourceName;
+
+    private bool playerIsClicking;
 
     [SerializeField]
     private TextMeshProUGUI _barAmountText;
     [SerializeField]
     private Image _barAmountImage;
 
-    [SerializeField]
-    private float _playerCompetence;
+    public int playerCompetence;
 
     [SerializeField]
     private float _maxFillAmount;
     [SerializeField]
     private float _fillAmount = 0;
 
-    [SerializeField]
-    private float _workerCompetence;
+    private float workerCompetence;
     private bool isWorkerActive;
     private bool workerResource;
     private Coroutine workerCoroutine;
@@ -39,8 +42,9 @@ public class ClickableObject : MonoBehaviour
     void Start()
     {
         resourceDisplay = FindObjectOfType<ResourceDisplay>();
-        resourceGestion = FindObjectOfType<ResourcesGestion>();
+        resourceGestion = FindObjectOfType<ResourceGestion>();
         goalDisplay = FindObjectOfType<GoalDisplay>();
+        upgradeManager = FindObjectOfType<UpgradeManager>();
 
         ChangeResource();
     }
@@ -49,39 +53,43 @@ public class ClickableObject : MonoBehaviour
     {
         _barAmountImage.fillAmount = _fillAmount / _maxFillAmount;
         _barAmountImage.color = Color.Lerp(Color.red, Color.green, _fillAmount / _maxFillAmount);
+
+
+        if (_fillAmount >= _maxFillAmount)
+        {
+            _barAmountText.text = resourceName + "\n" + _fillAmount + "/" + _maxFillAmount;
+        }
+
+        if (_fillAmount >= _maxFillAmount)
+        {
+            StartCoroutine(restartClicker());
+        }
     }
 
-    public void Clicker()
+    
+
+    public void Clicker(int competence)
     {
-        _fillAmount += _playerCompetence;
+        _fillAmount += competence;
         _barAmountText.text = resourceName + "\n" + _fillAmount + "/" + _maxFillAmount;
+
+
     }
 
     public void PlayerClicker()
     {
-        if (_fillAmount < _maxFillAmount)
-        {
-            Clicker();
-            if (_fillAmount >= _maxFillAmount)
-            {
-                StartCoroutine(restartClicker());
-            }
-        }
+
+            playerCompetence = upgradeManager.PlayerCompetence;
+            _fillAmount += playerCompetence
     }
 
     private IEnumerator restartClicker()
     {
         _barAmountText.text = "Terminé !";
-
-        if (!workerResource)
-        {
-            resourceDisplay.DisplayResource();
-        }
-
+        resourceDisplay.DisplayResource();
         yield return new WaitForSeconds(0.5f);
-        ChangeResource();
-        _fillAmount = 0;
-        _barAmountText.text = "";
+
+        ResetStats();
     }
 
 
@@ -90,21 +98,9 @@ public class ClickableObject : MonoBehaviour
     public void Worker()
     {
         isWorkerActive = !isWorkerActive;
-
         if (isWorkerActive)
         {
-            if (workerCoroutine == null)
-            {
-                workerCoroutine = StartCoroutine(workerRoutine());
-            }
-        }
-        else
-        {
-            if (workerCoroutine != null)
-            {
-                StopCoroutine(workerCoroutine);
-                workerCoroutine = null;
-            }
+
         }
     }
 
@@ -114,18 +110,17 @@ public class ClickableObject : MonoBehaviour
         {
             if (_fillAmount < _maxFillAmount)
             {
-                Clicker();
-                yield return new WaitForSeconds(_workerCompetence);
+                Clicker(1);
+                workerCompetence = upgradeManager.WorkerCompetence;
+                yield return new WaitForSeconds(workerCompetence);
 
                 if (_fillAmount >= _maxFillAmount)
                 {
                     workerResource = true;
                     _barAmountText.text = "Terminé !";
                     resourceDisplay.DisplayResource();
-                    yield return new WaitForSeconds(_workerCompetence);
-                    ChangeResource();
-                    _fillAmount = 0;
-                    _barAmountText.text = "";
+                    yield return new WaitForSeconds(0.2f);
+                    ResetStats();
                     workerResource = false;
                 }
             }
@@ -149,9 +144,18 @@ public class ClickableObject : MonoBehaviour
             actualResource = resourceGestion.AllDryerResources[Random.Range(0, resourceGestion.AllDryerResources.Count)];
         }
 
-        _maxFillAmount = actualResource.GetResourceClick() * goalDisplay.Multiplicator;
         resourceName = actualResource.ResourceName;
-        ResourcePrice = actualResource.GetResourcePrice() * goalDisplay.Multiplicator;
+        resourceClickBase = actualResource.GetResourceClick() * (Mathf.Pow(1.5f, (goalDisplay.currentIndex)));
+        resourceMoneyBase = actualResource.GetResourceMoney() * (Mathf.Pow(1.5f, (goalDisplay.currentIndex)));
+        _maxFillAmount = (int) resourceClickBase;
+        ResourceMoney = (int) resourceMoneyBase;
+    }
+
+    public void ResetStats()
+    {
+        ChangeResource();
+        _fillAmount = 0;
+        _barAmountText.text = "";
     }
 
 }

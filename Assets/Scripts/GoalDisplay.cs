@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GoalDisplay : MonoBehaviour
 {
-    private ResourcesGestion randomResource;
+    private ResourceGestion randomResource;
+    private ClickableObject clickableObjects;
     private ResourceScriptable resourceScriptable;
 
     [SerializeField]
@@ -21,11 +23,12 @@ public class GoalDisplay : MonoBehaviour
     private TextMeshProUGUI _seasonText;
     private string[] seasonsText = { "Printemps", "Été", "Automne", "Hiver" };
 
-    private int currentIndex = 0;
-    private int seasonGoal;
+    public int currentIndex = 0;
+    private int newSeasonGoal;
+    private int seasonGoalBase = 50;
+    private float seasonGoal;
 
     public int PlayerGoalAmount;
-    public int Multiplicator;
 
 
     [SerializeField]
@@ -35,15 +38,16 @@ public class GoalDisplay : MonoBehaviour
 
     void Start()
     {
-        randomResource = FindObjectOfType<ResourcesGestion>();
+        randomResource = FindObjectOfType<ResourceGestion>();
+        clickableObjects = FindObjectOfType<ClickableObject>();
+
+
 
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
 
         PlayerGoalAmount = 0;
-        seasonGoal = 50;
-
-        Multiplicator = 1;
+        newSeasonGoal = seasonGoalBase;
 
 
         randomResource.ChangeRandomResourcesList();
@@ -52,9 +56,9 @@ public class GoalDisplay : MonoBehaviour
     {
         if (goalCompleted == false)
         {
-            _goalText.text = "Objectif : " + PlayerGoalAmount.ToString("") + "/" + seasonGoal.ToString("") + " Or";
+            _goalText.text = "Objectif : " + PlayerGoalAmount.ToString("") + "/" + newSeasonGoal.ToString("") + " Or";
 
-            if (PlayerGoalAmount >= seasonGoal)
+            if (PlayerGoalAmount >= newSeasonGoal)
             {
                 goalCompleted = true;
                 DisplaySeason();
@@ -64,23 +68,18 @@ public class GoalDisplay : MonoBehaviour
 
     private void DisplaySeason()
     {
+        randomResource.ChangeRandomResourcesList();
+
         PlayerGoalAmount = 0;
 
-        if (Multiplicator == 1)
-        {
-            Multiplicator = 0;
-        }
-
-        Multiplicator += 2;
-        seasonGoal *= Multiplicator;
-
-        currentIndex = (currentIndex + 1) % seasonsText.Length;
+        currentIndex += 1;
+        seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (currentIndex)));
+        newSeasonGoal = (int)seasonGoal;
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
         _menuDisplay.sprite = _menuSprites[currentIndex];
 
-
-        randomResource.ChangeRandomResourcesList();
+        clickableObjects.ResetStats();
 
         goalCompleted = false;
 

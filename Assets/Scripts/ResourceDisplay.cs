@@ -40,7 +40,7 @@ public class ResourceDisplay : MonoBehaviour
 
     public void DisplayResource()
     {
-        resourcePrice = clickableObject.ResourcePrice;
+        resourcePrice = clickableObject.ResourceMoney;
 
         if (_resourceContainer.childCount >= maxResources)
         {
