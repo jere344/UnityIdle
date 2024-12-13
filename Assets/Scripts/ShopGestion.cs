@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class ShopGestion : MonoBehaviour
 {
     public int PlayerCompetence = 1;
     public float WorkerCompetence = 0.5f;
@@ -11,7 +11,7 @@ public class UpgradeManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
 

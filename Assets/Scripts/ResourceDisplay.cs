@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class ResourceDisplay : MonoBehaviour
 {
-    public ClickableObject clickableObject;
-
     [SerializeField]
     private GameObject _resourcePrefab;
     [SerializeField]
@@ -30,17 +28,12 @@ public class ResourceDisplay : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    string resourceTag = clickableObject.actualResource.ResourceTag;
-        //    GameObject resourceImage = GameObject.FindWithTag(resourceTag);
-        //    resourceImage.Image.SetActive(true);
-        //}
+
     }
 
-    public void DisplayResource()
+    public void DisplayResource(int ResourceMoney)
     {
-        resourcePrice = clickableObject.ResourceMoney;
+        resourcePrice = ResourceMoney;
 
         if (_resourceContainer.childCount >= maxResources)
         {

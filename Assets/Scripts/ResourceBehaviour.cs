@@ -6,13 +6,9 @@ public class ResourceBehaviour : MonoBehaviour
 {
     public int MoneyAmount;
     private int _extraMoneyAmount;
-    private MoneyDisplay moneyDisplay;
-    private ResourceDisplay resourceDisplay;
 
     void Start()
     {
-        moneyDisplay = FindObjectOfType<MoneyDisplay>();
-        resourceDisplay = FindObjectOfType<ResourceDisplay>();
 
     }
 
@@ -23,15 +19,15 @@ public class ResourceBehaviour : MonoBehaviour
 
     public void GainGold()
     {
-        moneyDisplay.GainGold(MoneyAmount);
+        GameManager.Instance.DisplayMoney.GainGold(MoneyAmount);
         Destroy(gameObject);
     }
 
     public void GainExtraGold()
     {
-        _extraMoneyAmount = resourceDisplay.GetComponent<ResourceDisplay>().ExtraMoney;
-        moneyDisplay.GainGold(_extraMoneyAmount);
-        resourceDisplay.GetComponent<ResourceDisplay>().ExtraMoney = 0;
+        _extraMoneyAmount = GameManager.Instance.DisplayResource.ExtraMoney;
+        GameManager.Instance.DisplayMoney.GainGold(_extraMoneyAmount);
+        GameManager.Instance.DisplayResource.ExtraMoney = 0;
         gameObject.SetActive(false);
     }
 }

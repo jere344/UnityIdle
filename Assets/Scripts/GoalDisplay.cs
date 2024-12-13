@@ -7,18 +7,21 @@ using System;
 
 public class GoalDisplay : MonoBehaviour
 {
-    private ResourceGestion randomResource;
-    private ClickableObject clickableObjects;
-    private ResourceScriptable resourceScriptable;
-
     [SerializeField]
     private Image _seasonDisplay;
     [SerializeField]
     private Image _menuDisplay;
     [SerializeField]
+    private Image _windowDisplay;
+
+    [SerializeField]
     private Sprite[] _seasonsSprites;
     [SerializeField]
     private Sprite[] _menuSprites;
+    [SerializeField]
+    private Sprite[] _windowSprites;
+
+
     [SerializeField]
     private TextMeshProUGUI _seasonText;
     private string[] seasonsText = { "Printemps", "Été", "Automne", "Hiver" };
@@ -30,27 +33,20 @@ public class GoalDisplay : MonoBehaviour
 
     public int PlayerGoalAmount;
 
-
     [SerializeField]
     private TextMeshProUGUI _goalText;
     private bool goalCompleted = false;
 
-
     void Start()
     {
-        randomResource = FindObjectOfType<ResourceGestion>();
-        clickableObjects = FindObjectOfType<ClickableObject>();
-
-
+        GameManager.Instance.gestionResource = FindObjectOfType<ResourceGestion>();
 
         _seasonText.text = seasonsText[currentIndex];
-        _seasonDisplay.sprite = _seasonsSprites[currentIndex];
 
         PlayerGoalAmount = 0;
         newSeasonGoal = seasonGoalBase;
 
-
-        randomResource.ChangeRandomResourcesList();
+        GameManager.Instance.gestionResource.ChangeRandomResourcesList();
     }
     void Update()
     {
@@ -68,20 +64,22 @@ public class GoalDisplay : MonoBehaviour
 
     private void DisplaySeason()
     {
-        randomResource.ChangeRandomResourcesList();
+        GameManager.Instance.gestionResource.ChangeRandomResourcesList();
 
         PlayerGoalAmount = 0;
 
         currentIndex += 1;
         seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (currentIndex)));
         newSeasonGoal = (int)seasonGoal;
+
         _seasonText.text = seasonsText[currentIndex];
         _seasonDisplay.sprite = _seasonsSprites[currentIndex];
         _menuDisplay.sprite = _menuSprites[currentIndex];
+        _windowDisplay.sprite = _windowSprites[currentIndex];
 
-        clickableObjects.ResetStats();
+        GameManager.Instance.ovenClickable.ResetStats();
+        //GameManager.Instance.washingClickable_001.ResetStats();
 
         goalCompleted = false;
-
     }
 }

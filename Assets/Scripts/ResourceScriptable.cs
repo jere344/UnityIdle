@@ -7,7 +7,6 @@ public class ResourceScriptable : ScriptableObject
 {
     public Sprite ResourceImage;
     public string ResourceName;
-    public string ResourceTag;
     
     public ResourceTimeClick timeClick;
 
