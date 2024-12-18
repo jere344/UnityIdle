@@ -11,7 +11,7 @@ public class ResourceDisplay : MonoBehaviour
     [SerializeField]
     private Transform _resourceContainer;
     private int resourcePrice;
-    private float maxResources = 8;
+    private float maxResources = 5;
 
     [SerializeField]
     private TextMeshProUGUI _extraMoneyText;
@@ -20,6 +20,8 @@ public class ResourceDisplay : MonoBehaviour
     public int ExtraMoney;
 
     private GameObject _newResource;
+
+    public GameObject FoodObject;
 
     void Start()
     {
@@ -31,7 +33,7 @@ public class ResourceDisplay : MonoBehaviour
 
     }
 
-    public void DisplayResource(int ResourceMoney)
+    public void DisplayResource(int ResourceMoney, Sprite ResourceImage)
     {
         resourcePrice = ResourceMoney;
 
@@ -39,14 +41,42 @@ public class ResourceDisplay : MonoBehaviour
         {
             _extraMoneyGO.SetActive(true);
             ExtraMoney += resourcePrice;
-            _extraMoneyText.text = "" + ExtraMoney;
+            _extraMoneyText.text = "" + ExtraMoney + " Or";
         }
         else
         {
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
+            Image resourceNewImage = _newResource.GetComponent<Image>();
             TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>();
 
+            resourceNewImage.sprite = ResourceImage;
             _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
+  
+            resourceText.text = "" + resourcePrice;
+        }
+    }
+
+    public void DisplayResourceFood(int ResourceMoney, Sprite ResourceImage, GameObject SelectedFoodObject)
+    {
+        resourcePrice = ResourceMoney;
+
+        if (_resourceContainer.childCount >= maxResources)
+        {
+            _extraMoneyGO.SetActive(true);
+            ExtraMoney += resourcePrice;
+            _extraMoneyText.text = "" + ExtraMoney + " Or";
+        }
+        else
+        {
+            FoodObject = SelectedFoodObject;
+            FoodObject.SetActive(!FoodObject.activeSelf);
+            _newResource = Instantiate(_resourcePrefab, _resourceContainer);
+            Image resourceNewImage = _newResource.GetComponent<Image>();
+            TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>();
+
+            resourceNewImage.sprite = ResourceImage;
+            _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
+
             resourceText.text = "" + resourcePrice;
         }
     }

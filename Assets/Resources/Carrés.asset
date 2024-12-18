@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e75b728fd2bf2a4a81393d863e6a1ee, type: 3}
   m_Name: "Carr\xE9s"
   m_EditorClassIdentifier: 
-  ResourceImage: {fileID: 0}
-  ResourceName: "Carr\xE9s \xE0 la passion"
-  ResourceTag: Cake
+  ResourceImage: {fileID: 21300000, guid: dc6398cc1404e4045bb22ef7be04634e, type: 3}
+  ResourceName: "Carr\xE9s passion"
   timeClick: 1

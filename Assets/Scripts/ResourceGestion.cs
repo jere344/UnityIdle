@@ -8,35 +8,40 @@ using UnityEngine.UI;
 public class ResourceGestion : MonoBehaviour
 {
     public List<ResourceScriptable> AllLaundryResources;
-    public List<ResourceScriptable> AllDryerResources;
     public List<ResourceScriptable> AllFoodResources;
+    public List<GameObject> AllFoodGameObjects;
 
     public List<ResourceScriptable> seasonResource;
-    private List<ResourceScriptable> resources;
-    private List<ResourceScriptable> copyResources;
-
+    public List<GameObject> seasonFoodObject;
 
     private int index;
-    private int randomIndex;
+    private int count;
 
-    List<ResourceScriptable> RandomResources()
+    public void RandomFoodResourcesList()
     {
-        resources = new List<ResourceScriptable>();
-        copyResources = new List<ResourceScriptable>(AllFoodResources);
+        seasonResource = new List<ResourceScriptable>();
+        seasonFoodObject = new List<GameObject>();
 
-
-        for (index = 0; index < 4; index++)
+        List<int> availableIndices = new List<int>();
+        for (index = 0; index < AllFoodResources.Count; index++)
         {
-            randomIndex = Random.Range(0, copyResources.Count);
-            resources.Add(copyResources[randomIndex]);
-            copyResources.RemoveAt(randomIndex);
+            availableIndices.Add(index);
         }
 
-        return resources;
+        for (count = 0; count < 4; count++)
+        {
+            int randomIndex = Random.Range(0, availableIndices.Count);
+            int selectedIndex = availableIndices[randomIndex];
+
+            seasonResource.Add(AllFoodResources[selectedIndex]);
+            seasonFoodObject.Add(AllFoodGameObjects[selectedIndex]);
+
+            availableIndices.RemoveAt(randomIndex);
+        }
     }
 
     public void ChangeRandomResourcesList()
     {
-        seasonResource = RandomResources();
+        RandomFoodResourcesList();
     }
 }

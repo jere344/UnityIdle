@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e75b728fd2bf2a4a81393d863e6a1ee, type: 3}
   m_Name: LemonTarts
   m_EditorClassIdentifier: 
-  ResourceImage: {fileID: 0}
-  ResourceName: Tartes au citron
-  ResourceTag: Cake
+  ResourceImage: {fileID: 21300000, guid: 08909c8240baf614dafadf4b85ac0413, type: 3}
+  ResourceName: Tartes citrons
   timeClick: 1
