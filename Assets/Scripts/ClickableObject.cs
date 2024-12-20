@@ -162,7 +162,9 @@ public class ClickableObject : MonoBehaviour
     {
         if (ResourceIsFood)
         {
-            scriptableResource = GameManager.Instance.gestionResource.seasonResource[Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count)];
+            int index = Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count);
+            scriptableResource = GameManager.Instance.gestionResource.seasonResource[index];
+            FoodObject = GameManager.Instance.gestionResource.seasonFoodObject[index];
         }
 
         if (ResourceIsLaundry)

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ResourceBehaviour : MonoBehaviour
 {
+    public Image ImageReference;
+    public TextMeshProUGUI TexteReference;
+
     public int MoneyAmount;
     private int _extraMoneyAmount;
-
     void Start()
     {
 

@@ -78,7 +78,6 @@ public class GoalDisplay : MonoBehaviour
         _windowDisplay.sprite = _windowSprites[currentIndex];
 
         GameManager.Instance.ovenClickable.ResetStats();
-        //GameManager.Instance.washingClickable_001.ResetStats();
 
         goalCompleted = false;
     }

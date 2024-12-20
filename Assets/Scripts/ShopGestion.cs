@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopGestion : MonoBehaviour
 {
@@ -8,6 +10,14 @@ public class ShopGestion : MonoBehaviour
     public float WorkerCompetence = 0.5f;
     public int ClickerMoney = 1;
 
+    [SerializeField]
+    private Image _itemImage;
+    [SerializeField]
+    private TextMeshProUGUI _itemName;
+    [SerializeField]
+    private TextMeshProUGUI _itemDescription;
+    [SerializeField]
+    private TextMeshProUGUI _itemPrice;
 
     void Start()
     {
@@ -18,6 +28,14 @@ public class ShopGestion : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DisplayInformations(ShopScriptable itemScriptable)
+    {
+        _itemImage.sprite = itemScriptable.itemImage;
+        _itemName.text = itemScriptable.itemName;
+        _itemDescription.text = itemScriptable.itemDescription;
+        _itemPrice.text = "" + itemScriptable.itemPrice;
     }
 
 

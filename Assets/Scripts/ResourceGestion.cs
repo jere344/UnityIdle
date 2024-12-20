@@ -11,8 +11,8 @@ public class ResourceGestion : MonoBehaviour
     public List<ResourceScriptable> AllFoodResources;
     public List<GameObject> AllFoodGameObjects;
 
-    public List<ResourceScriptable> seasonResource;
     public List<GameObject> seasonFoodObject;
+    public List<ResourceScriptable> seasonResource;
 
     private int index;
     private int count;

@@ -71,13 +71,12 @@ public class ResourceDisplay : MonoBehaviour
             FoodObject = SelectedFoodObject;
             FoodObject.SetActive(!FoodObject.activeSelf);
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
-            Image resourceNewImage = _newResource.GetComponent<Image>();
-            TextMeshProUGUI resourceText = _newResource.GetComponentInChildren<TextMeshProUGUI>();
-
-            resourceNewImage.sprite = ResourceImage;
+            ResourceBehaviour resourceNewImage = _newResource.GetComponent<ResourceBehaviour>();
+            ResourceBehaviour resourceText = _newResource.GetComponentInChildren<ResourceBehaviour>();
             _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
 
-            resourceText.text = "" + resourcePrice;
+            resourceNewImage.ImageReference.sprite = ResourceImage;
+            resourceText.TexteReference.text = "" + resourcePrice;
         }
     }
 }
