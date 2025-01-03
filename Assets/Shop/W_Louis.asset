@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: W_Louis
   m_EditorClassIdentifier: 
+  itemIndex: 1
   itemImage: {fileID: 21300000, guid: 329eab92800d4d5428c01c108fce47de, type: 3}
-  itemName: Louis (Barista)
-  itemDescription: "Un gar\xE7on qui adore faire de d\xE9licieux g\xE2teaux.\n<b>Ajoute
+  itemName: Louis
+  itemDescription: "Barista, c'est un gar\xE7on qui adore faire de d\xE9licieux g\xE2teaux.\n<b>Ajoute
     automatiquement 1 clic sur le Four</b>"
-  itemPrice: 20
-  itemIndex: 0
+  itemPrice: 40
+  itemType: 0
+  HaveGameObject: 1

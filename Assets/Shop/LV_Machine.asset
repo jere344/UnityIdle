@@ -16,4 +16,7 @@ MonoBehaviour:
   itemName: "Linge (Machine \xE0 laver)"
   itemDescription: "Du linge encore mieux nettoy\xE9 !\n<b>Augmente l'argent obtenu
     de 1</b>\n<i>S'applique \xE0 toutes les ressources</i>"
-  itemPrice: 150
+  itemPrice: 15
+  itemIndex: 4
+  itemGameObject: 0
+  itemType: 5

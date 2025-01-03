@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: LV_Jules
   m_EditorClassIdentifier: 
+  itemIndex: 2
   itemImage: {fileID: 21300000, guid: ca55c1a26e1ff1f4c833a3619e7ba332, type: 3}
   itemName: "Jules (Am\xE9lior\xE9)"
-  itemDescription: "Ma\xEEtre du lavage, il devient encore plus fort pour nettoyer
-    et plier rapidement\u202F!\n<b>Augmente son nombre de clics actuel de 1</b>"
-  itemPrice: 50
+  itemDescription: Il devient encore plus fort pour nettoyer et plier rapidement.
+  itemPrice: 60
+  itemType: 4
+  HaveGameObject: 0

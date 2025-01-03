@@ -15,7 +15,15 @@ public class MoneyDisplay : MonoBehaviour
     {
         goldAmount = GameManager.Instance.GoldAmount;
         goldAmount = 0;
-        _goldAmountText.text = "Or : " + goldAmount.ToString("");
+
+        if (goldAmount >= 1000)
+        {
+            _goldAmountText.text = (goldAmount/1000) + " k";
+        }
+        else
+        {
+            _goldAmountText.text = goldAmount.ToString("");
+        }
     }
 
     void Update()

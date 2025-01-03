@@ -9,4 +9,9 @@ public class TitleScreen : MonoBehaviour
     {
         SceneManager.LoadScene("BubbleCoffee_GameScreen");
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

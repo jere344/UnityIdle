@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: W_Tristan
   m_EditorClassIdentifier: 
   itemImage: {fileID: 21300000, guid: e0ea7009c6905d94f80f6f16e4abb127, type: 3}
-  itemName: "Tristan (G\xE9rant)"
-  itemDescription: "C'est toi, tu es pr\xEAt \xE0 tout pour sauver l'\xE9tablissement.\n<b>Ajoute
+  itemName: Tristan
+  itemDescription: "C'est toi, tu es pr\xEAt \xE0 tout pour sauver ton \xE9tablissement.\n<b>Ajoute
     1 clic \xE0 chaque appui</b>"
   itemPrice: 0
-  itemIndex: 10
+  itemIndex: 0
+  itemGameObject: 0

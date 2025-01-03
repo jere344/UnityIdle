@@ -7,10 +7,12 @@ using UnityEngine;
 
 public class ItemScriptable : ScriptableObject
 {
+    public int itemIndex;
     public Sprite itemImage;
     public string itemName;
     [TextArea]
     public string itemDescription;
     public int itemPrice;
-    public int itemIndex;
+    public Type itemType;
+    public bool HaveGameObject;
 }

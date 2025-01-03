@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: S_Table
   m_EditorClassIdentifier: 
+  itemIndex: 1
   itemImage: {fileID: 0}
   itemName: "Table et si\xE8ges"
   itemDescription: "Des clients assis sont des clients heureux !\n<b>Donne 7 \xE0
-    10 Pi\xE8ces apr\xE8s 2 minutes</b>\n<i>(+) D\xE9coration</i>\n"
-  itemPrice: 100
-  itemIndex: 4
+    10 Pi\xE8ces apr\xE8s 2 minutes</b>\n"
+  itemPrice: 50
+  itemType: 2
+  HaveGameObject: 1

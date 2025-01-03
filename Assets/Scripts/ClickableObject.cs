@@ -17,25 +17,28 @@ public class ClickableObject : MonoBehaviour
 
     private ResourceScriptable scriptableResource;
 
+    private float workerCompetence;
+
+    public bool CanUseWorker;
+    
+    [SerializeField]
+    private GameObject bar;
+
     public bool ResourceIsFood, ResourceIsLaundry;
     public int ResourceMoney;
     private Sprite resourceNewImage;
     private GameObject foodObject;
     private string resourceName;
 
-
-
-    private bool playerIsClicking, playerResourceActivated;
-    private int playerCompetence;
-
     private float maxFillAmount, fillAmount = 0;
 
-    private float workerCompetence;
+    private bool playerIsClicking, playerResourceActivated;
     private bool workerIsClicking, workerResourceActivated;
     private Coroutine workerCoroutine;
 
     void Start()
     {
+        bar.SetActive(true);
         _barText.text = "";
         SetBackgroundImage(0);
         ChangeResource();
@@ -62,7 +65,7 @@ public class ClickableObject : MonoBehaviour
     {
         if (fillAmount < maxFillAmount)
         {
-            playerCompetence = GameManager.Instance.GestionShop.PlayerCompetence;
+            int playerCompetence = GameManager.Instance.PlayerCompetence;
             Clicker(playerCompetence);
 
             if (fillAmount >= maxFillAmount && !workerResourceActivated)
@@ -95,17 +98,26 @@ public class ClickableObject : MonoBehaviour
         playerResourceActivated = false;
     }
 
-    //########################## Auto-Clicker Behaviour ##########################//
+    // Worker (AutoClicker)
 
     public void Worker()
     {
         workerIsClicking = !workerIsClicking;
 
+        if (ResourceIsFood)
+        {
+            workerCompetence = GameManager.Instance.LouisCompetence;
+        }
+        else if (ResourceIsLaundry)
+        {
+            workerCompetence = GameManager.Instance.JulesCompetence;
+        }
+
         if (workerIsClicking)
         {
             if (workerCoroutine == null)
             {
-                workerCoroutine = StartCoroutine(workerRoutine());
+                workerCoroutine = StartCoroutine(workerRoutine(workerCompetence));
             }
         }
         else
@@ -118,14 +130,14 @@ public class ClickableObject : MonoBehaviour
         }
     }
 
-    private IEnumerator workerRoutine()
+    private IEnumerator workerRoutine(float workerCompetence)
     {
         while (true)
         {
             if (fillAmount < maxFillAmount)
             {
                 Clicker(1);
-                workerCompetence = GameManager.Instance.GestionShop.WorkerCompetence;
+
                 yield return new WaitForSeconds(workerCompetence);
 
                 if (fillAmount >= maxFillAmount && !playerResourceActivated)
@@ -153,7 +165,7 @@ public class ClickableObject : MonoBehaviour
         }
     }
 
-    //########################## Reset Stats ##########################//
+    // Reset all
 
     public void ResetStats()
     {
@@ -162,7 +174,7 @@ public class ClickableObject : MonoBehaviour
         _barAmountText.text = "";
     }
 
-    //########################## Change resource ##########################//
+    // Change Resource
 
     private void ChangeResource()
     {
@@ -182,11 +194,12 @@ public class ClickableObject : MonoBehaviour
         resourceNewImage = scriptableResource.ResourceImage;
 
         float resourceClickBase = scriptableResource.GetResourceClick() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)));
-        float resourceMoneyBase = scriptableResource.GetResourceMoney() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)));
+        float resourceMoneyBase = (scriptableResource.GetResourceMoney() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)))) + GameManager.Instance.OvenCompetence;
         maxFillAmount = (int) resourceClickBase;
         ResourceMoney = (int) resourceMoneyBase;
     }
 
+    // UI Background Bar
     void SetBackgroundImage(float alpha)
     {
         Color currentColor = _barBackground.color;

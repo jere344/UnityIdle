@@ -45,14 +45,24 @@ public class GoalDisplay : MonoBehaviour
 
         PlayerGoalAmount = 0;
         newSeasonGoal = seasonGoalBase;
-
         GameManager.Instance.gestionResource.ChangeRandomResourcesList();
     }
     void Update()
     {
         if (goalCompleted == false)
         {
-            _goalText.text = "Objectif : " + PlayerGoalAmount.ToString("") + "/" + newSeasonGoal.ToString("") + " Or";
+            if (newSeasonGoal >= 1000)
+            {
+                _goalText.text = PlayerGoalAmount.ToString("") + " / " + (newSeasonGoal / 1000) + " k";
+            }
+            else if (newSeasonGoal >= 1000 && PlayerGoalAmount >= 1000)
+            {
+                _goalText.text = (PlayerGoalAmount / 1000) + " k / " + (newSeasonGoal/1000) + " k";
+            }
+            else
+            {
+                _goalText.text = PlayerGoalAmount.ToString("") + " / " + newSeasonGoal.ToString("");
+            }
 
             if (PlayerGoalAmount >= newSeasonGoal)
             {
@@ -77,7 +87,7 @@ public class GoalDisplay : MonoBehaviour
         _menuDisplay.sprite = _menuSprites[currentIndex];
         _windowDisplay.sprite = _windowSprites[currentIndex];
 
-        GameManager.Instance.ovenClickable.ResetStats();
+        GameManager.Instance.clickableObject.ResetStats();
 
         goalCompleted = false;
     }

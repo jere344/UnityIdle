@@ -12,15 +12,25 @@ public class GameManager : MonoBehaviour
     public ResourceDisplay DisplayResource;
     public ShopGestion GestionShop;
     public ResourceGestion gestionResource;
-    public ClickableObject ovenClickable;
+    [HideInInspector]
+    public ClickableObject clickableObject;
 
     //Var
-    public int GoldAmount = 0;
-    public int TristanCompetence;
-    public int LouisCompetence;
-    public int JulesCompetence;
-    public int CakeValue;
-    public int LaundryValue;
+    public int GoldAmount;
+
+    public int PlayerLvl;
+    public int PlayerCompetence;
+    public int LouisLvl;
+    public float LouisCompetence;
+    public int JulesLvl;
+    public float JulesCompetence;
+
+    public int OvenLvl;
+    public int OvenCompetence;
+    public int LaundryLvl;
+    public int LaundryCompetence;
+    public int MachineNumber;
+
 
     void Awake()
     {
