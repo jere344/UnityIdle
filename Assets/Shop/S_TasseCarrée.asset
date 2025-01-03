@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
+  m_Name: "S_TasseCarr\xE9e"
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: aa98a17321ce9944597f8b5057938733, type: 3}
+  itemName: "Tasses carr\xE9es"
+  itemDescription: "Une collection de mug simple pour repartir avec votre meilleure
+    caf\xE9 !\n<b>Donne 12 \xE0 15 Pi\xE8ces apr\xE8s 1 \xE0 2 minutes</b>\n<i>(+)
+    D\xE9coration temporaire</i>\n"
+  itemPrice: 50
+  itemIndex: 6

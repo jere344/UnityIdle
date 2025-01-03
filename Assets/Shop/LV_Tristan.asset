@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: LV_Tristan
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 0}
-  itemName: "Tristan (Am\xE9lioration)"
-  itemDescription: "C'est toi. Tu es bien d\xE9cid\xE9 \xE0 maintenir debout l'\xE9tablissement
-    ! <b>Augmente le nombre de clic de +1<b>"
-  itemPrice: 0
+  itemImage: {fileID: 21300000, guid: efd2b53ab616bfb4ebd4eed5e5e12a24, type: 3}
+  itemName: "Tristan (Am\xE9lior\xE9)"
+  itemDescription: "Tu es super motiv\xE9 et tu veux toujours en apprendre plus\u202F!\n<b>Augmente
+    le nombre de clics actuel de 1</b>"
+  itemPrice: 50

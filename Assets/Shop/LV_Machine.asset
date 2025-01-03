@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
+  m_Name: LV_Machine
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: b6fdc84414ea98749b72be73d33679c4, type: 3}
+  itemName: "Linge (Machine \xE0 laver)"
+  itemDescription: "Du linge encore mieux nettoy\xE9 !\n<b>Augmente l'argent obtenu
+    de 1</b>\n<i>S'applique \xE0 toutes les ressources</i>"
+  itemPrice: 150

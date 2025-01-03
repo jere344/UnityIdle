@@ -11,14 +11,16 @@ public class ClickableObject : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _barText;
     [SerializeField]
-    private Image _barAmountImage;
+    private Image _barAmountImage;    
+    [SerializeField]
+    private Image _barBackground;
 
     private ResourceScriptable scriptableResource;
 
     public bool ResourceIsFood, ResourceIsLaundry;
     public int ResourceMoney;
-    public Sprite ResourceNewImage;
-    public GameObject FoodObject;
+    private Sprite resourceNewImage;
+    private GameObject foodObject;
     private string resourceName;
 
 
@@ -35,6 +37,7 @@ public class ClickableObject : MonoBehaviour
     void Start()
     {
         _barText.text = "";
+        SetBackgroundImage(0);
         ChangeResource();
     }
 
@@ -52,6 +55,7 @@ public class ClickableObject : MonoBehaviour
         fillAmount += competence;
         _barText.text = resourceName;
         _barAmountText.text =  fillAmount + "/" + maxFillAmount;
+        SetBackgroundImage(1f);
     }
 
     public void PlayerClicker()
@@ -75,11 +79,11 @@ public class ClickableObject : MonoBehaviour
 
         if (ResourceIsFood)
         {
-            GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, ResourceNewImage, FoodObject);
+            GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, resourceNewImage, foodObject);
         }
         else
         {
-            GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, ResourceNewImage);
+            GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -87,6 +91,7 @@ public class ClickableObject : MonoBehaviour
         fillAmount = 0;
         _barText.text = "";
         _barAmountText.text = "";
+        SetBackgroundImage(0);
         playerResourceActivated = false;
     }
 
@@ -125,23 +130,24 @@ public class ClickableObject : MonoBehaviour
 
                 if (fillAmount >= maxFillAmount && !playerResourceActivated)
                 {
-                    playerResourceActivated = true;
+                    workerResourceActivated = true;
                     _barAmountText.text = "Terminé !";
 
                     if (ResourceIsFood)
                     {
-                        GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, ResourceNewImage, FoodObject);
+                        GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, resourceNewImage, foodObject);
                     }
                     else
                     {
-                        GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, ResourceNewImage);
+                        GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
                     }
 
                     yield return new WaitForSeconds(0.5f);
                     ChangeResource();
                     fillAmount = 0;
                     _barAmountText.text = "";
-                    playerResourceActivated = false;
+                    SetBackgroundImage(0);
+                    workerResourceActivated = false;
                 }
             }
         }
@@ -164,7 +170,7 @@ public class ClickableObject : MonoBehaviour
         {
             int index = Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count);
             scriptableResource = GameManager.Instance.gestionResource.seasonResource[index];
-            FoodObject = GameManager.Instance.gestionResource.seasonFoodObject[index];
+            foodObject = GameManager.Instance.gestionResource.seasonFoodObject[index];
         }
 
         if (ResourceIsLaundry)
@@ -173,12 +179,19 @@ public class ClickableObject : MonoBehaviour
         }
 
         resourceName = scriptableResource.ResourceName;
-        ResourceNewImage = scriptableResource.ResourceImage;
+        resourceNewImage = scriptableResource.ResourceImage;
 
         float resourceClickBase = scriptableResource.GetResourceClick() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)));
         float resourceMoneyBase = scriptableResource.GetResourceMoney() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)));
         maxFillAmount = (int) resourceClickBase;
         ResourceMoney = (int) resourceMoneyBase;
+    }
+
+    void SetBackgroundImage(float alpha)
+    {
+        Color currentColor = _barBackground.color;
+        currentColor.a = alpha;
+        _barBackground.color = currentColor;
     }
 
 }
