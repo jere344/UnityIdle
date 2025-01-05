@@ -18,5 +18,5 @@ MonoBehaviour:
   itemDescription: "Ses g\xE2teaux deviennent de plus en plus d\xE9licieux.\n<b>Diminue
     son temps de clic de 0,2 ms</b>"
   itemPrice: 20
-  itemType: 4
+  itemType: 5
   HaveGameObject: 0

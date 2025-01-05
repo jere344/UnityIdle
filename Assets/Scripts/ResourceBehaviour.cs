@@ -11,6 +11,7 @@ public class ResourceBehaviour : MonoBehaviour
 
     public int MoneyAmount;
     private int _extraMoneyAmount;
+
     void Start()
     {
 

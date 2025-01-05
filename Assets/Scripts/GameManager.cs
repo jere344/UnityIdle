@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public int OvenCompetence;
     public int LaundryLvl;
     public int LaundryCompetence;
-    public int MachineNumber;
 
 
     void Awake()

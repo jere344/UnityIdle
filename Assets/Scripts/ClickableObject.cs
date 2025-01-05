@@ -193,8 +193,8 @@ public class ClickableObject : MonoBehaviour
         resourceName = scriptableResource.ResourceName;
         resourceNewImage = scriptableResource.ResourceImage;
 
-        float resourceClickBase = scriptableResource.GetResourceClick() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)));
-        float resourceMoneyBase = (scriptableResource.GetResourceMoney() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.currentIndex)))) + GameManager.Instance.OvenCompetence;
+        float resourceClickBase = scriptableResource.GetResourceClick() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.CurrentIndex)));
+        float resourceMoneyBase = (scriptableResource.GetResourceMoney() * (Mathf.Pow(1.5f, (GameManager.Instance.DisplayGoal.CurrentIndex)))) + GameManager.Instance.OvenCompetence;
         maxFillAmount = (int) resourceClickBase;
         ResourceMoney = (int) resourceMoneyBase;
     }

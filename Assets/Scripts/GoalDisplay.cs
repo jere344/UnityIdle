@@ -8,6 +8,13 @@ using System;
 public class GoalDisplay : MonoBehaviour
 {
     [SerializeField]
+    private Sprite[] _seasonsSprites;
+    [SerializeField]
+    private Sprite[] _menuSprites;
+    [SerializeField]
+    private Sprite[] _windowSprites;
+
+    [SerializeField]
     private Image _seasonDisplay;
     [SerializeField]
     private Image _menuDisplay;
@@ -15,22 +22,14 @@ public class GoalDisplay : MonoBehaviour
     private Image _windowDisplay;
 
     [SerializeField]
-    private Sprite[] _seasonsSprites;
-    [SerializeField]
-    private Sprite[] _menuSprites;
-    [SerializeField]
-    private Sprite[] _windowSprites;
-
-
-    [SerializeField]
     private TextMeshProUGUI _seasonText;
     private string[] seasonsText = { "Printemps", "Été", "Automne", "Hiver" };
 
-    public int currentIndex = 0;
     private int newSeasonGoal;
     private int seasonGoalBase = 50;
     private float seasonGoal;
 
+    public int CurrentIndex;
     public int PlayerGoalAmount;
 
     [SerializeField]
@@ -41,10 +40,10 @@ public class GoalDisplay : MonoBehaviour
     {
         GameManager.Instance.gestionResource = FindObjectOfType<ResourceGestion>();
 
-        _seasonText.text = seasonsText[currentIndex];
-
         PlayerGoalAmount = 0;
+        _seasonText.text = seasonsText[CurrentIndex];
         newSeasonGoal = seasonGoalBase;
+
         GameManager.Instance.gestionResource.ChangeRandomResourcesList();
     }
     void Update()
@@ -78,14 +77,14 @@ public class GoalDisplay : MonoBehaviour
 
         PlayerGoalAmount = 0;
 
-        currentIndex += 1;
-        seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (currentIndex)));
+        CurrentIndex += 1;
+        seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (CurrentIndex)));
         newSeasonGoal = (int)seasonGoal;
 
-        _seasonText.text = seasonsText[currentIndex];
-        _seasonDisplay.sprite = _seasonsSprites[currentIndex];
-        _menuDisplay.sprite = _menuSprites[currentIndex];
-        _windowDisplay.sprite = _windowSprites[currentIndex];
+        _seasonText.text = seasonsText[CurrentIndex];
+        _seasonDisplay.sprite = _seasonsSprites[CurrentIndex];
+        _menuDisplay.sprite = _menuSprites[CurrentIndex];
+        _windowDisplay.sprite = _windowSprites[CurrentIndex];
 
         GameManager.Instance.clickableObject.ResetStats();
 

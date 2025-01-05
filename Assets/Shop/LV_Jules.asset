@@ -17,5 +17,5 @@ MonoBehaviour:
   itemName: "Jules (Am\xE9lior\xE9)"
   itemDescription: Il devient encore plus fort pour nettoyer et plier rapidement.
   itemPrice: 60
-  itemType: 4
+  itemType: 5
   HaveGameObject: 0

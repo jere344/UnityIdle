@@ -718,6 +718,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47613376}
   m_CullTransparentMesh: 1
+--- !u!1 &61994457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61994458}
+  - component: {fileID: 61994460}
+  - component: {fileID: 61994459}
+  m_Layer: 5
+  m_Name: Item_Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &61994458
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61994457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.85599154, y: 1.956552, z: 0.75252}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1244991652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &61994459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61994457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
+  m_sharedMaterial: {fileID: -7899475927307169406, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: -17.95011, z: 0, w: -19.446009}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &61994460
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61994457}
+  m_CullTransparentMesh: 1
 --- !u!1 &64079004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1177,7 @@ GameObject:
   - component: {fileID: 104225935}
   - component: {fileID: 104225938}
   - component: {fileID: 104225937}
+  - component: {fileID: 104225939}
   m_Layer: 5
   m_Name: Set_Table_003
   m_TagString: Untagged
@@ -1107,6 +1242,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104225934}
   m_CullTransparentMesh: 1
+--- !u!114 &104225939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104225934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 120
+  _minGold: 25
+  _maxGold: 40
+  objectIsASet: 1
 --- !u!1 &123849660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Merci de jouer !
+  m_text: Merci d'y jouer !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
   m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
@@ -1256,7 +1408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &156306401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1890,7 +2042,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
+      - m_Target: {fileID: 296835711}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: PlayerClicker
         m_Mode: 1
@@ -2385,6 +2537,7 @@ GameObject:
   - component: {fileID: 304160797}
   - component: {fileID: 304160800}
   - component: {fileID: 304160799}
+  - component: {fileID: 304160801}
   m_Layer: 5
   m_Name: Set_Table_005
   m_TagString: Untagged
@@ -2449,6 +2602,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304160796}
   m_CullTransparentMesh: 1
+--- !u!114 &304160801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304160796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 120
+  _minGold: 25
+  _maxGold: 40
+  objectIsASet: 1
 --- !u!1 &314926118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2499,8 +2669,9 @@ GameObject:
   - component: {fileID: 318695674}
   - component: {fileID: 318695677}
   - component: {fileID: 318695676}
+  - component: {fileID: 318695678}
   m_Layer: 5
-  m_Name: GOODIES_Coffee
+  m_Name: GOODIES_Coffee_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2563,6 +2734,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318695673}
   m_CullTransparentMesh: 1
+--- !u!114 &318695678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318695673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 12
+  _maxGold: 18
+  objectIsASet: 0
 --- !u!1 &320880959
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,7 +4458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &547058490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4453,7 +4641,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
+      - m_Target: {fileID: 1202115026}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: PlayerClicker
         m_Mode: 1
@@ -4521,7 +4709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &555834662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4585,7 +4773,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
+      - m_Target: {fileID: 959318327}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: PlayerClicker
         m_Mode: 1
@@ -4803,7 +4991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 188.5, y: -16.580017}
+  m_AnchoredPosition: {x: 188.5, y: -16.579956}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563212134
@@ -4855,6 +5043,7 @@ GameObject:
   - component: {fileID: 570020646}
   - component: {fileID: 570020649}
   - component: {fileID: 570020648}
+  - component: {fileID: 570020650}
   m_Layer: 5
   m_Name: Set_Table_004
   m_TagString: Untagged
@@ -4919,6 +5108,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570020645}
   m_CullTransparentMesh: 1
+--- !u!114 &570020650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570020645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 120
+  _minGold: 25
+  _maxGold: 40
+  objectIsASet: 1
 --- !u!1 &574736952
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,9 +5161,9 @@ Transform:
   - {fileID: 2063130538}
   - {fileID: 296835710}
   - {fileID: 393429329}
-  - {fileID: 1422958068}
   - {fileID: 1598104879}
   - {fileID: 1675129596}
+  - {fileID: 1422958068}
   - {fileID: 1399458995}
   - {fileID: 1094128323}
   m_Father: {fileID: 0}
@@ -5742,6 +5948,7 @@ GameObject:
   - component: {fileID: 655903967}
   - component: {fileID: 655903970}
   - component: {fileID: 655903969}
+  - component: {fileID: 655903971}
   m_Layer: 5
   m_Name: Set_Table_002
   m_TagString: Untagged
@@ -5806,6 +6013,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655903966}
   m_CullTransparentMesh: 1
+--- !u!114 &655903971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655903966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 120
+  _minGold: 25
+  _maxGold: 40
+  objectIsASet: 1
 --- !u!1 &657922249
 GameObject:
   m_ObjectHideFlags: 0
@@ -7724,7 +7948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &837671674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8540,7 +8764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &959318326
 Transform:
   m_ObjectHideFlags: 0
@@ -8905,6 +9129,7 @@ GameObject:
   - component: {fileID: 1008908770}
   - component: {fileID: 1008908773}
   - component: {fileID: 1008908772}
+  - component: {fileID: 1008908774}
   m_Layer: 5
   m_Name: Set_Table_001
   m_TagString: Untagged
@@ -8969,6 +9194,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008908769}
   m_CullTransparentMesh: 1
+--- !u!114 &1008908774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008908769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 120
+  _minGold: 25
+  _maxGold: 40
+  objectIsASet: 1
 --- !u!1 &1014014600
 GameObject:
   m_ObjectHideFlags: 0
@@ -9199,8 +9441,9 @@ GameObject:
   - component: {fileID: 1040894549}
   - component: {fileID: 1040894552}
   - component: {fileID: 1040894551}
+  - component: {fileID: 1040894553}
   m_Layer: 5
-  m_Name: GOODIES_Coffee
+  m_Name: GOODIES_Coffee_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9263,6 +9506,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040894548}
   m_CullTransparentMesh: 1
+--- !u!114 &1040894553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040894548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 12
+  _maxGold: 18
+  objectIsASet: 0
 --- !u!1 &1055575513
 GameObject:
   m_ObjectHideFlags: 0
@@ -9537,7 +9797,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
+      - m_Target: {fileID: 393429330}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: PlayerClicker
         m_Mode: 1
@@ -9785,14 +10045,13 @@ MonoBehaviour:
   PlayerLvl: 1
   PlayerCompetence: 1
   LouisLvl: 1
-  LouisCompetence: 0.5
+  LouisCompetence: 1.5
   JulesLvl: 1
-  JulesCompetence: 0.5
+  JulesCompetence: 1.5
   OvenLvl: 1
   OvenCompetence: 0
   LaundryLvl: 1
   LaundryCompetence: 0
-  MachineNumber: 1
 --- !u!1 &1097405229
 GameObject:
   m_ObjectHideFlags: 0
@@ -11086,6 +11345,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 788895518}
+  - {fileID: 61994458}
   m_Father: {fileID: 158167743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -12330,24 +12590,29 @@ MonoBehaviour:
   - {fileID: 1866406990}
   - {fileID: 64079004}
   _machines:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1590152215}
+  - {fileID: 1475321781}
+  - {fileID: 555180101}
+  - {fileID: 1069486911}
+  - {fileID: 262197303}
+  _machinesManagers:
+  - {fileID: 1413535637}
+  - {fileID: 2063130537}
+  - {fileID: 1202115024}
+  - {fileID: 393429328}
+  - {fileID: 296835709}
   _set:
-  - {fileID: 1008908769}
-  - {fileID: 655903966}
-  - {fileID: 104225934}
-  - {fileID: 570020645}
   - {fileID: 304160796}
-  _coffeeGoodies:
+  - {fileID: 104225934}
+  - {fileID: 655903966}
+  - {fileID: 570020645}
+  - {fileID: 1008908769}
+  _coffee:
   - {fileID: 2057385911}
   - {fileID: 1040894548}
   - {fileID: 318695673}
   - {fileID: 1567142540}
-  _goodies:
+  _cups:
   - {fileID: 1426206135}
   - {fileID: 1771612170}
   _sprites:
@@ -12367,6 +12632,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 79a4cd3901b824747b4407e60b69c3e4, type: 3}
   - {fileID: 21300000, guid: e4b2bce0e8df75943945c7d7e25884bf, type: 3}
   - {fileID: 21300000, guid: 5a48d2f68ad1d934880484852c733bf1, type: 3}
+  _coffeeCooldownReference: {fileID: 1567142540}
+  _restartCoffeeItem: {fileID: 11400000, guid: 9659d789ec23bea4c8ff393b2c321f81, type: 2}
+  _sCupCooldownReference: {fileID: 1426206135}
+  _restartSCupItem: {fileID: 11400000, guid: 7f97ab072cf09db4483452118b448958, type: 2}
+  _rCupCooldownReference: {fileID: 1771612170}
+  _restartRCupItem: {fileID: 11400000, guid: 70dde08a3661896448dc43192734ee14, type: 2}
   _buttonRed: {fileID: 21300000, guid: 6f782d93387a263428962cda2fb76653, type: 3}
   _buttonGreen: {fileID: 21300000, guid: 4bed041acbf38624d895958295875ab9, type: 3}
   _buttonBlue: {fileID: 21300000, guid: 670a881e606154c4592b31b4ee20a83f, type: 3}
@@ -12483,7 +12754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barAmountText: {fileID: 753515778}
   _barText: {fileID: 422661778}
-  _barAmountImage: {fileID: 1711425507}
+  _barAmountImage: {fileID: 3553604}
   _barBackground: {fileID: 294566340}
   CanUseWorker: 0
   bar: {fileID: 1886259022}
@@ -12561,6 +12832,7 @@ GameObject:
   - component: {fileID: 1426206136}
   - component: {fileID: 1426206139}
   - component: {fileID: 1426206138}
+  - component: {fileID: 1426206140}
   m_Layer: 5
   m_Name: GOODIES_CupSquare
   m_TagString: Untagged
@@ -12625,6 +12897,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426206135}
   m_CullTransparentMesh: 1
+--- !u!114 &1426206140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426206135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 8
+  _maxGold: 12
+  objectIsASet: 0
 --- !u!1 &1465068064
 GameObject:
   m_ObjectHideFlags: 0
@@ -12851,7 +13140,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
+      - m_Target: {fileID: 2063130539}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: PlayerClicker
         m_Mode: 1
@@ -13062,8 +13351,9 @@ GameObject:
   - component: {fileID: 1567142541}
   - component: {fileID: 1567142544}
   - component: {fileID: 1567142543}
+  - component: {fileID: 1567142545}
   m_Layer: 5
-  m_Name: GOODIES_Coffee
+  m_Name: GOODIES_Coffee_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13126,6 +13416,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567142540}
   m_CullTransparentMesh: 1
+--- !u!114 &1567142545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567142540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 12
+  _maxGold: 18
+  objectIsASet: 0
 --- !u!1 &1585429115
 GameObject:
   m_ObjectHideFlags: 0
@@ -14359,7 +14666,7 @@ GameObject:
   - component: {fileID: 1675129596}
   - component: {fileID: 1675129597}
   m_Layer: 0
-  m_Name: Environment_Manager
+  m_Name: Goal_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14392,9 +14699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8603900fc8d5658469b31412589ee67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _seasonDisplay: {fileID: 882768662}
-  _menuDisplay: {fileID: 1410009385}
-  _windowDisplay: {fileID: 1298886277}
   _seasonsSprites:
   - {fileID: 21300000, guid: e1f46269ce9dd7d4a9c50edbe97cb6e1, type: 3}
   - {fileID: 21300000, guid: d7fdb2bda36921f47846e46c9d860749, type: 3}
@@ -14410,8 +14714,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 78bd56261495cc5409bf33591587d93d, type: 3}
   - {fileID: 21300000, guid: 1060cfe59a69cc1439ebdd19e7f7d346, type: 3}
   - {fileID: 21300000, guid: 2483996797aa9d4479c3322e7397bfe0, type: 3}
+  _seasonDisplay: {fileID: 882768662}
+  _menuDisplay: {fileID: 1410009385}
+  _windowDisplay: {fileID: 1298886277}
   _seasonText: {fileID: 1109311367}
-  currentIndex: 0
+  CurrentIndex: 0
   PlayerGoalAmount: 0
   _goalText: {fileID: 1097405231}
 --- !u!1 &1711425505
@@ -14766,6 +15073,7 @@ GameObject:
   - component: {fileID: 1771612171}
   - component: {fileID: 1771612174}
   - component: {fileID: 1771612173}
+  - component: {fileID: 1771612175}
   m_Layer: 5
   m_Name: GOODIES_CupRound
   m_TagString: Untagged
@@ -14830,6 +15138,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771612170}
   m_CullTransparentMesh: 1
+--- !u!114 &1771612175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771612170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 8
+  _maxGold: 12
+  objectIsASet: 0
 --- !u!1 &1776268691
 GameObject:
   m_ObjectHideFlags: 0
@@ -15910,8 +16235,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 767945697}
-  - {fileID: 1395471804}
   - {fileID: 1648690878}
+  - {fileID: 1395471804}
   - {fileID: 899937002}
   - {fileID: 979901693}
   m_Father: {fileID: 928326037}
@@ -16007,12 +16332,13 @@ GameObject:
   - component: {fileID: 2057385912}
   - component: {fileID: 2057385915}
   - component: {fileID: 2057385914}
+  - component: {fileID: 2057385916}
   m_Layer: 5
-  m_Name: GOODIES_Coffee
+  m_Name: GOODIES_Coffee_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!224 &2057385912
 RectTransform:
@@ -16071,6 +16397,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057385911}
   m_CullTransparentMesh: 1
+--- !u!114 &2057385916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057385911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e568075018069340bd7782d21b7ca9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  EndTimer: 60
+  _minGold: 12
+  _maxGold: 18
+  objectIsASet: 0
 --- !u!1 &2063130537
 GameObject:
   m_ObjectHideFlags: 0
@@ -16504,7 +16847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2114674189
 RectTransform:
   m_ObjectHideFlags: 0

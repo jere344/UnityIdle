@@ -7,29 +7,58 @@ using UnityEngine.UI;
 
 public class ShopGestion : MonoBehaviour
 {
+    [Header("Lists")]
     [SerializeField]
-    public List<GameObject> _workers;
+    private List<GameObject> _workers;
     [SerializeField]
-    public List<GameObject> _machines;
+    private List<GameObject> _machines;
     [SerializeField]
-    public List<GameObject> _set;
+    private List<GameObject> _machinesManagers;
     [SerializeField]
-    public List<GameObject> _coffeeGoodies;
+    private List<GameObject> _set;
     [SerializeField]
-    public List<GameObject> _goodies;
-
+    private List<GameObject> _coffee;
+    [SerializeField]
+    private List<GameObject> _cups;
     [SerializeField]
     public List<Sprite> _sprites;
 
+    [Header("Item Coffee")]
+    [SerializeField]
+    private GameObject _coffeeCooldownReference;
+    private bool coffeeCooldownActivated;
+    private bool coffeeButtonActivated;
+    [SerializeField]
+    private ItemScriptable _restartCoffeeItem;
+
+    [Header("Item Square Cup")]
+    [SerializeField]
+    private GameObject _sCupCooldownReference;
+    private bool sCupCooldownActivated;
+    private bool sCupButtonActivated;
+    [SerializeField]
+    private ItemScriptable _restartSCupItem;
+
+    [Header("Item Round Cup")]
+    [SerializeField]
+    private GameObject _rCupCooldownReference;
+    private bool rCupCooldownActivated;
+    private bool rCupButtonActivated;
+    [SerializeField]
+    private ItemScriptable _restartRCupItem;
+
+    [Header("Items informations")]
     private string itemName;
     private int itemPrice;
     private int itemIndex;
     private Type itemType;
 
+    [Header("Index")]
     private int indexSet;
-    private int indexMachine = 1;
-    private int indexCoffeeGoodies;
+    private int indexMachine;
+    private int indexCoffeeItems;
 
+    [Header("Money and Price")]
     private int playerMoney;
     private int playerLvlPriceBase = 20;
     private int louisLvlPriceBase = 10;
@@ -37,6 +66,7 @@ public class ShopGestion : MonoBehaviour
     private int ovenLvlPriceBase = 15;
     private int laundryLvlPriceBase = 90;
 
+    [Header("Buttons")]
     [SerializeField]
     private Sprite _buttonRed;
     [SerializeField]
@@ -48,6 +78,7 @@ public class ShopGestion : MonoBehaviour
     [SerializeField]
     private Button _buyButton;
 
+    [Header("Item UI")]
     [SerializeField]
     private Image _itemImage;
     [SerializeField]
@@ -59,21 +90,54 @@ public class ShopGestion : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _playerMoney;
 
-
     void Start()
     {
-        playerMoney = 200;
-    }
 
+    }
 
     void Update()
     {
-        //playerMoney = GameManager.Instance.GoldAmount;
+        playerMoney = GameManager.Instance.GoldAmount;
+
+        if (coffeeButtonActivated)
+        {
+            indexCoffeeItems = 0;
+            Cooldown(_coffeeCooldownReference, coffeeCooldownActivated, _restartCoffeeItem);
+        }
+
+        if (sCupButtonActivated)
+        {
+            Cooldown(_sCupCooldownReference, sCupCooldownActivated, _restartSCupItem);
+        }
+
+        if (rCupButtonActivated)
+        {
+            Cooldown(_rCupCooldownReference, rCupCooldownActivated, _restartRCupItem);
+        }
+    }
+
+    private void Cooldown(GameObject cooldownReference, bool boolReference, ItemScriptable itemReference)
+    {
+        int endCooldown = cooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        float cooldownFloat = cooldownReference.GetComponent<ItemBehaviour>().Timer;
+        int cooldown = (int)cooldownFloat;
+        _itemPrice.text = "" + (endCooldown - cooldown);
+
+        if (cooldown >= endCooldown)
+        {
+            boolReference = false;
+            _buyButton.interactable = true;
+            DisplayInformations(itemReference);
+        }
     }
 
     // Informations 
     public void DisplayInformations(ItemScriptable itemScriptable)
     {
+        coffeeButtonActivated = false;
+        sCupButtonActivated = false;
+        rCupButtonActivated = false;
+
         itemName = itemScriptable.itemName;
         itemPrice = itemScriptable.itemPrice;
         itemType = itemScriptable.itemType;
@@ -84,6 +148,7 @@ public class ShopGestion : MonoBehaviour
         _itemImage.sprite = itemScriptable.itemImage;
         _itemImage.SetNativeSize();
 
+        //-- Specials --
         if (itemName == "Tristan")
         {
             _itemPrice.text = "";
@@ -121,12 +186,12 @@ public class ShopGestion : MonoBehaviour
         } 
         else
         {
+            _buyButton.interactable = true;
             PriceBehaviour();
         }
     }
 
     // Behaviours
-
     public void ButtonBehaviour()
     {
         if (itemType == Type.BWorker)
@@ -144,9 +209,54 @@ public class ShopGestion : MonoBehaviour
             ListType(_set);
         }
 
-        if (itemType == Type.BGoodies)
+        if (itemType == Type.BCups)
         {
-            ListType(_goodies);
+            if (itemIndex == 0)
+            {
+                if (sCupCooldownActivated)
+                {
+                    sCupButtonActivated = true;
+                    _buyButton.interactable = false;
+                    _buttonDisplay.sprite = _buttonBlue;
+                    _itemPrice.text = "";
+                }
+                else
+                {
+                    _buyButton.interactable = true;
+                    PriceBehaviour();
+                }
+            }
+            else
+            {
+                if (rCupCooldownActivated)
+                {
+                    rCupButtonActivated = true;
+                    _buyButton.interactable = false;
+                    _buttonDisplay.sprite = _buttonBlue;
+                    _itemPrice.text = "";
+                }
+                else
+                {
+                    _buyButton.interactable = true;
+                    PriceBehaviour();
+                }
+            }
+        }
+
+        if (itemType == Type.BCoffee)
+        {
+            if (coffeeCooldownActivated)
+            {
+                coffeeButtonActivated = true;
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonBlue;
+                _itemPrice.text = "";
+            }
+            else
+            {
+                _buyButton.interactable = true;
+                PriceBehaviour();
+            }
         }
     }
     public void ListType(List<GameObject> typeOfList)
@@ -177,17 +287,21 @@ public class ShopGestion : MonoBehaviour
             _buttonDisplay.sprite = _buttonRed;
         }
     }
-
     public void ShoppingBehaviour()
     {
-        if (itemType == Type.BWorker || itemType == Type.BGoodies)
+        if (itemType == Type.BWorker)
         {
-            BuyWorkersOrGoodies();
+            BuyWorkers();
         }
 
-        if (itemType == Type.BSets || itemType == Type.BMachines)
+        if (itemType == Type.BSets || itemType == Type.BMachines || itemType == Type.BCoffee || itemType == Type.BCups)
         {
-            BuyObjects();
+            BuyObjectsOrGoodies();
+        }
+
+        if (itemType == Type.LWorker)
+        {
+            LevelUpWorker();
         }
 
         if (itemType == Type.LClicker)
@@ -196,8 +310,8 @@ public class ShopGestion : MonoBehaviour
         }
     }
 
-    // Buy a Worker or Goodies (unique quantity)
-    public void BuyWorkersOrGoodies()
+    // Buy a Worker
+    public void BuyWorkers()
     {
         if (playerMoney >= itemPrice)
         {
@@ -214,26 +328,11 @@ public class ShopGestion : MonoBehaviour
                     _buttonDisplay.sprite = _buttonGreen;
                 }
             }
-
-            else if (itemType == Type.BGoodies)
-            {
-                if (itemIndex >= 0 && itemIndex < _goodies.Count)
-                {
-                    playerMoney -= itemPrice;
-                    _itemPrice.text = "";
-                    _playerMoney.text = "" + playerMoney;
-
-                    _goodies[itemIndex].SetActive(true);
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonGreen;
-                }
-            }
-
         }
     }
 
-    //Buy an Object(limited quantity)
-    public void BuyObjects()
+    //Buy an Object
+    public void BuyObjectsOrGoodies()
     {
         if (playerMoney >= itemPrice)
         {
@@ -247,8 +346,9 @@ public class ShopGestion : MonoBehaviour
                 {
                     _set[indexSet].SetActive(true);
                     indexSet += 1;
+                    PriceBehaviour();
                 }
-                if (indexSet >= 5)
+                if (indexSet >= 4)
                 {
                     _buyButton.interactable = false;
                     _buttonDisplay.sprite = _buttonGreen;
@@ -260,27 +360,58 @@ public class ShopGestion : MonoBehaviour
                 if (indexMachine >= 0 && indexMachine < _machines.Count)
                 {
                     _machines[indexMachine].SetActive(true);
+                    _machinesManagers[indexMachine].SetActive(true);
                     indexMachine += 1;
+                    PriceBehaviour();
                 }
-                if (indexMachine >= 6)
+                if (indexMachine >= 5)
                 {
                     _buyButton.interactable = false;
                     _buttonDisplay.sprite = _buttonGreen;
                     _itemPrice.text = "";
                 }
             }
-            else if (itemType == Type.BGoodies)
+            else if (itemType == Type.BCoffee)
             {
-                if (indexCoffeeGoodies >= 0 && indexCoffeeGoodies < _coffeeGoodies.Count)
+                if (indexCoffeeItems < _coffee.Count)
                 {
-                    _coffeeGoodies[indexMachine].SetActive(true);
-                    indexCoffeeGoodies += 1;
+                    _coffee[indexCoffeeItems].SetActive(true);
+                    indexCoffeeItems += 1;
+                    PriceBehaviour();
                 }
-                if (indexMachine >= 4)
+                if (indexCoffeeItems >= _coffee.Count)
                 {
                     _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonGreen;
+                    _buttonDisplay.sprite = _buttonBlue;
                     _itemPrice.text = "";
+                    coffeeCooldownActivated = true;
+                    ButtonBehaviour();
+                }
+            }
+            else if (itemType == Type.BCups)
+            {
+                if (itemIndex < _cups.Count)
+                {
+                    playerMoney -= itemPrice;
+                    _itemPrice.text = "";
+                    _playerMoney.text = "" + playerMoney;
+
+                    _cups[itemIndex].SetActive(true);
+
+                    _buyButton.interactable = false;
+                    _buttonDisplay.sprite = _buttonBlue;
+                    _itemPrice.text = "";
+
+                    if (itemIndex == 0)
+                    {
+                        sCupCooldownActivated = true;
+                    }
+                    else
+                    {
+                        rCupCooldownActivated = true;
+                    }
+
+                    ButtonBehaviour();
                 }
             }
         }
@@ -322,11 +453,20 @@ public class ShopGestion : MonoBehaviour
                 else if (indexMachine == 6)
                 {
                     GameManager.Instance.JulesCompetence -= 0.2f;
+
+                    //if (GameManager.Instance.JulesCompetence <= 0)
+                    //{
+                    //    _buyButton.interactable = false;
+                    //    _buttonDisplay.sprite = _buttonGreen;
+
+                    //}
                 }
 
                 julesLvl += 1;
                 float itemOriginalPrice = itemPrice + julesLvlPriceBase * GameManager.Instance.JulesLvl;
                 itemPrice = (int)itemOriginalPrice;
+
+
             }
 
             PriceBehaviour();

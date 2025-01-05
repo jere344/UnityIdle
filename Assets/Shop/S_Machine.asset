@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: S_Machine
   m_EditorClassIdentifier: 
-  itemIndex: 0
+  itemIndex: 1
   itemImage: {fileID: 21300000, guid: 9ea88f689bfeabb42b39507522a4231e, type: 3}
   itemName: "Machine \xE0 laver"
   itemDescription: "Plus de machines, plus de possibilit\xE9s.\n<b>Ajoute 1 Machine

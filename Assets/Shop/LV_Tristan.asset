@@ -18,5 +18,5 @@ MonoBehaviour:
   itemDescription: "Tu es super motiv\xE9 et tu veux toujours en apprendre plus\u202F!\n<b>Augmente
     ton nombre de clics de 1</b>"
   itemPrice: 40
-  itemType: 4
+  itemType: 5
   HaveGameObject: 0

@@ -4,7 +4,8 @@ public enum Type
     BWorker,
     BMachines,
     BSets,
-    BGoodies,
+    BCups,
+    BCoffee,
     LWorker,
     LClicker
 }

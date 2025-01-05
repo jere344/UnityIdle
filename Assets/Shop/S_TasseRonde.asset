@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: S_TasseRonde
   m_EditorClassIdentifier: 
-  itemIndex: 4
+  itemIndex: 1
   itemImage: {fileID: 21300000, guid: 046f8a3183b98614bb65f6d1e3a5d776, type: 3}
   itemName: Tasses rondes
   itemDescription: "Des tasses parfaites pour savourer chaque gorg\xE9e de caf\xE9
-    !\n<b>Donne 12 \xE0 18 Pi\xE8ces apr\xE8s 1 minute</b>\n"
-  itemPrice: 50
+    !\n<b>Donne 8 \xE0 12 Pi\xE8ces apr\xE8s 1 minute</b>\n"
+  itemPrice: 15
   itemType: 3
   HaveGameObject: 1
