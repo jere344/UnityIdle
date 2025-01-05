@@ -17,6 +17,6 @@ MonoBehaviour:
   itemName: "Machine \xE0 laver"
   itemDescription: "Plus de machines, plus de possibilit\xE9s.\n<b>Ajoute 1 Machine
     \xE0 laver</b>"
-  itemPrice: 100
+  itemPrice: 50
   itemType: 1
   HaveGameObject: 1

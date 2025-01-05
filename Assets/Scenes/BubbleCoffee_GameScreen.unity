@@ -777,8 +777,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
-  m_sharedMaterial: {fileID: -7899475927307169406, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5227,8 +5227,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Cr\xE9dits"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
-  m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5236,7 +5236,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -5645,8 +5645,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Description
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
-  m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7402,8 +7402,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Price
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
-  m_sharedMaterial: {fileID: -7899475927307169406, guid: 55531fa0aa0017e4489b29db8ce3b883, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7433,7 +7433,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7948,7 +7948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &837671674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12466,8 +12466,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Item name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
-  m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12590,12 +12590,14 @@ MonoBehaviour:
   - {fileID: 1866406990}
   - {fileID: 64079004}
   _machines:
+  - {fileID: 0}
   - {fileID: 1590152215}
   - {fileID: 1475321781}
   - {fileID: 555180101}
   - {fileID: 1069486911}
   - {fileID: 262197303}
   _machinesManagers:
+  - {fileID: 0}
   - {fileID: 1413535637}
   - {fileID: 2063130537}
   - {fileID: 1202115024}
@@ -12638,6 +12640,7 @@ MonoBehaviour:
   _restartSCupItem: {fileID: 11400000, guid: 7f97ab072cf09db4483452118b448958, type: 2}
   _rCupCooldownReference: {fileID: 1771612170}
   _restartRCupItem: {fileID: 11400000, guid: 70dde08a3661896448dc43192734ee14, type: 2}
+  indexMachine: 1
   _buttonRed: {fileID: 21300000, guid: 6f782d93387a263428962cda2fb76653, type: 3}
   _buttonGreen: {fileID: 21300000, guid: 4bed041acbf38624d895958295875ab9, type: 3}
   _buttonBlue: {fileID: 21300000, guid: 670a881e606154c4592b31b4ee20a83f, type: 3}
@@ -13998,8 +14001,8 @@ MonoBehaviour:
   m_text: "Conception, programmation, art : Patient Violaine\nMusique : __\n\nEn
     partenariat avec le personnel de l'ESMA \n(Merci Tristan, Louis, Jules \u263A)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
-  m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
+  m_sharedMaterial: {fileID: -3386523458234849455, guid: 4e94e02585fe2d044bde482d072bb1f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

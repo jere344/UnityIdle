@@ -16,6 +16,6 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: ca55c1a26e1ff1f4c833a3619e7ba332, type: 3}
   itemName: "Jules (Am\xE9lior\xE9)"
   itemDescription: Il devient encore plus fort pour nettoyer et plier rapidement.
-  itemPrice: 60
+  itemPrice: 30
   itemType: 5
   HaveGameObject: 0
