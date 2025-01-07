@@ -13,6 +13,8 @@ public class ShopGestion : MonoBehaviour
     [SerializeField]
     private List<GameObject> _machines;
     [SerializeField]
+    private List<GameObject> _machinesShadows;
+    [SerializeField]
     private List<GameObject> _machinesManagers;
     [SerializeField]
     private List<GameObject> _set;
@@ -22,6 +24,8 @@ public class ShopGestion : MonoBehaviour
     private List<GameObject> _cups;
     [SerializeField]
     public List<Sprite> _sprites;
+    [SerializeField]
+    public List<Sprite> _spritesShadows;
 
     [Header("Item Coffee")]
     [SerializeField]
@@ -34,9 +38,7 @@ public class ShopGestion : MonoBehaviour
     [Header("Item Square Cup")]
     [SerializeField]
     private GameObject _sCupCooldownReference;
-    [SerializeField]
     private bool sCupCooldownActivated;
-    [SerializeField]
     private bool sCupButtonActivated;
     [SerializeField]
     private ItemScriptable _restartSCupItem;
@@ -58,7 +60,8 @@ public class ShopGestion : MonoBehaviour
 
     [Header("Index")]
     private int indexSet;
-    private int indexMachine = 1;
+    public int indexMachine = 1;
+    public int indexMachineShadow = 1;
     private int indexMachineJules = 1;
     private int indexCoffeeItems;
 
@@ -551,6 +554,12 @@ public class ShopGestion : MonoBehaviour
                     _machines[indexMachine].SetActive(true);
                     _machinesManagers[indexMachine].SetActive(true);
 
+                    if (indexMachine == 2 || indexMachine == 4)
+                    {
+                        _machinesShadows[indexMachineShadow].SetActive(true);
+                        indexMachineShadow++;
+                    }
+
                     float itemOriginalPrice = itemPrice + itemPrice * indexMachine;
                     machinePrice = (int)itemOriginalPrice;
 
@@ -805,6 +814,22 @@ public class ShopGestion : MonoBehaviour
                                 _machines[index].transform.position = new Vector3(currentPosition.x, currentPosition.y + 24, currentPosition.z);
                                 _machines[index].GetComponent<Image>().sprite = _sprites[8];
                                 _itemImage.SetNativeSize();
+
+                                if (indexMachineShadow == 2)
+                                {
+                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[2];
+                                }
+                                if (indexMachineShadow == 1)
+                                {
+                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[1];
+                                    indexMachineShadow++;
+                                }
+                                if (indexMachineShadow == 0)
+                                {
+                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[0];
+                                    indexMachineShadow++;
+                                }
+
 
                                 SpriteState spriteState = new SpriteState
                                 {

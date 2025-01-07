@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int LaundryCompetence;
 
 
+
     void Awake()
     {
         if (Instance == null)
