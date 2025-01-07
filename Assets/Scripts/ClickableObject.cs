@@ -6,6 +6,7 @@ using TMPro;
 
 public class ClickableObject : MonoBehaviour
 {
+    [Header("Bar UI")]
     [SerializeField]
     private TextMeshProUGUI _barAmountText;
     [SerializeField]
@@ -14,31 +15,33 @@ public class ClickableObject : MonoBehaviour
     private Image _barAmountImage;    
     [SerializeField]
     private Image _barBackground;
+    private float maxFillAmount, fillAmount = 0;
 
-    private ResourceScriptable scriptableResource;
-
-    private float workerCompetence;
-
-    public bool CanUseWorker;
-    
+    [Header("Activated GameObjects")]
     [SerializeField]
     private GameObject bar;
 
+    [Header("Resources")]
     public bool ResourceIsFood, ResourceIsLaundry;
     public int ResourceMoney;
+    private ResourceScriptable scriptableResource;
     private Sprite resourceNewImage;
     private GameObject foodObject;
     private string resourceName;
 
-    private float maxFillAmount, fillAmount = 0;
 
+    [Header("Conditions & Routine")]
+    public bool CanUseWorker;
     private bool playerIsClicking, playerResourceActivated;
     private bool workerIsClicking, workerResourceActivated;
     private Coroutine workerCoroutine;
 
+    private float workerCompetence;
+
     void Start()
     {
         bar.SetActive(true);
+
         _barText.text = "";
         SetBackgroundImage(0);
         ChangeResource();
@@ -102,30 +105,33 @@ public class ClickableObject : MonoBehaviour
 
     public void Worker()
     {
-        workerIsClicking = !workerIsClicking;
+        if (CanUseWorker)
+        {
+            workerIsClicking = !workerIsClicking;
 
-        if (ResourceIsFood)
-        {
-            workerCompetence = GameManager.Instance.LouisCompetence;
-        }
-        else if (ResourceIsLaundry)
-        {
-            workerCompetence = GameManager.Instance.JulesCompetence;
-        }
-
-        if (workerIsClicking)
-        {
-            if (workerCoroutine == null)
+            if (ResourceIsFood)
             {
-                workerCoroutine = StartCoroutine(workerRoutine(workerCompetence));
+                workerCompetence = GameManager.Instance.LouisCompetence;
             }
-        }
-        else
-        {
-            if (workerCoroutine != null)
+            else if (ResourceIsLaundry)
             {
-                StopCoroutine(workerCoroutine);
-                workerCoroutine = null;
+                workerCompetence = GameManager.Instance.JulesCompetence;
+            }
+
+            if (workerIsClicking)
+            {
+                if (workerCoroutine == null)
+                {
+                    workerCoroutine = StartCoroutine(workerRoutine(workerCompetence));
+                }
+            }
+            else
+            {
+                if (workerCoroutine != null)
+                {
+                    StopCoroutine(workerCoroutine);
+                    workerCoroutine = null;
+                }
             }
         }
     }

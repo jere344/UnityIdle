@@ -88,6 +88,12 @@ public class GoalDisplay : MonoBehaviour
 
         GameManager.Instance.clickableObject.ResetStats();
 
+        GameManager.Instance.LouisCompetence += 0.4f;
+        if (GameManager.Instance.JulesV2)
+        {
+            GameManager.Instance.JulesCompetence += 0.4f;
+        }
+
         goalCompleted = false;
     }
 }

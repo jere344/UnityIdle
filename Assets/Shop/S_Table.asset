@@ -16,7 +16,7 @@ MonoBehaviour:
   itemImage: {fileID: 0}
   itemName: "Table et si\xE8ges"
   itemDescription: "Des clients assis sont des clients heureux !\n<b>Donne 25 \xE0
-    40 Pi\xE8ces apr\xE8s 2 minutes</b>\n<i>Quantit\xE9 maximum : 5</i>\n"
+    40 Pi\xE8ces apr\xE8s 2 minutes</b>\n"
   itemPrice: 40
   itemType: 2
   HaveGameObject: 1

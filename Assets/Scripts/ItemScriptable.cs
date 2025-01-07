@@ -14,5 +14,4 @@ public class ItemScriptable : ScriptableObject
     public string itemDescription;
     public int itemPrice;
     public Type itemType;
-    public bool HaveGameObject;
 }

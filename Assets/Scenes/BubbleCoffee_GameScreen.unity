@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 64079008}
   - component: {fileID: 64079007}
   - component: {fileID: 64079006}
+  - component: {fileID: 64079009}
   m_Layer: 5
   m_Name: Button_Jules
   m_TagString: Untagged
@@ -887,7 +888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -43.5, y: -488.5}
+  m_AnchoredPosition: {x: -43.5, y: -159.5}
   m_SizeDelta: {x: 287, y: 319}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64079006
@@ -934,9 +935,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413535638}
-        m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
-        m_MethodName: Worker
+      - m_Target: {fileID: 64079009}
+        m_TargetAssemblyTypeName: JulesBehaviour, Assembly-CSharp
+        m_MethodName: AutoClicker
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -984,6 +985,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64079004}
   m_CullTransparentMesh: 1
+--- !u!114 &64079009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64079004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc1ce79efb2c344fbbd2c433ba5fada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickersManagers:
+  - {fileID: 959318325}
+  - {fileID: 1413535637}
 --- !u!1 &70476036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 324, y: 389}
+  m_AnchoredPosition: {x: 329, y: 389}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &123849662
@@ -1316,7 +1332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Merci d'y jouer !
+  m_text: Merci de jouer !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fce8081b5237474581600724145634b, type: 2}
   m_sharedMaterial: {fileID: 3592652394331497238, guid: 5fce8081b5237474581600724145634b, type: 2}
@@ -2521,11 +2537,11 @@ MonoBehaviour:
   _barText: {fileID: 600345671}
   _barAmountImage: {fileID: 2141517162}
   _barBackground: {fileID: 13656659}
-  CanUseWorker: 0
   bar: {fileID: 544127110}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!1 &304160796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,11 +2853,11 @@ MonoBehaviour:
   _barText: {fileID: 1391811347}
   _barAmountImage: {fileID: 919709734}
   _barBackground: {fileID: 906337737}
-  CanUseWorker: 0
   bar: {fileID: 294275424}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!1 &394435877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,8 +5255,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.7026027, g: 0.8394834, b: 0.91194963, a: 1}
+    topRight: {r: 0.7058824, g: 0.84313726, b: 0.9137255, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
@@ -8796,11 +8812,11 @@ MonoBehaviour:
   _barText: {fileID: 485959553}
   _barAmountImage: {fileID: 1711425507}
   _barBackground: {fileID: 1276958068}
-  CanUseWorker: 0
   bar: {fileID: 992061020}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 1
 --- !u!1 &979901692
 GameObject:
   m_ObjectHideFlags: 0
@@ -10048,6 +10064,7 @@ MonoBehaviour:
   LouisCompetence: 1.5
   JulesLvl: 1
   JulesCompetence: 1.5
+  JulesV2: 0
   OvenLvl: 1
   OvenCompetence: 0
   LaundryLvl: 1
@@ -11082,11 +11099,11 @@ MonoBehaviour:
   _barText: {fileID: 536084549}
   _barAmountImage: {fileID: 473250568}
   _barBackground: {fileID: 1229589136}
-  CanUseWorker: 0
   bar: {fileID: 320880959}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!1 &1216734248
 GameObject:
   m_ObjectHideFlags: 0
@@ -12004,11 +12021,11 @@ MonoBehaviour:
   _barText: {fileID: 1168179674}
   _barAmountImage: {fileID: 689572826}
   _barBackground: {fileID: 32478196}
-  CanUseWorker: 0
   bar: {fileID: 2114674188}
   ResourceIsFood: 1
   ResourceIsLaundry: 0
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!4 &1373759582
 Transform:
   m_ObjectHideFlags: 0
@@ -12491,8 +12508,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12527,7 +12544,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -343.2198, w: -23.077682}
+  m_margin: {x: 0, y: 0, z: -363.0197, w: -23.077682}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12637,10 +12654,11 @@ MonoBehaviour:
   _coffeeCooldownReference: {fileID: 1567142540}
   _restartCoffeeItem: {fileID: 11400000, guid: 9659d789ec23bea4c8ff393b2c321f81, type: 2}
   _sCupCooldownReference: {fileID: 1426206135}
+  sCupCooldownActivated: 0
+  sCupButtonActivated: 0
   _restartSCupItem: {fileID: 11400000, guid: 7f97ab072cf09db4483452118b448958, type: 2}
   _rCupCooldownReference: {fileID: 1771612170}
   _restartRCupItem: {fileID: 11400000, guid: 70dde08a3661896448dc43192734ee14, type: 2}
-  indexMachine: 1
   _buttonRed: {fileID: 21300000, guid: 6f782d93387a263428962cda2fb76653, type: 3}
   _buttonGreen: {fileID: 21300000, guid: 4bed041acbf38624d895958295875ab9, type: 3}
   _buttonBlue: {fileID: 21300000, guid: 670a881e606154c4592b31b4ee20a83f, type: 3}
@@ -12759,11 +12777,11 @@ MonoBehaviour:
   _barText: {fileID: 422661778}
   _barAmountImage: {fileID: 3553604}
   _barBackground: {fileID: 294566340}
-  CanUseWorker: 0
   bar: {fileID: 1886259022}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!4 &1413535639
 Transform:
   m_ObjectHideFlags: 0
@@ -16465,11 +16483,11 @@ MonoBehaviour:
   _barText: {fileID: 1383374854}
   _barAmountImage: {fileID: 1216734250}
   _barBackground: {fileID: 185034003}
-  CanUseWorker: 0
   bar: {fileID: 534788815}
   ResourceIsFood: 0
   ResourceIsLaundry: 1
   ResourceMoney: 0
+  CanUseWorker: 0
 --- !u!1 &2074375291
 GameObject:
   m_ObjectHideFlags: 0

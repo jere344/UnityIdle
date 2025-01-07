@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public float LouisCompetence;
     public int JulesLvl;
     public float JulesCompetence;
+    public bool JulesV2;
 
     public int OvenLvl;
     public int OvenCompetence;

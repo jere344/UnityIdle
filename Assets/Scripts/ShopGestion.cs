@@ -34,7 +34,9 @@ public class ShopGestion : MonoBehaviour
     [Header("Item Square Cup")]
     [SerializeField]
     private GameObject _sCupCooldownReference;
+    [SerializeField]
     private bool sCupCooldownActivated;
+    [SerializeField]
     private bool sCupButtonActivated;
     [SerializeField]
     private ItemScriptable _restartSCupItem;
@@ -49,15 +51,20 @@ public class ShopGestion : MonoBehaviour
 
     [Header("Items informations")]
     private string itemName;
+    private string originalItemDescription;
     private int itemPrice;
     private int itemIndex;
     private Type itemType;
 
     [Header("Index")]
     private int indexSet;
-    [SerializeField]
     private int indexMachine = 1;
+    private int indexMachineJules = 1;
     private int indexCoffeeItems;
+
+    [Header("Conditions")]
+    private bool canBuyJulesLvl;
+    private bool canBuyLaundryLvl;
 
     [Header("Money and Price")]
     private int playerMoney;
@@ -65,13 +72,17 @@ public class ShopGestion : MonoBehaviour
     private int louisLvlPrice = 20;
     private int julesLvlPrice = 30;
     private int ovenLvlPrice = 15;
-    private int laundryLvlPrice = 30;
+    private int laundryLvlPrice = 50;
     private int machinePrice = 50;
-    private int itemPriceReference;
 
-    [Header("Conditions")]
-    private bool canBuyJulesLvl;
-    private bool canBuyLaundryLvl;
+    [Header("Level")]
+    private int julesLvl;
+
+    [Header("Quantity")]
+    private int quantityMachine = 5;
+    private int quantitySet = 5;
+    private int quantityCoffee = 4;
+    private int actualQuantityCoffee ;
 
     [Header("Buttons")]
     [SerializeField]
@@ -99,6 +110,9 @@ public class ShopGestion : MonoBehaviour
 
     void Start()
     {
+        julesLvl = GameManager.Instance.JulesLvl;
+        actualQuantityCoffee = quantityCoffee;
+
         playerMoney = 9999;
     }
 
@@ -109,35 +123,87 @@ public class ShopGestion : MonoBehaviour
         if (coffeeButtonActivated)
         {
             indexCoffeeItems = 0;
-            Cooldown(_coffeeCooldownReference, coffeeCooldownActivated, _restartCoffeeItem);
+            CooldownCoffee();
         }
 
         if (sCupButtonActivated)
         {
-            Cooldown(_sCupCooldownReference, sCupCooldownActivated, _restartSCupItem);
+            CooldownSCup();
         }
 
         if (rCupButtonActivated)
         {
-            Cooldown(_rCupCooldownReference, rCupCooldownActivated, _restartRCupItem);
+            CooldownRCup();
         }
     }
 
-    private void Cooldown(GameObject cooldownReference, bool boolReference, ItemScriptable itemReference)
+    // Cooldowns 
+    private void CooldownCoffee()
     {
-        int endCooldown = cooldownReference.GetComponent<ItemBehaviour>().EndTimer;
-        float cooldownFloat = cooldownReference.GetComponent<ItemBehaviour>().Timer;
+        int endCooldown = _coffeeCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        float cooldownFloat = _coffeeCooldownReference.GetComponent<ItemBehaviour>().Timer;
         int cooldown = (int)cooldownFloat;
         _itemPrice.text = "" + (endCooldown - cooldown);
 
         if (cooldown >= endCooldown)
         {
-            boolReference = false;
+            coffeeButtonActivated = false;
+            coffeeCooldownActivated = false;
             _buyButton.interactable = true;
-            DisplayInformations(itemReference);
+
+            if (actualQuantityCoffee == 0)
+            {
+                actualQuantityCoffee = quantityCoffee;
+            }
+            Debug.Log(_restartCoffeeItem);
+            DisplayInformations(_restartCoffeeItem);
+        }
+    }
+    private void CooldownSCup()
+    {
+        int endCooldown = _sCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        float cooldownFloat = _sCupCooldownReference.GetComponent<ItemBehaviour>().Timer;
+        int cooldown = (int)cooldownFloat;
+        _itemPrice.text = "" + (endCooldown - cooldown);
+
+        if (cooldown >= endCooldown)
+        {
+            sCupButtonActivated = false;
+            sCupCooldownActivated = false;
+            _buyButton.interactable = true;
+
+            if (actualQuantityCoffee == 0)
+            {
+                actualQuantityCoffee = quantityCoffee;
+            }
+            Debug.Log(_restartSCupItem);
+            DisplayInformations(_restartSCupItem);
+        }
+    }
+    private void CooldownRCup()
+    {
+        int endCooldown = _rCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        float cooldownFloat = _rCupCooldownReference.GetComponent<ItemBehaviour>().Timer;
+        int cooldown = (int)cooldownFloat;
+        _itemPrice.text = "" + (endCooldown - cooldown);
+
+        if (cooldown >= endCooldown)
+        {
+            rCupButtonActivated = false;
+            rCupCooldownActivated = false;
+            _buyButton.interactable = true;
+
+            if (actualQuantityCoffee == 0)
+            {
+                actualQuantityCoffee = quantityCoffee;
+            }
+            Debug.Log(_restartRCupItem);
+            DisplayInformations(_restartRCupItem);
         }
     }
 
+    ///---------- If Player clicks on an Item ----------
+    
     // Informations 
     public void DisplayInformations(ItemScriptable itemScriptable)
     {
@@ -152,12 +218,17 @@ public class ShopGestion : MonoBehaviour
         itemType = itemScriptable.itemType;
         itemIndex = itemScriptable.itemIndex;
         _itemDescription.text = itemScriptable.itemDescription;
+        originalItemDescription = _itemDescription.text;
 
         _itemName.text = itemName;
         _itemImage.sprite = itemScriptable.itemImage;
         _itemImage.SetNativeSize();
 
-        //-- Specials --
+        Sorting();
+    }
+
+    public void Sorting()
+    {
         if (itemName == "Tristan")
         {
             _itemPrice.text = "";
@@ -176,24 +247,24 @@ public class ShopGestion : MonoBehaviour
         else
         {
             ButtonBehaviour();
-        } 
+        }
     }
 
-    // Specials Behaviours
+    // Specials Item Button Behaviour
     public void ButtonLvlLaundry()
     {
-        _itemPrice.text = "" + machinePrice;
+        _itemPrice.text = "" + laundryLvlPrice;
         _playerMoney.text = "" + playerMoney;
 
         if (indexMachine == _machines.Count)
         {
-            _itemDescription.text = "Du linge encore mieux nettoyé !\r\n<b>Augmente l'argent obtenu de 1</b>\r\n<i>S'applique à toutes les ressources</i>";
+            _itemDescription.text = originalItemDescription;
             canBuyLaundryLvl = true;
             _buttonDisplay.sprite = _buttonGreen;
         }
         else
         {
-            _itemDescription.text = "Du linge encore mieux nettoyé !\r\n<b>Augmente l'argent obtenu de 1</b>\r\n<i>S'applique à toutes les ressources</i>\n<color=#98E5FF>Nécessite 6 machines</color>";
+            _itemDescription.text = originalItemDescription + "\n<color=#98E5FF>Nécessite 6 machines</color>";
             canBuyLaundryLvl = false;
             _buttonDisplay.sprite = _buttonBlue;
         }
@@ -206,11 +277,11 @@ public class ShopGestion : MonoBehaviour
         if (indexMachine < _machines.Count)
         {
             itemName += " v1";
-            _itemDescription.text = "Il devient encore plus fort pour nettoyer et plier rapidement.\r\n<b>Clique sur toutes les Machines</b>\r\n<color=#98E5FF>Nécessite 1 machine en plus</color>";
+            _itemDescription.text = originalItemDescription + "\r\n<b>Clique sur toutes les Machines</b>\r\n<color=#98E5FF>Nécessite 1 machine en plus</color>";
 
-            if (indexMachine > GameManager.Instance.JulesLvl)
+            if (indexMachine > julesLvl)
             {
-                _itemDescription.text = "Il devient encore plus fort pour nettoyer et plier rapidement.\r\n<b>Clique sur toutes les Machines</b>";
+                _itemDescription.text = originalItemDescription + "\r\n<b>Clique sur toutes les Machines</b>";
 
                 canBuyJulesLvl = true;
                 _buttonDisplay.sprite = _buttonGreen;
@@ -222,21 +293,33 @@ public class ShopGestion : MonoBehaviour
             }
         }
 
-        if (indexMachine == _machines.Count)
+        if (indexMachineJules == _machinesManagers.Count)
         {
+            GameManager.Instance.JulesV2 = true;
             canBuyJulesLvl = true;
             itemName += " v2";
-            _itemDescription.text = "Il devient encore plus fort pour nettoyer et plier rapidement.\n<b>Diminue son temps de clic de 0,2 ms</b>\r\n<i>S'applique à toutes les machines</i>";
+            _itemDescription.text = originalItemDescription + "\n<b>Diminue son temps de clic de 0,2 ms</b>\r\n<i>S'applique à toutes les machines</i>";
 
             PriceBehaviour(julesLvlPrice);
         }
     }
-    // Behaviours
+    
+    // Item Button Behaviours
     public void ButtonBehaviour()
     {
         if (itemType == Type.BWorker)
         {
-            ListType(_workers, itemPrice);
+            if (_workers[itemIndex].activeSelf)
+            {
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonGreen;
+                _itemPrice.text = "";
+            }
+            else
+            {
+                _buyButton.interactable = true;
+                PriceBehaviour(itemPrice);
+            }
         }
 
         if (itemType == Type.LWorker)
@@ -287,18 +370,44 @@ public class ShopGestion : MonoBehaviour
 
         if (itemType == Type.BMachines)
         {
-            ListType(_machines, machinePrice);
+            _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantityMachine + "</color>";
+
+            if (indexMachine < 6)
+            {
+                _buyButton.interactable = true;
+                PriceBehaviour(machinePrice);
+            }
+            else
+            {
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonGreen;
+
+                _itemPrice.text = "";
+            }
         }
 
         if (itemType == Type.BSets)
         {
-            ListType(_set, itemPrice);
+            _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantitySet + "</color>";
+
+            if (indexSet == _set.Count)
+            {
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonGreen;
+                _itemPrice.text = "";
+            }
+            else
+            {
+                _buyButton.interactable = true;
+                PriceBehaviour(itemPrice);
+            }
         }
 
         if (itemType == Type.BCups)
         {
             if (itemIndex == 0)
             {
+
                 if (sCupCooldownActivated)
                 {
                     sCupButtonActivated = true;
@@ -306,13 +415,13 @@ public class ShopGestion : MonoBehaviour
                     _buttonDisplay.sprite = _buttonBlue;
                     _itemPrice.text = "";
                 }
-                else
+                else if (!sCupCooldownActivated)
                 {
                     _buyButton.interactable = true;
                     PriceBehaviour(itemPrice);
                 }
             }
-            else
+            else if (itemIndex == 1)
             {
                 if (rCupCooldownActivated)
                 {
@@ -331,6 +440,8 @@ public class ShopGestion : MonoBehaviour
 
         if (itemType == Type.BCoffee)
         {
+            _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + actualQuantityCoffee + "</color>";
+
             if (coffeeCooldownActivated)
             {
                 coffeeButtonActivated = true;
@@ -343,20 +454,6 @@ public class ShopGestion : MonoBehaviour
                 _buyButton.interactable = true;
                 PriceBehaviour(itemPrice);
             }
-        }
-    }
-    public void ListType(List<GameObject> typeOfList, int itemPrice)
-    {
-        if (typeOfList[itemIndex].activeSelf)
-        {
-            _buyButton.interactable = false;
-            _buttonDisplay.sprite = _buttonGreen;
-            _itemPrice.text = "";
-        }
-        else
-        {
-            _buyButton.interactable = true;
-            PriceBehaviour(itemPrice);
         }
     }
     public void PriceBehaviour(int itemPrice)
@@ -373,6 +470,10 @@ public class ShopGestion : MonoBehaviour
             _buttonDisplay.sprite = _buttonRed;
         }
     }
+
+    ///---------- If Player clicks on button with price ----------
+
+    // Price Button Behaviour
     public void ShoppingBehaviour()
     {
         if (itemType == Type.BWorker)
@@ -382,7 +483,7 @@ public class ShopGestion : MonoBehaviour
 
         if (itemType == Type.BSets || itemType == Type.BMachines || itemType == Type.BCoffee || itemType == Type.BCups)
         {
-            BuyObjectsOrGoodies();
+            BuyObjects();
         }
 
         if (itemType == Type.LWorker)
@@ -396,7 +497,7 @@ public class ShopGestion : MonoBehaviour
         }
     }
 
-    // Buy a Worker
+    //001 : Buy a Worker
     public void BuyWorkers()
     {
         if (playerMoney >= itemPrice)
@@ -414,8 +515,8 @@ public class ShopGestion : MonoBehaviour
         }
     }
 
-    //Buy an Object
-    public void BuyObjectsOrGoodies()
+    //002 : Buy an Object
+    public void BuyObjects()
     {
         if (playerMoney >= itemPrice)
         {
@@ -428,15 +529,18 @@ public class ShopGestion : MonoBehaviour
                 if (indexSet >= 0 && indexSet < _set.Count)
                 {
                     _set[indexSet].SetActive(true);
-                    indexSet += 1;
+                    indexSet++;
+                    quantitySet--;
                     PriceBehaviour(itemPrice);
                 }
-                if (indexSet >= 4)
+                if (indexSet == _set.Count)
                 {
                     _buyButton.interactable = false;
                     _buttonDisplay.sprite = _buttonGreen;
                     _itemPrice.text = "";
                 }
+
+                _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantitySet + "</color>";
             }
             else if (itemType == Type.BMachines)
             {
@@ -450,16 +554,18 @@ public class ShopGestion : MonoBehaviour
                     float itemOriginalPrice = itemPrice + itemPrice * indexMachine;
                     machinePrice = (int)itemOriginalPrice;
 
-                    indexMachine += 1;
+                    indexMachine++;
+                    quantityMachine--;
                     PriceBehaviour(machinePrice);
                 }
-                if (indexMachine >= 5)
+                if (indexMachine >= 6)
                 {
-                    Debug.Log("Full");
                     _buyButton.interactable = false;
                     _buttonDisplay.sprite = _buttonGreen;
                     _itemPrice.text = "";
                 }
+
+                _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantityMachine + "</color>";
             }
             else if (itemType == Type.BCoffee)
             {
@@ -468,8 +574,10 @@ public class ShopGestion : MonoBehaviour
                 if (indexCoffeeItems < _coffee.Count)
                 {
                     _coffee[indexCoffeeItems].SetActive(true);
-                    indexCoffeeItems += 1;
+                    indexCoffeeItems++;
+                    actualQuantityCoffee--;
                     PriceBehaviour(itemPrice);
+                    _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + actualQuantityCoffee + "</color>";
                 }
                 if (indexCoffeeItems >= _coffee.Count)
                 {
@@ -483,35 +591,29 @@ public class ShopGestion : MonoBehaviour
             else if (itemType == Type.BCups)
             {
                 playerMoney -= itemPrice;
+                _itemPrice.text = "";
+                _playerMoney.text = "" + playerMoney;
 
-                if (itemIndex < _cups.Count)
+                _cups[itemIndex].SetActive(true);
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonBlue;
+                _itemPrice.text = "";
+
+                if (itemIndex == 0)
                 {
-                    playerMoney -= itemPrice;
-                    _itemPrice.text = "";
-                    _playerMoney.text = "" + playerMoney;
-
-                    _cups[itemIndex].SetActive(true);
-
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonBlue;
-                    _itemPrice.text = "";
-
-                    if (itemIndex == 0)
-                    {
-                        sCupCooldownActivated = true;
-                    }
-                    else
-                    {
-                        rCupCooldownActivated = true;
-                    }
-
-                    ButtonBehaviour();
+                    sCupCooldownActivated = true;
                 }
+                else
+                {
+                    rCupCooldownActivated = true;
+                }
+
+                ButtonBehaviour();
             }
         }
     }
-
-    // Level up an Item
+    
+    //003 : Level up a Worker
     public void LevelUpWorker()
     {
         if (playerMoney >= itemPrice)
@@ -550,22 +652,24 @@ public class ShopGestion : MonoBehaviour
             {
                 if (canBuyJulesLvl)
                 {
-                    int julesLvl = GameManager.Instance.JulesLvl;
-
-                    float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
+                    float itemOriginalPrice = itemPrice + itemPrice * julesLvl;
                     julesLvlPrice = (int)itemOriginalPrice;
 
-                    GameManager.Instance.JulesLvl++;
+                    julesLvl++;
 
                     playerMoney -= julesLvlPrice;
 
-                    if (indexMachine > julesLvl)
+                    if (indexMachine > julesLvl && indexMachineJules != 6)
                     {
-                        _machinesManagers[indexMachine].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
+                        _machinesManagers[indexMachineJules].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
                         GameManager.Instance.JulesCompetence += 0.5f;
+                        indexMachineJules++;
+
+
                     }
-                    else if (indexMachine == _machines.Count)
+                    else if (indexMachineJules <= julesLvl)
                     {
+                        GameManager.Instance.JulesV2 = true;
                         GameManager.Instance.JulesCompetence -= 0.2f;
 
                         if (GameManager.Instance.JulesCompetence <= 0.2f)
@@ -581,13 +685,12 @@ public class ShopGestion : MonoBehaviour
             }
         }
     }
+    
+    //004 : Level up a Clicker
     public void LevelUpClickers()
     {
         if (playerMoney >= itemPrice)
         {
-            _itemPrice.text = "";
-            _playerMoney.text = "" + playerMoney;
-
             if (itemIndex == 0)
             {
                 GameManager.Instance.OvenCompetence += 1;
@@ -595,7 +698,9 @@ public class ShopGestion : MonoBehaviour
                 float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.OvenLvl;
                 ovenLvlPrice = (int)itemOriginalPrice;
                 playerMoney -= ovenLvlPrice;
-                PriceBehaviour(itemPriceReference);
+
+                _itemPrice.text = "" + ovenLvlPrice;
+                PriceBehaviour(ovenLvlPrice);
                 GameManager.Instance.OvenLvl++;
             }
 
@@ -613,6 +718,7 @@ public class ShopGestion : MonoBehaviour
                     laundryLvlPrice = (int)itemOriginalPrice;
                     playerMoney -= laundryLvlPrice;
 
+                    _itemPrice.text = "" + laundryLvlPrice;
                     PriceBehaviour(laundryLvlPrice);
                     GameManager.Instance.LaundryLvl++;
 
@@ -763,6 +869,7 @@ public class ShopGestion : MonoBehaviour
                         }
                     }
 
+                    _playerMoney.text = "" + playerMoney;
                 }
 
             }
