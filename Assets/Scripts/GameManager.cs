@@ -6,14 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+
+    //List
+
+
     //Scripts
     public GoalDisplay DisplayGoal;
     public MoneyDisplay DisplayMoney;
     public ResourceDisplay DisplayResource;
     public ShopGestion GestionShop;
     public ResourceGestion gestionResource;
-    [HideInInspector]
-    public ClickableObject clickableObject;
+
+    public ClickableObject ovenObject;
 
     //Var
     public int GoldAmount;

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -35,8 +34,16 @@ public class ClickableObject : MonoBehaviour
     private bool playerIsClicking, playerResourceActivated;
     private bool workerIsClicking, workerResourceActivated;
     private Coroutine workerCoroutine;
-
     private float workerCompetence;
+
+    [Header ("Sprite logo")]
+    [SerializeField]
+    private Sprite _checkmark;
+    [SerializeField]
+    private Sprite _cross;
+    [SerializeField]
+    private Image _imageAutoclickerLogo;
+    private bool isSprite1 = true;
 
     void Start()
     {
@@ -108,6 +115,8 @@ public class ClickableObject : MonoBehaviour
         if (CanUseWorker)
         {
             workerIsClicking = !workerIsClicking;
+            _imageAutoclickerLogo.sprite = isSprite1 ? _checkmark : _cross;
+            isSprite1 = !isSprite1;
 
             if (ResourceIsFood)
             {
@@ -184,9 +193,10 @@ public class ClickableObject : MonoBehaviour
 
     private void ChangeResource()
     {
+        int index = Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count);
+
         if (ResourceIsFood)
         {
-            int index = Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count);
             scriptableResource = GameManager.Instance.gestionResource.seasonResource[index];
             foodObject = GameManager.Instance.gestionResource.seasonFoodObject[index];
         }

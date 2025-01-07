@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _audioManager;
+
     public void LoadScene()
     {
+        DontDestroyOnLoad(_audioManager);
         SceneManager.LoadScene("BubbleCoffee_GameScreen");
     }
 

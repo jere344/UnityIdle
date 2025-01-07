@@ -53,10 +53,11 @@ public class ShopGestion : MonoBehaviour
 
     [Header("Items informations")]
     private string itemName;
-    private string originalItemDescription;
     private int itemPrice;
     private int itemIndex;
     private Type itemType;
+    private string originalItemName;
+    private string originalItemDescription;
 
     [Header("Index")]
     private int indexSet;
@@ -77,9 +78,6 @@ public class ShopGestion : MonoBehaviour
     private int ovenLvlPrice = 15;
     private int laundryLvlPrice = 50;
     private int machinePrice = 50;
-
-    [Header("Level")]
-    private int julesLvl;
 
     [Header("Quantity")]
     private int quantityMachine = 5;
@@ -113,15 +111,12 @@ public class ShopGestion : MonoBehaviour
 
     void Start()
     {
-        julesLvl = GameManager.Instance.JulesLvl;
         actualQuantityCoffee = quantityCoffee;
-
-        playerMoney = 9999;
     }
 
     void Update()
     {
-        //playerMoney = GameManager.Instance.GoldAmount;
+        playerMoney = GameManager.Instance.GoldAmount;
 
         if (coffeeButtonActivated)
         {
@@ -224,6 +219,7 @@ public class ShopGestion : MonoBehaviour
         originalItemDescription = _itemDescription.text;
 
         _itemName.text = itemName;
+        originalItemName = _itemName.text;
         _itemImage.sprite = itemScriptable.itemImage;
         _itemImage.SetNativeSize();
 
@@ -277,12 +273,11 @@ public class ShopGestion : MonoBehaviour
         _itemPrice.text = "" + julesLvlPrice;
         _playerMoney.text = "" + playerMoney;
 
-        if (indexMachine < _machines.Count)
+        if (indexMachineJules < _machinesManagers.Count-1)
         {
-            itemName += " v1";
+            _itemName.text = originalItemName + " v1";
             _itemDescription.text = originalItemDescription + "\r\n<b>Clique sur toutes les Machines</b>\r\n<color=#98E5FF>Nécessite 1 machine en plus</color>";
-
-            if (indexMachine > julesLvl)
+            if (indexMachine > GameManager.Instance.JulesLvl)
             {
                 _itemDescription.text = originalItemDescription + "\r\n<b>Clique sur toutes les Machines</b>";
 
@@ -296,11 +291,11 @@ public class ShopGestion : MonoBehaviour
             }
         }
 
-        if (indexMachineJules == _machinesManagers.Count)
+        if (indexMachineJules >= _machinesManagers.Count-1)
         {
             GameManager.Instance.JulesV2 = true;
             canBuyJulesLvl = true;
-            itemName += " v2";
+            _itemName.text = originalItemName + " v2";
             _itemDescription.text = originalItemDescription + "\n<b>Diminue son temps de clic de 0,2 ms</b>\r\n<i>S'applique à toutes les machines</i>";
 
             PriceBehaviour(julesLvlPrice);
@@ -661,14 +656,14 @@ public class ShopGestion : MonoBehaviour
             {
                 if (canBuyJulesLvl)
                 {
-                    float itemOriginalPrice = itemPrice + itemPrice * julesLvl;
+                    float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
                     julesLvlPrice = (int)itemOriginalPrice;
 
-                    julesLvl++;
+                    GameManager.Instance.JulesLvl++;
 
                     playerMoney -= julesLvlPrice;
 
-                    if (indexMachine > julesLvl && indexMachineJules != 6)
+                    if (indexMachine > GameManager.Instance.JulesLvl && indexMachineJules != 6)
                     {
                         _machinesManagers[indexMachineJules].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
                         GameManager.Instance.JulesCompetence += 0.5f;
@@ -676,7 +671,7 @@ public class ShopGestion : MonoBehaviour
 
 
                     }
-                    else if (indexMachineJules <= julesLvl)
+                    else if (indexMachineJules <= GameManager.Instance.JulesLvl)
                     {
                         GameManager.Instance.JulesV2 = true;
                         GameManager.Instance.JulesCompetence -= 0.2f;

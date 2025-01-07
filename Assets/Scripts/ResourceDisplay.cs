@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -68,13 +69,18 @@ public class ResourceDisplay : MonoBehaviour
         else
         {
             FoodObject = SelectedFoodObject;
-            FoodObject.SetActive(!FoodObject.activeSelf);
+            if (!FoodObject.activeSelf)
+            {
+                FoodObject.SetActive(!FoodObject.activeSelf);
+            }
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
-            ResourceBehaviour resourceNewImage = _newResource.GetComponent<ResourceBehaviour>();
+            ResourceBehaviour resourceScript = _newResource.GetComponent<ResourceBehaviour>();
             ResourceBehaviour resourceText = _newResource.GetComponentInChildren<ResourceBehaviour>();
+
+            resourceScript.SetObjectToDeactivate(FoodObject);
             _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
 
-            resourceNewImage.ImageReference.sprite = ResourceImage;
+            resourceScript.ImageReference.sprite = ResourceImage;
             resourceText.TexteReference.text = "" + resourcePrice;
         }
     }

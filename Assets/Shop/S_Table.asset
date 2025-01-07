@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: S_Table
   m_EditorClassIdentifier: 
   itemIndex: 0
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: afd82a650b9ea0a40a97c38e26877e6d, type: 3}
   itemName: "Table et si\xE8ges"
   itemDescription: "Des clients assis sont des clients heureux !\n<b>Donne 25 \xE0
-    40 Pi\xE8ces apr\xE8s 2 minutes</b>\n"
+    40 Pi\xE8ces apr\xE8s 2 minutes</b>"
   itemPrice: 40
   itemType: 2
-  HaveGameObject: 1

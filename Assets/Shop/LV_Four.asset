@@ -15,8 +15,7 @@ MonoBehaviour:
   itemIndex: 0
   itemImage: {fileID: 21300000, guid: 0a67fd03507bc114f918264d06a7e585, type: 3}
   itemName: "G\xE2teaux (Four)"
-  itemDescription: "Des g\xE2teaux encore meilleurs.\n<b>Augmente l'argent obtenu
+  itemDescription: "Des g\xE2teaux encore meilleurs !\n<b>Augmente l'argent obtenu
     de 1</b>\n<i>S'applique \xE0 toutes les ressources</i>"
   itemPrice: 15
   itemType: 6
-  HaveGameObject: 0

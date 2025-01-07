@@ -9,6 +9,8 @@ public class ResourceBehaviour : MonoBehaviour
     public Image ImageReference;
     public TextMeshProUGUI TexteReference;
 
+    private GameObject objectToDeactivate;
+
     public int MoneyAmount;
     private int _extraMoneyAmount;
 
@@ -25,6 +27,7 @@ public class ResourceBehaviour : MonoBehaviour
     public void GainGold()
     {
         GameManager.Instance.DisplayMoney.GainGold(MoneyAmount);
+        objectToDeactivate.SetActive(false);
         Destroy(gameObject);
     }
 
@@ -33,6 +36,13 @@ public class ResourceBehaviour : MonoBehaviour
         _extraMoneyAmount = GameManager.Instance.DisplayResource.ExtraMoney;
         GameManager.Instance.DisplayMoney.GainGold(_extraMoneyAmount);
         GameManager.Instance.DisplayResource.ExtraMoney = 0;
+        objectToDeactivate.SetActive(false);
         gameObject.SetActive(false);
     }
+
+    public void SetObjectToDeactivate(GameObject obj)
+    {
+        objectToDeactivate = obj;
+    }
+
 }

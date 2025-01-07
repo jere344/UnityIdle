@@ -86,7 +86,12 @@ public class GoalDisplay : MonoBehaviour
         _menuDisplay.sprite = _menuSprites[CurrentIndex];
         _windowDisplay.sprite = _windowSprites[CurrentIndex];
 
-        GameManager.Instance.clickableObject.ResetStats();
+        ClickableObject[] allClickers = FindObjectsOfType<ClickableObject>();
+
+        foreach (ClickableObject clicker in allClickers)
+        {
+            clicker.ResetStats();
+        }
 
         GameManager.Instance.LouisCompetence += 0.4f;
         if (GameManager.Instance.JulesV2)
