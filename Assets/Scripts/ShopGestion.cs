@@ -71,7 +71,6 @@ public class ShopGestion : MonoBehaviour
     private bool canBuyLaundryLvl;
 
     [Header("Money and Price")]
-    private int playerMoney;
     private int playerLvlPrice = 40;
     private int louisLvlPrice = 20;
     private int julesLvlPrice = 30;
@@ -116,8 +115,6 @@ public class ShopGestion : MonoBehaviour
 
     void Update()
     {
-        playerMoney = GameManager.Instance.GoldAmount;
-
         if (coffeeButtonActivated)
         {
             indexCoffeeItems = 0;
@@ -231,7 +228,7 @@ public class ShopGestion : MonoBehaviour
         if (itemName == "Tristan")
         {
             _itemPrice.text = "";
-            _playerMoney.text = "" + playerMoney;
+            _playerMoney.text = "" + GameManager.Instance.GoldAmount;
             _buyButton.interactable = false;
             _buttonDisplay.sprite = _buttonGreen;
         }
@@ -253,7 +250,7 @@ public class ShopGestion : MonoBehaviour
     public void ButtonLvlLaundry()
     {
         _itemPrice.text = "" + laundryLvlPrice;
-        _playerMoney.text = "" + playerMoney;
+        _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
         if (indexMachine == _machines.Count)
         {
@@ -271,7 +268,7 @@ public class ShopGestion : MonoBehaviour
     public void ButtonLvlJules()
     {
         _itemPrice.text = "" + julesLvlPrice;
-        _playerMoney.text = "" + playerMoney;
+        _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
         if (indexMachineJules < _machinesManagers.Count-1)
         {
@@ -457,9 +454,9 @@ public class ShopGestion : MonoBehaviour
     public void PriceBehaviour(int itemPrice)
     {
         _itemPrice.text = "" + itemPrice;
-        _playerMoney.text = "" + playerMoney;
+        _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
-        if (playerMoney >= itemPrice)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
             _buttonDisplay.sprite = _buttonGreen;
         }
@@ -498,13 +495,13 @@ public class ShopGestion : MonoBehaviour
     //001 : Buy a Worker
     public void BuyWorkers()
     {
-        if (playerMoney >= itemPrice)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
                 if (itemIndex >= 0 && itemIndex < _workers.Count)
                 {
-                    playerMoney -= itemPrice;
+                GameManager.Instance.GoldAmount -= itemPrice;
                     _itemPrice.text = "";
-                    _playerMoney.text = "" + playerMoney;
+                    _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
                     _workers[itemIndex].SetActive(true);
                     _buyButton.interactable = false;
@@ -516,13 +513,13 @@ public class ShopGestion : MonoBehaviour
     //002 : Buy an Object
     public void BuyObjects()
     {
-        if (playerMoney >= itemPrice)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
-            _playerMoney.text = "" + playerMoney;
+            _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
             if (itemType == Type.BSets)
             {
-                playerMoney -= itemPrice;
+                GameManager.Instance.GoldAmount -= itemPrice;
 
                 if (indexSet >= 0 && indexSet < _set.Count)
                 {
@@ -542,7 +539,7 @@ public class ShopGestion : MonoBehaviour
             }
             else if (itemType == Type.BMachines)
             {
-                playerMoney -= machinePrice;
+                GameManager.Instance.GoldAmount -= machinePrice;
 
                 if (indexMachine < _machines.Count)
                 {
@@ -573,7 +570,7 @@ public class ShopGestion : MonoBehaviour
             }
             else if (itemType == Type.BCoffee)
             {
-                playerMoney -= itemPrice;
+                GameManager.Instance.GoldAmount -= itemPrice;
 
                 if (indexCoffeeItems < _coffee.Count)
                 {
@@ -594,9 +591,9 @@ public class ShopGestion : MonoBehaviour
             }
             else if (itemType == Type.BCups)
             {
-                playerMoney -= itemPrice;
+                GameManager.Instance.GoldAmount -= itemPrice;
                 _itemPrice.text = "";
-                _playerMoney.text = "" + playerMoney;
+                _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
                 _cups[itemIndex].SetActive(true);
                 _buyButton.interactable = false;
@@ -620,30 +617,29 @@ public class ShopGestion : MonoBehaviour
     //003 : Level up a Worker
     public void LevelUpWorker()
     {
-        if (playerMoney >= itemPrice)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
             if (itemIndex == 0)
             {
                 GameManager.Instance.PlayerLvl += 1;
                 GameManager.Instance.PlayerCompetence += 1;
 
+                GameManager.Instance.GoldAmount -= playerLvlPrice;
                 float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.PlayerLvl;
                 playerLvlPrice = (int)itemOriginalPrice;
 
-                playerMoney -= playerLvlPrice;
                 PriceBehaviour(playerLvlPrice);
             }
             if (itemIndex == 1)
             {
                 GameManager.Instance.LouisCompetence -= 0.2f;
 
+                GameManager.Instance.GoldAmount -= louisLvlPrice;
                 float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LouisLvl;
                 louisLvlPrice = (int)itemOriginalPrice;
                 GameManager.Instance.LouisLvl++;
 
-                playerMoney -= louisLvlPrice;
                 PriceBehaviour(louisLvlPrice);
-
 
                 if (GameManager.Instance.LouisCompetence <= 0.2f)
                 {
@@ -656,12 +652,12 @@ public class ShopGestion : MonoBehaviour
             {
                 if (canBuyJulesLvl)
                 {
+                    GameManager.Instance.GoldAmount -= julesLvlPrice;
+
                     float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
                     julesLvlPrice = (int)itemOriginalPrice;
-
                     GameManager.Instance.JulesLvl++;
 
-                    playerMoney -= julesLvlPrice;
 
                     if (indexMachine > GameManager.Instance.JulesLvl && indexMachineJules != 6)
                     {
@@ -693,15 +689,15 @@ public class ShopGestion : MonoBehaviour
     //004 : Level up a Clicker
     public void LevelUpClickers()
     {
-        if (playerMoney >= itemPrice)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
             if (itemIndex == 0)
             {
-                GameManager.Instance.OvenCompetence += 1;
-
+                GameManager.Instance.GoldAmount -= ovenLvlPrice;
                 float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.OvenLvl;
                 ovenLvlPrice = (int)itemOriginalPrice;
-                playerMoney -= ovenLvlPrice;
+
+                GameManager.Instance.OvenCompetence += 1;
 
                 _itemPrice.text = "" + ovenLvlPrice;
                 PriceBehaviour(ovenLvlPrice);
@@ -716,11 +712,11 @@ public class ShopGestion : MonoBehaviour
                 }
                 else
                 {
-                    GameManager.Instance.LaundryCompetence += 1;
+                    GameManager.Instance.GoldAmount -= laundryLvlPrice;
 
                     float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LaundryLvl;
                     laundryLvlPrice = (int)itemOriginalPrice;
-                    playerMoney -= laundryLvlPrice;
+                    GameManager.Instance.LaundryCompetence += 1;
 
                     _itemPrice.text = "" + laundryLvlPrice;
                     PriceBehaviour(laundryLvlPrice);
@@ -889,7 +885,7 @@ public class ShopGestion : MonoBehaviour
                         }
                     }
 
-                    _playerMoney.text = "" + playerMoney;
+                    _playerMoney.text = "" + GameManager.Instance.GoldAmount;
                 }
 
             }

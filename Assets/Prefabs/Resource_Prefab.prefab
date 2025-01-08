@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 8792824708056577946}
   - component: {fileID: 8851778033213091741}
   - component: {fileID: 4400350993422016117}
+  - component: {fileID: 8326506932499373808}
   m_Layer: 5
   m_Name: Resource_Prefab
   m_TagString: Untagged
@@ -332,6 +333,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 8326506932499373808}
+        m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4400350993422016117}
         m_TargetAssemblyTypeName: ResourceBehaviour, Assembly-CSharp
         m_MethodName: GainGold
@@ -359,3 +372,16 @@ MonoBehaviour:
   ImageReference: {fileID: 4841249514983590864}
   TexteReference: {fileID: 4812947677645857695}
   MoneyAmount: 0
+--- !u!114 &8326506932499373808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882276812707897673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cf2d43c506f2a47a55de538886d613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxSound: {fileID: 8300000, guid: 7ba773386b8c9c1489bbca5a526aa1f7, type: 3}

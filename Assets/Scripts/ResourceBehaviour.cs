@@ -10,6 +10,7 @@ public class ResourceBehaviour : MonoBehaviour
     public TextMeshProUGUI TexteReference;
 
     private GameObject objectToDeactivate;
+    private bool haveAnObject;
 
     public int MoneyAmount;
     private int _extraMoneyAmount;
@@ -27,7 +28,10 @@ public class ResourceBehaviour : MonoBehaviour
     public void GainGold()
     {
         GameManager.Instance.DisplayMoney.GainGold(MoneyAmount);
-        objectToDeactivate.SetActive(false);
+        if (haveAnObject)
+        {
+            objectToDeactivate.SetActive(false);
+        }
         Destroy(gameObject);
     }
 
@@ -42,6 +46,7 @@ public class ResourceBehaviour : MonoBehaviour
 
     public void SetObjectToDeactivate(GameObject obj)
     {
+        haveAnObject = true;
         objectToDeactivate = obj;
     }
 

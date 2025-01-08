@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e75b728fd2bf2a4a81393d863e6a1ee, type: 3}
   m_Name: Eclairs
   m_EditorClassIdentifier: 
-  ResourceImage: {fileID: 0}
+  ResourceImage: {fileID: 21300000, guid: af272cfb1d2b54a45b02034924653fe9, type: 3}
   ResourceName: "Eclairs chocolat caf\xE9"
-  ResourceTag: Cake
   timeClick: 1

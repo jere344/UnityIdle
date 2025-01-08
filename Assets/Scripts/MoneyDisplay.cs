@@ -8,29 +8,27 @@ public class MoneyDisplay : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _goldAmountText;
-    private int goldAmount;
 
     void Start()
     {
-        goldAmount = GameManager.Instance.GoldAmount;
-        goldAmount = 0;
+
     }
 
     void Update()
     {
-        if (goldAmount >= 1000)
+        if (GameManager.Instance.GoldAmount >= 1000)
         {
-            _goldAmountText.text = (goldAmount / 1000) + " k";
+            _goldAmountText.text = (GameManager.Instance.GoldAmount / 1000) + " k";
         }
         else
         {
-            _goldAmountText.text = goldAmount.ToString("");
+            _goldAmountText.text = GameManager.Instance.GoldAmount.ToString("");
         }
     }
 
     public void GainGold(int GainAmount)
     {
         GameManager.Instance.DisplayGoal.PlayerGoalAmount += GainAmount;
-        goldAmount += GainAmount;
+        GameManager.Instance.GoldAmount += GainAmount;
     }
 }

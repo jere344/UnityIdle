@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField]
     private AudioSource _musicSource;
+    [SerializeField]
+    private AudioSource _sfxSource;
 
     public AudioClip music001;
     public AudioClip music002;
@@ -33,5 +35,11 @@ public class AudioManager : MonoBehaviour
             IsPlayingFirstMusic = !IsPlayingFirstMusic;
             _musicSource.Play();
         }
+    }
+
+    public void PlaySound(AudioClip sound)
+    {
+        _sfxSource.clip = sound;
+        _sfxSource.Play();
     }
 }
