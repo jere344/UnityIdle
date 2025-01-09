@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
 {
+    [Header("Audio")]
     [SerializeField]
     private AudioMixer _mixer;
     [SerializeField]

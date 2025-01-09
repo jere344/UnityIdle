@@ -6,28 +6,21 @@ using TMPro;
 
 public class ResourceBehaviour : MonoBehaviour
 {
+    [Header("References")]
     public Image ImageReference;
     public TextMeshProUGUI TexteReference;
 
+    [Header("Object Informations")]
     private GameObject objectToDeactivate;
     private bool haveAnObject;
 
-    public int MoneyAmount;
-    private int _extraMoneyAmount;
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
+    [Header("Gold")]
+    public int GoldAmount;
+    private int _extraGoldAmount;
 
     public void GainGold()
     {
-        GameManager.Instance.DisplayMoney.GainGold(MoneyAmount);
+        GameManager.Instance.DisplayMoney.GainGold(GoldAmount);
         if (haveAnObject)
         {
             objectToDeactivate.SetActive(false);
@@ -37,9 +30,9 @@ public class ResourceBehaviour : MonoBehaviour
 
     public void GainExtraGold()
     {
-        _extraMoneyAmount = GameManager.Instance.DisplayResource.ExtraMoney;
-        GameManager.Instance.DisplayMoney.GainGold(_extraMoneyAmount);
-        GameManager.Instance.DisplayResource.ExtraMoney = 0;
+        _extraGoldAmount = GameManager.Instance.DisplayResource.ExtraGold;
+        GameManager.Instance.DisplayMoney.GainGold(_extraGoldAmount);
+        GameManager.Instance.DisplayResource.ExtraGold = 0;
         objectToDeactivate.SetActive(false);
         gameObject.SetActive(false);
     }

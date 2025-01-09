@@ -7,22 +7,11 @@ public class JulesBehaviour : MonoBehaviour
     [SerializeField]
     private List<GameObject> _clickersManagers;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AutoClicker()
     {
         if (_clickersManagers[0].activeSelf && _clickersManagers[0].GetComponent<ClickableObject>().CanUseWorker)
         {
+            Debug.Log("Activated!");
             ClickableObject clicker = _clickersManagers[0].GetComponent<ClickableObject>();
             clicker.Worker();
         }

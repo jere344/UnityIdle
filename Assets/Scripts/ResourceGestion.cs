@@ -7,13 +7,14 @@ using UnityEngine.UI;
 
 public class ResourceGestion : MonoBehaviour
 {
+    [Header("Lists Resources")]
     public List<ResourceScriptable> AllLaundryResources;
     public List<ResourceScriptable> AllFoodResources;
     public List<GameObject> AllFoodGameObjects;
-
     public List<GameObject> seasonFoodObject;
     public List<ResourceScriptable> seasonResource;
 
+    [Header("Values")]
     private int index;
     private int count;
 

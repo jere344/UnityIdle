@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class ShopGestion : MonoBehaviour
 {
     [Header("Lists")]
-    [SerializeField]
-    private List<GameObject> _workers;
+    public List<GameObject> Workers;
     [SerializeField]
     private List<GameObject> _machines;
     [SerializeField]
@@ -65,6 +64,7 @@ public class ShopGestion : MonoBehaviour
     public int indexMachineShadow = 1;
     private int indexMachineJules = 1;
     private int indexCoffeeItems;
+    private int indexSpriteMachine;
 
     [Header("Conditions")]
     private bool canBuyJulesLvl;
@@ -208,16 +208,16 @@ public class ShopGestion : MonoBehaviour
         sCupButtonActivated = false;
         rCupButtonActivated = false;
 
-        itemName = itemScriptable.itemName;
-        itemPrice = itemScriptable.itemPrice;
-        itemType = itemScriptable.itemType;
-        itemIndex = itemScriptable.itemIndex;
-        _itemDescription.text = itemScriptable.itemDescription;
+        itemName = itemScriptable.ItemName;
+        itemPrice = itemScriptable.ItemPrice;
+        itemType = itemScriptable.ItemType;
+        itemIndex = itemScriptable.ItemIndex;
+        _itemDescription.text = itemScriptable.ItemDescription;
         originalItemDescription = _itemDescription.text;
 
         _itemName.text = itemName;
         originalItemName = _itemName.text;
-        _itemImage.sprite = itemScriptable.itemImage;
+        _itemImage.sprite = itemScriptable.ItemImage;
         _itemImage.SetNativeSize();
 
         Sorting();
@@ -304,7 +304,7 @@ public class ShopGestion : MonoBehaviour
     {
         if (itemType == Type.BWorker)
         {
-            if (_workers[itemIndex].activeSelf)
+            if (Workers[itemIndex].activeSelf)
             {
                 _buyButton.interactable = false;
                 _buttonDisplay.sprite = _buttonGreen;
@@ -497,13 +497,13 @@ public class ShopGestion : MonoBehaviour
     {
         if (GameManager.Instance.GoldAmount >= itemPrice)
         {
-                if (itemIndex >= 0 && itemIndex < _workers.Count)
+                if (itemIndex >= 0 && itemIndex < Workers.Count)
                 {
                 GameManager.Instance.GoldAmount -= itemPrice;
                     _itemPrice.text = "";
                     _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
-                    _workers[itemIndex].SetActive(true);
+                    Workers[itemIndex].SetActive(true);
                     _buyButton.interactable = false;
                     _buttonDisplay.sprite = _buttonGreen;
                 }
@@ -760,12 +760,12 @@ public class ShopGestion : MonoBehaviour
 
                     else if (GameManager.Instance.LaundryLvl == 10)
                     {
-                        int index = 0;
-                        while (index <= _machines.Count)
+                        indexSpriteMachine = 0;
+                        while (indexSpriteMachine != _machines.Count)
                         {
-                            if (index % 2 == 0)
+                            if (indexSpriteMachine % 2 == 0)
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[4];
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[4];
 
                                 SpriteState spriteState = new SpriteState
                                 {
@@ -773,13 +773,13 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[5]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                             else
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[6];
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[6];
 
                                 SpriteState spriteState = new SpriteState
                                 {
@@ -787,24 +787,22 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[7]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                         }
                     }
 
                     else if (GameManager.Instance.LaundryLvl == 20)
                     {
-                        int index = 0;
-                        while (index <= _machines.Count)
+                        indexSpriteMachine = 0;
+                        while (indexSpriteMachine != _machines.Count)
                         {
-                            if (index % 2 == 0)
+                            _itemImage.SetNativeSize();
+                            if (indexSpriteMachine % 2 == 0)
                             {
-                                Vector3 currentPosition = _machines[index].transform.position;
-                                _machines[index].transform.position = new Vector3(currentPosition.x, currentPosition.y + 24, currentPosition.z);
-                                _machines[index].GetComponent<Image>().sprite = _sprites[8];
-                                _itemImage.SetNativeSize();
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[8];
 
                                 if (indexMachineShadow == 2)
                                 {
@@ -828,13 +826,13 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[9]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                             else
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[10];
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[10];
 
                                 SpriteState spriteState = new SpriteState
                                 {
@@ -842,21 +840,21 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[11]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                         }
                     }
 
                     else if (GameManager.Instance.LaundryLvl == 30)
                     {
-                        int index = 0;
-                        while (index <= _machines.Count)
+                        indexSpriteMachine = 0;
+                        while (indexSpriteMachine != _machines.Count)
                         {
-                            if (index % 2 == 0)
+                            if (indexSpriteMachine % 2 == 0)
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[12];
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[12];
 
                                 SpriteState spriteState = new SpriteState
                                 {
@@ -864,13 +862,13 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[13]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                             else
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[14];
+                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[14];
 
                                 SpriteState spriteState = new SpriteState
                                 {
@@ -878,9 +876,9 @@ public class ShopGestion : MonoBehaviour
                                     pressedSprite = _sprites[15]
                                 };
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
 
-                                index += 1;
+                                indexSpriteMachine += 1;
                             }
                         }
                     }

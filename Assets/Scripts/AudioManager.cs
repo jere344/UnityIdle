@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("AudioSources")]
     [SerializeField]
     private AudioSource _musicSource;
     [SerializeField]
     private AudioSource _sfxSource;
 
-    public AudioClip music001;
-    public AudioClip music002;
+    [Header("AudioClips")]
+    [SerializeField]
+    private AudioClip _music001;
+    [SerializeField]
+    private AudioClip _music002;
 
     private bool IsPlayingFirstMusic = true;
 
     void Start()
     {
-        _musicSource.clip = music001;
+        _musicSource.clip = _music001;
         _musicSource.Play();
     }
     void Update()
@@ -25,11 +29,11 @@ public class AudioManager : MonoBehaviour
         {
             if (IsPlayingFirstMusic)
             {
-                _musicSource.clip = music001;
+                _musicSource.clip = _music001;
             }
             else
             {
-                _musicSource.clip = music002;
+                _musicSource.clip = _music002;
             }
 
             IsPlayingFirstMusic = !IsPlayingFirstMusic;

@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class ItemScriptable : ScriptableObject
 {
-    public int itemIndex;
-    public Sprite itemImage;
-    public string itemName;
+    public int ItemIndex;
+    public Sprite ItemImage;
+    public string ItemName;
     [TextArea]
-    public string itemDescription;
-    public int itemPrice;
-    public Type itemType;
+    public string ItemDescription;
+    public int ItemPrice;
+    public Type ItemType;
 }

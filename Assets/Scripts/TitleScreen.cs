@@ -5,17 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
     private GameObject _audioManager;
+    [SerializeField]
+    private Animator transitionAnim;
+    [SerializeField]
+    private GameObject _transitionObject;
 
-    public void LoadScene()
+    public void NextLevel()
     {
         DontDestroyOnLoad(_audioManager);
-        SceneManager.LoadScene("BubbleCoffee_GameScreen");
+        StartCoroutine(LoadLevel());
     }
 
-    public void Destroy()
+    private IEnumerator LoadLevel()
     {
-        Destroy(gameObject);
+        _transitionObject.SetActive(true);
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("BubbleCoffee_GameScreen");
     }
 }

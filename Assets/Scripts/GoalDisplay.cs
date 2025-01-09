@@ -7,13 +7,20 @@ using System;
 
 public class GoalDisplay : MonoBehaviour
 {
+    [Header("Sound Effect")]
+    private AudioManager audioManager;
     [SerializeField]
-    private Sprite[] _seasonsSprites;
-    [SerializeField]
-    private Sprite[] _menuSprites;
-    [SerializeField]
-    private Sprite[] _windowSprites;
+    private AudioClip _sfxSound;
 
+    [Header("Environment Lists")]
+    [SerializeField]
+    private List<Sprite> _seasonsSprites;
+    [SerializeField]
+    private List<Sprite> _menuSprites;
+    [SerializeField]
+    private List<Sprite> _windowSprites;
+
+    [Header("Environment Images")]
     [SerializeField]
     private Image _seasonDisplay;
     [SerializeField]
@@ -21,30 +28,35 @@ public class GoalDisplay : MonoBehaviour
     [SerializeField]
     private Image _windowDisplay;
 
+    [Header("Environment Text")]
     [SerializeField]
     private TextMeshProUGUI _seasonText;
     private string[] seasonsText = { "Printemps", "Été", "Automne", "Hiver" };
 
-    private int newSeasonGoal;
-    private int seasonGoalBase = 50;
-    private float seasonGoal;
-
-    public int CurrentIndex;
-    public int PlayerGoalAmount;
-
+    [Header("Goal Text")]
     [SerializeField]
     private TextMeshProUGUI _goalText;
     private bool goalCompleted = false;
 
+    [Header("Values Goal")]
+    private int newSeasonGoal;
+    private int seasonGoalBase = 50;
+    private float seasonGoal;
+    public int CurrentIndex;
+    public int PlayerGoalAmount;
+
+
     void Start()
     {
-        GameManager.Instance.gestionResource = FindObjectOfType<ResourceGestion>();
+        audioManager = FindObjectOfType<AudioManager>();
+
+        GameManager.Instance.GestionResource = FindObjectOfType<ResourceGestion>();
 
         PlayerGoalAmount = 0;
         _seasonText.text = seasonsText[CurrentIndex];
         newSeasonGoal = seasonGoalBase;
 
-        GameManager.Instance.gestionResource.ChangeRandomResourcesList();
+        GameManager.Instance.GestionResource.ChangeRandomResourcesList();
     }
     void Update()
     {
@@ -73,7 +85,7 @@ public class GoalDisplay : MonoBehaviour
 
     private void DisplaySeason()
     {
-        GameManager.Instance.gestionResource.ChangeRandomResourcesList();
+        GameManager.Instance.GestionResource.ChangeRandomResourcesList();
 
         PlayerGoalAmount = 0;
 
@@ -99,6 +111,7 @@ public class GoalDisplay : MonoBehaviour
             GameManager.Instance.JulesCompetence += 0.4f;
         }
 
+        audioManager.PlaySound(_sfxSound);
         goalCompleted = false;
     }
 }

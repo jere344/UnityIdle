@@ -9,11 +9,6 @@ public class MoneyDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _goldAmountText;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (GameManager.Instance.GoldAmount >= 1000)

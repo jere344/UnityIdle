@@ -7,31 +7,26 @@ using UnityEngine.UI;
 
 public class ResourceDisplay : MonoBehaviour
 {
+    [Header("Resource informations")]
     [SerializeField]
     private GameObject _resourcePrefab;
     [SerializeField]
     private Transform _resourceContainer;
+    private GameObject _newResource;
+    public GameObject FoodObject;
     private int resourcePrice;
     private float maxResources = 5;
 
+    [Header("Gold informations")]
     [SerializeField]
-    private TextMeshProUGUI _extraMoneyText;
+    private TextMeshProUGUI _extraGoldText;
     [SerializeField]
-    private GameObject _extraMoneyGO;
-    public int ExtraMoney;
-
-    private GameObject _newResource;
-
-    public GameObject FoodObject;
+    private GameObject _extraGoldGO;
+    public int ExtraGold;
 
     void Start()
     {
-        ExtraMoney = 0;
-    }
-
-    void Update()
-    {
-
+        ExtraGold = 0;
     }
 
     public void DisplayResource(int ResourceMoney, Sprite ResourceImage)
@@ -40,16 +35,16 @@ public class ResourceDisplay : MonoBehaviour
 
         if (_resourceContainer.childCount >= maxResources)
         {
-            _extraMoneyGO.SetActive(true);
-            ExtraMoney += resourcePrice;
-            _extraMoneyText.text = "" + ExtraMoney + " Or";
+            _extraGoldGO.SetActive(true);
+            ExtraGold += resourcePrice;
+            _extraGoldText.text = "" + ExtraGold + " Or";
         }
         else
         {
             _newResource = Instantiate(_resourcePrefab, _resourceContainer);
             ResourceBehaviour resourceNewImage = _newResource.GetComponent<ResourceBehaviour>();
             ResourceBehaviour resourceText = _newResource.GetComponentInChildren<ResourceBehaviour>();
-            _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
+            _newResource.GetComponent<ResourceBehaviour>().GoldAmount = resourcePrice;
 
             resourceNewImage.ImageReference.sprite = ResourceImage;
             resourceText.TexteReference.text = "" + resourcePrice;
@@ -62,9 +57,9 @@ public class ResourceDisplay : MonoBehaviour
 
         if (_resourceContainer.childCount >= maxResources)
         {
-            _extraMoneyGO.SetActive(true);
-            ExtraMoney += resourcePrice;
-            _extraMoneyText.text = "" + ExtraMoney + " Or";
+            _extraGoldGO.SetActive(true);
+            ExtraGold += resourcePrice;
+            _extraGoldText.text = "" + ExtraGold + " Or";
         }
         else
         {
@@ -78,7 +73,7 @@ public class ResourceDisplay : MonoBehaviour
             ResourceBehaviour resourceText = _newResource.GetComponentInChildren<ResourceBehaviour>();
 
             resourceScript.SetObjectToDeactivate(FoodObject);
-            _newResource.GetComponent<ResourceBehaviour>().MoneyAmount = resourcePrice;
+            _newResource.GetComponent<ResourceBehaviour>().GoldAmount = resourcePrice;
 
             resourceScript.ImageReference.sprite = ResourceImage;
             resourceText.TexteReference.text = "" + resourcePrice;

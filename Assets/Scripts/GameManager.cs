@@ -6,22 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-
-    //List
-
-
-    //Scripts
+    [Header("Scripts")]
     public GoalDisplay DisplayGoal;
     public MoneyDisplay DisplayMoney;
     public ResourceDisplay DisplayResource;
     public ShopGestion GestionShop;
-    public ResourceGestion gestionResource;
+    public ResourceGestion GestionResource;
 
-    public ClickableObject ovenObject;
-
-    //Var
+    [Header("Variables")]
     public int GoldAmount;
-
     public int PlayerLvl;
     public int PlayerCompetence;
     public int LouisLvl;
@@ -29,7 +22,6 @@ public class GameManager : MonoBehaviour
     public int JulesLvl;
     public float JulesCompetence;
     public bool JulesV2;
-
     public int OvenLvl;
     public int OvenCompetence;
     public int LaundryLvl;
@@ -47,5 +39,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        GoldAmount = 9999;
     }
 }

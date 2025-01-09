@@ -18,7 +18,7 @@ public class ClickableObject : MonoBehaviour
 
     [Header("Activated GameObjects")]
     [SerializeField]
-    private GameObject bar;
+    private GameObject _bar;
 
     [Header("Resources")]
     public bool ResourceIsFood, ResourceIsLaundry;
@@ -28,13 +28,12 @@ public class ClickableObject : MonoBehaviour
     private GameObject foodObject;
     private string resourceName;
 
-
     [Header("Conditions & Routine")]
     public bool CanUseWorker;
-    private bool playerIsClicking, playerResourceActivated;
+    private bool playerResourceActivated;
     private bool workerIsClicking, workerResourceActivated;
-    private Coroutine workerCoroutine;
     private float workerCompetence;
+    private Coroutine workerCoroutine;
 
     [Header ("Sprite logo")]
     [SerializeField]
@@ -43,11 +42,15 @@ public class ClickableObject : MonoBehaviour
     private Sprite _cross;
     [SerializeField]
     private Image _imageAutoclickerLogo;
-    private bool isSprite1 = true;
+    private bool isCheckmark = true;
+
+    [Header("Timer Bar")]
+    public float barTimer;
+    public bool timerEnd;
 
     void Start()
     {
-        bar.SetActive(true);
+        _bar.SetActive(true);
 
         _barText.text = "";
         SetBackgroundImage(0);
@@ -56,6 +59,23 @@ public class ClickableObject : MonoBehaviour
 
     void Update()
     {
+        if (timerEnd == false)
+        {
+            _bar.SetActive(true);
+            barTimer += Time.deltaTime;
+        }
+        if (barTimer > 3 && !workerIsClicking)
+        {
+            timerEnd = true;
+            _bar.SetActive(false);
+        }
+        if (workerIsClicking)
+        {
+            timerEnd = true;
+            _bar.SetActive(true);
+        }
+
+
         Color pastelRed = new Color(1.0f, 0.7389936f, 0.7462438f, 1.0f);
         Color pastelGreen = new Color(0.7940765f, 1.0f, 0.4980392f, 1.0f);
 
@@ -73,6 +93,9 @@ public class ClickableObject : MonoBehaviour
 
     public void PlayerClicker()
     {
+        barTimer = 0;
+        timerEnd = false;
+
         if (fillAmount < maxFillAmount)
         {
             int playerCompetence = GameManager.Instance.PlayerCompetence;
@@ -115,8 +138,8 @@ public class ClickableObject : MonoBehaviour
         if (CanUseWorker)
         {
             workerIsClicking = !workerIsClicking;
-            _imageAutoclickerLogo.sprite = isSprite1 ? _checkmark : _cross;
-            isSprite1 = !isSprite1;
+            _imageAutoclickerLogo.sprite = isCheckmark ? _checkmark : _cross;
+            isCheckmark = !isCheckmark;
 
             if (ResourceIsFood)
             {
@@ -149,6 +172,7 @@ public class ClickableObject : MonoBehaviour
     {
         while (true)
         {
+
             if (fillAmount < maxFillAmount)
             {
                 Clicker(1);
@@ -193,17 +217,17 @@ public class ClickableObject : MonoBehaviour
 
     private void ChangeResource()
     {
-        int index = Random.Range(0, GameManager.Instance.gestionResource.seasonResource.Count);
+        int index = Random.Range(0, GameManager.Instance.GestionResource.seasonResource.Count);
 
         if (ResourceIsFood)
         {
-            scriptableResource = GameManager.Instance.gestionResource.seasonResource[index];
-            foodObject = GameManager.Instance.gestionResource.seasonFoodObject[index];
+            scriptableResource = GameManager.Instance.GestionResource.seasonResource[index];
+            foodObject = GameManager.Instance.GestionResource.seasonFoodObject[index];
         }
 
         if (ResourceIsLaundry)
         {
-            scriptableResource = GameManager.Instance.gestionResource.AllLaundryResources[Random.Range(0, GameManager.Instance.gestionResource.AllLaundryResources.Count)];
+            scriptableResource = GameManager.Instance.GestionResource.AllLaundryResources[Random.Range(0, GameManager.Instance.GestionResource.AllLaundryResources.Count)];
         }
 
         resourceName = scriptableResource.ResourceName;

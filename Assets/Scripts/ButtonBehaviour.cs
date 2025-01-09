@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ButtonBehaviour : MonoBehaviour
 {
+    [Header("Audio")]
     private AudioManager audioManager;
     [SerializeField]
     private AudioClip _sfxSound;

@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class ItemBehaviour : MonoBehaviour
 {
+    [Header("Timer")]
     public float Timer;
     public int EndTimer;
-    private int gainGold;
 
+    [Header("Gold Values")]
     [SerializeField]
     private int _minGold;
     [SerializeField]
     private int _maxGold;
-    [SerializeField]
+    private int gainGold;
+
+    [Header("Information Object")]
     private bool objectIsASet;
 
     void Start()
