@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: "S_TasseCarr\xE9e"
   m_EditorClassIdentifier: 
-  itemIndex: 0
-  itemImage: {fileID: 21300000, guid: aa98a17321ce9944597f8b5057938733, type: 3}
-  itemName: "Tasses carr\xE9es"
-  itemDescription: "Une collection de mug simple pour repartir avec votre meilleure
-    caf\xE9 !\n<b>Donne 8 \xE0 12 Pi\xE8ces apr\xE8s 1 minute</b>\n"
-  itemPrice: 15
-  itemType: 3
-  HaveGameObject: 1
+  ItemIndex: 0
+  ItemImage: {fileID: 21300000, guid: aa98a17321ce9944597f8b5057938733, type: 3}
+  ItemName: "Tasses carr\xE9es"
+  ItemDescription: "Une collection de mugs simples pour repartir avec votre meilleur
+    caf\xE9.\n<b>Donne 12 \xE0 18 Pi\xE8ces apr\xE8s 1 minute</b>"
+  ItemPrice: 15
+  ItemType: 3

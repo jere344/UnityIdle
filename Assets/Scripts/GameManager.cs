@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     public int LaundryLvl;
     public int LaundryCompetence;
 
-
-
     void Awake()
     {
         if (Instance == null)
@@ -39,10 +37,5 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        GoldAmount = 9999;
     }
 }

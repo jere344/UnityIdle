@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: "S_Caf\xE9"
   m_EditorClassIdentifier: 
-  itemIndex: 0
-  itemImage: {fileID: 21300000, guid: 6ed49a23b1019b747b271de65bd47ac1, type: 3}
-  itemName: "Sachet de caf\xE9"
-  itemDescription: "Le meilleur caf\xE9 pour vos clients !\n<b>Donne 12 \xE0 18 Pi\xE8ces
+  ItemIndex: 0
+  ItemImage: {fileID: 21300000, guid: 6ed49a23b1019b747b271de65bd47ac1, type: 3}
+  ItemName: "Sachet de caf\xE9"
+  ItemDescription: "Le meilleur caf\xE9 pour vos clients.\n<b>Donne 12 \xE0 18 Pi\xE8ces
     apr\xE8s 1 minute</b>"
-  itemPrice: 20
-  itemType: 4
-  HaveGameObject: 1
+  ItemPrice: 20
+  ItemType: 4

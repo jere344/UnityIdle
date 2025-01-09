@@ -2,8 +2,8 @@
 public enum Type
 {
     BWorker,
-    BMachines,
-    BSets,
+    BMachine,
+    BSet,
     BCups,
     BCoffee,
     LWorker,

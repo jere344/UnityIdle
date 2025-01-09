@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: LV_Machine
   m_EditorClassIdentifier: 
-  itemIndex: 1
-  itemImage: {fileID: 21300000, guid: b6fdc84414ea98749b72be73d33679c4, type: 3}
-  itemName: "Linge (Machine \xE0 laver)"
-  itemDescription: "Du linge encore mieux nettoy\xE9 !\n<b>Augmente l'argent obtenu
+  ItemIndex: 1
+  ItemImage: {fileID: 21300000, guid: b6fdc84414ea98749b72be73d33679c4, type: 3}
+  ItemName: "Linge (Machine \xE0 laver)"
+  ItemDescription: "Du linge encore mieux nettoy\xE9 !\n<b>Augmente l'argent obtenu
     de 1</b>\n<i>S'applique \xE0 toutes les ressources</i>"
-  itemPrice: 30
-  itemType: 6
-  HaveGameObject: 0
+  ItemPrice: 30
+  ItemType: 6

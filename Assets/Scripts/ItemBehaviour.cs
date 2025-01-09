@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class ItemBehaviour : MonoBehaviour
 {
+    [Header("Audio")]
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioClip _sfxSound;
+
     [Header("Timer")]
     public float Timer;
     public int EndTimer;
@@ -20,11 +25,10 @@ public class ItemBehaviour : MonoBehaviour
     [Header("Information Object")]
     private bool objectIsASet;
 
-    void Start()
+    private void Start()
     {
-        
+        audioManager = FindObjectOfType<AudioManager>();
     }
-
     void Update()
     {
         if (Timer <= EndTimer)
@@ -47,6 +51,7 @@ public class ItemBehaviour : MonoBehaviour
                 GameManager.Instance.DisplayMoney.GainGold(gainGold);
                 Timer = 0;
             }
+            audioManager.PlaySound(_sfxSound);
         }
     }
 }

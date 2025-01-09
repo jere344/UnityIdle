@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: LV_Louis
   m_EditorClassIdentifier: 
-  itemIndex: 1
-  itemImage: {fileID: 21300000, guid: ccf841d2756500143ad827261e1a3342, type: 3}
-  itemName: "Louis (Am\xE9lior\xE9)"
-  itemDescription: "Ses g\xE2teaux deviennent de plus en plus d\xE9licieux.\n<b>Diminue
+  ItemIndex: 1
+  ItemImage: {fileID: 21300000, guid: ccf841d2756500143ad827261e1a3342, type: 3}
+  ItemName: "Louis (Am\xE9lior\xE9)"
+  ItemDescription: "Ses g\xE2teaux deviennent de plus en plus d\xE9licieux !\n<b>Diminue
     son temps de clic de 0,2 ms</b>"
-  itemPrice: 20
-  itemType: 5
-  HaveGameObject: 0
+  ItemPrice: 20
+  ItemType: 5

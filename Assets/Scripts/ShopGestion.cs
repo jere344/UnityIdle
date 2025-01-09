@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class ShopGestion : MonoBehaviour
 {
+    [Header("Audio")]
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioClip _sfxSound;
+
     [Header("Lists")]
     public List<GameObject> Workers;
     [SerializeField]
@@ -31,22 +36,33 @@ public class ShopGestion : MonoBehaviour
     private GameObject _coffeeCooldownReference;
     private bool coffeeCooldownActivated;
     private bool coffeeButtonActivated;
+    private bool startTimerCoffee;
+    private float endCooldownCoffee;
+    private float cooldownCoffee;
+
     [SerializeField]
     private ItemScriptable _restartCoffeeItem;
 
     [Header("Item Square Cup")]
     [SerializeField]
     private GameObject _sCupCooldownReference;
-    private bool sCupCooldownActivated;
-    private bool sCupButtonActivated;
+    public bool sCupCooldownActivated;
+    public bool sCupButtonActivated;
     [SerializeField]
     private ItemScriptable _restartSCupItem;
+    private bool startTimerSCup;
+    private float endCooldownSCup;
+    private float cooldownSCup;
 
     [Header("Item Round Cup")]
     [SerializeField]
     private GameObject _rCupCooldownReference;
     private bool rCupCooldownActivated;
     private bool rCupButtonActivated;
+    private bool startTimerRCup;
+    private float endCooldownRCup;
+    private float cooldownRCup;
+
     [SerializeField]
     private ItemScriptable _restartRCupItem;
 
@@ -77,6 +93,10 @@ public class ShopGestion : MonoBehaviour
     private int ovenLvlPrice = 15;
     private int laundryLvlPrice = 50;
     private int machinePrice = 50;
+    private int setPrice = 40;
+    private int coffeePrice = 20;
+    private int sCupPrice = 15;
+    private int rCupPrice = 15;
 
     [Header("Quantity")]
     private int quantityMachine = 5;
@@ -110,6 +130,8 @@ public class ShopGestion : MonoBehaviour
 
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+
         actualQuantityCoffee = quantityCoffee;
     }
 
@@ -117,16 +139,30 @@ public class ShopGestion : MonoBehaviour
     {
         if (coffeeButtonActivated)
         {
-            indexCoffeeItems = 0;
+            startTimerCoffee = true;
+            _itemPrice.text = "" + (endCooldownCoffee - cooldownCoffee);
+        }
+        if (startTimerCoffee)
+        {
             CooldownCoffee();
         }
 
         if (sCupButtonActivated)
         {
+            startTimerSCup = true;
+            _itemPrice.text = "" + (endCooldownSCup - cooldownSCup);
+        }
+        if (startTimerSCup)
+        {
             CooldownSCup();
         }
 
         if (rCupButtonActivated)
+        {
+            startTimerRCup = true;
+            _itemPrice.text = "" + (endCooldownRCup - cooldownRCup);
+        }
+        if (startTimerRCup)
         {
             CooldownRCup();
         }
@@ -135,12 +171,11 @@ public class ShopGestion : MonoBehaviour
     // Cooldowns 
     private void CooldownCoffee()
     {
-        int endCooldown = _coffeeCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        endCooldownCoffee = _coffeeCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
         float cooldownFloat = _coffeeCooldownReference.GetComponent<ItemBehaviour>().Timer;
-        int cooldown = (int)cooldownFloat;
-        _itemPrice.text = "" + (endCooldown - cooldown);
+        cooldownCoffee = (int)cooldownFloat;
 
-        if (cooldown >= endCooldown)
+        if (cooldownCoffee >= endCooldownCoffee)
         {
             coffeeButtonActivated = false;
             coffeeCooldownActivated = false;
@@ -150,50 +185,44 @@ public class ShopGestion : MonoBehaviour
             {
                 actualQuantityCoffee = quantityCoffee;
             }
-            Debug.Log(_restartCoffeeItem);
+
+            coffeePrice += itemPrice;
             DisplayInformations(_restartCoffeeItem);
+            startTimerCoffee = false;
         }
     }
     private void CooldownSCup()
     {
-        int endCooldown = _sCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        endCooldownSCup = _sCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
         float cooldownFloat = _sCupCooldownReference.GetComponent<ItemBehaviour>().Timer;
-        int cooldown = (int)cooldownFloat;
-        _itemPrice.text = "" + (endCooldown - cooldown);
+        cooldownSCup = (int)cooldownFloat;
 
-        if (cooldown >= endCooldown)
+        if (cooldownSCup >= endCooldownSCup)
         {
             sCupButtonActivated = false;
             sCupCooldownActivated = false;
             _buyButton.interactable = true;
 
-            if (actualQuantityCoffee == 0)
-            {
-                actualQuantityCoffee = quantityCoffee;
-            }
-            Debug.Log(_restartSCupItem);
+            sCupPrice += itemPrice;
             DisplayInformations(_restartSCupItem);
+            startTimerSCup = false;
         }
     }
     private void CooldownRCup()
     {
-        int endCooldown = _rCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
+        endCooldownRCup = _rCupCooldownReference.GetComponent<ItemBehaviour>().EndTimer;
         float cooldownFloat = _rCupCooldownReference.GetComponent<ItemBehaviour>().Timer;
-        int cooldown = (int)cooldownFloat;
-        _itemPrice.text = "" + (endCooldown - cooldown);
+        cooldownRCup = (int)cooldownFloat;
 
-        if (cooldown >= endCooldown)
+        if (cooldownRCup >= endCooldownRCup)
         {
             rCupButtonActivated = false;
             rCupCooldownActivated = false;
             _buyButton.interactable = true;
 
-            if (actualQuantityCoffee == 0)
-            {
-                actualQuantityCoffee = quantityCoffee;
-            }
-            Debug.Log(_restartRCupItem);
+            rCupPrice += itemPrice;
             DisplayInformations(_restartRCupItem);
+            startTimerRCup = false;
         }
     }
 
@@ -363,7 +392,7 @@ public class ShopGestion : MonoBehaviour
 
         }
 
-        if (itemType == Type.BMachines)
+        if (itemType == Type.BMachine)
         {
             _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantityMachine + "</color>";
 
@@ -381,7 +410,7 @@ public class ShopGestion : MonoBehaviour
             }
         }
 
-        if (itemType == Type.BSets)
+        if (itemType == Type.BSet)
         {
             _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantitySet + "</color>";
 
@@ -394,7 +423,7 @@ public class ShopGestion : MonoBehaviour
             else
             {
                 _buyButton.interactable = true;
-                PriceBehaviour(itemPrice);
+                PriceBehaviour(setPrice);
             }
         }
 
@@ -402,7 +431,6 @@ public class ShopGestion : MonoBehaviour
         {
             if (itemIndex == 0)
             {
-
                 if (sCupCooldownActivated)
                 {
                     sCupButtonActivated = true;
@@ -413,7 +441,7 @@ public class ShopGestion : MonoBehaviour
                 else if (!sCupCooldownActivated)
                 {
                     _buyButton.interactable = true;
-                    PriceBehaviour(itemPrice);
+                    PriceBehaviour(sCupPrice);
                 }
             }
             else if (itemIndex == 1)
@@ -428,7 +456,7 @@ public class ShopGestion : MonoBehaviour
                 else
                 {
                     _buyButton.interactable = true;
-                    PriceBehaviour(itemPrice);
+                    PriceBehaviour(rCupPrice);
                 }
             }
         }
@@ -447,7 +475,7 @@ public class ShopGestion : MonoBehaviour
             else
             {
                 _buyButton.interactable = true;
-                PriceBehaviour(itemPrice);
+                PriceBehaviour(coffeePrice);
             }
         }
     }
@@ -471,217 +499,225 @@ public class ShopGestion : MonoBehaviour
     // Price Button Behaviour
     public void ShoppingBehaviour()
     {
-        if (itemType == Type.BWorker)
+        if (_buyButton.image.sprite != _buttonBlue)
         {
-            BuyWorkers();
+            if (_buyButton.image.sprite != _buttonRed)
+            {
+                audioManager.PlaySound(_sfxSound);
+            }
         }
 
-        if (itemType == Type.BSets || itemType == Type.BMachines || itemType == Type.BCoffee || itemType == Type.BCups)
+        if (GameManager.Instance.GoldAmount >= itemPrice)
         {
-            BuyObjects();
-        }
 
-        if (itemType == Type.LWorker)
-        {
-            LevelUpWorker();
-        }
+            if (itemType == Type.BWorker)
+            {
+                BuyWorkers();
+            }
 
-        if (itemType == Type.LClicker)
-        {
-            LevelUpClickers();
+            if (itemType == Type.BSet || itemType == Type.BMachine || itemType == Type.BCoffee || itemType == Type.BCups)
+            {
+                BuyObjects();
+            }
+
+            if (itemType == Type.LWorker)
+            {
+                LevelUpWorker();
+            }
+
+            if (itemType == Type.LClicker)
+            {
+                LevelUpClickers();
+            }
         }
     }
 
     //001 : Buy a Worker
     public void BuyWorkers()
     {
-        if (GameManager.Instance.GoldAmount >= itemPrice)
+        if (itemIndex >= 0 && itemIndex < Workers.Count)
         {
-                if (itemIndex >= 0 && itemIndex < Workers.Count)
-                {
-                GameManager.Instance.GoldAmount -= itemPrice;
-                    _itemPrice.text = "";
-                    _playerMoney.text = "" + GameManager.Instance.GoldAmount;
 
-                    Workers[itemIndex].SetActive(true);
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonGreen;
-                }
+            GameManager.Instance.GoldAmount -= itemPrice;
+            _itemPrice.text = "";
+            _playerMoney.text = "" + GameManager.Instance.GoldAmount;
+
+            Workers[itemIndex].SetActive(true);
+            _buyButton.interactable = false;
+            _buttonDisplay.sprite = _buttonGreen;
         }
     }
 
     //002 : Buy an Object
     public void BuyObjects()
     {
-        if (GameManager.Instance.GoldAmount >= itemPrice)
+        _playerMoney.text = "" + GameManager.Instance.GoldAmount;
+
+        if (itemType == Type.BSet)
         {
-            _playerMoney.text = "" + GameManager.Instance.GoldAmount;
+            GameManager.Instance.GoldAmount -= setPrice;
+            setPrice += itemPrice;
 
-            if (itemType == Type.BSets)
+            if (indexSet >= 0 && indexSet < _set.Count)
             {
-                GameManager.Instance.GoldAmount -= itemPrice;
-
-                if (indexSet >= 0 && indexSet < _set.Count)
-                {
-                    _set[indexSet].SetActive(true);
-                    indexSet++;
-                    quantitySet--;
-                    PriceBehaviour(itemPrice);
-                }
-                if (indexSet == _set.Count)
-                {
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonGreen;
-                    _itemPrice.text = "";
-                }
-
-                _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantitySet + "</color>";
+                _set[indexSet].SetActive(true);
+                indexSet++;
+                quantitySet--;
+                PriceBehaviour(setPrice);
             }
-            else if (itemType == Type.BMachines)
+            if (indexSet == _set.Count)
             {
-                GameManager.Instance.GoldAmount -= machinePrice;
-
-                if (indexMachine < _machines.Count)
-                {
-                    _machines[indexMachine].SetActive(true);
-                    _machinesManagers[indexMachine].SetActive(true);
-
-                    if (indexMachine == 2 || indexMachine == 4)
-                    {
-                        _machinesShadows[indexMachineShadow].SetActive(true);
-                        indexMachineShadow++;
-                    }
-
-                    float itemOriginalPrice = itemPrice + itemPrice * indexMachine;
-                    machinePrice = (int)itemOriginalPrice;
-
-                    indexMachine++;
-                    quantityMachine--;
-                    PriceBehaviour(machinePrice);
-                }
-                if (indexMachine >= 6)
-                {
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonGreen;
-                    _itemPrice.text = "";
-                }
-
-                _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantityMachine + "</color>";
-            }
-            else if (itemType == Type.BCoffee)
-            {
-                GameManager.Instance.GoldAmount -= itemPrice;
-
-                if (indexCoffeeItems < _coffee.Count)
-                {
-                    _coffee[indexCoffeeItems].SetActive(true);
-                    indexCoffeeItems++;
-                    actualQuantityCoffee--;
-                    PriceBehaviour(itemPrice);
-                    _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + actualQuantityCoffee + "</color>";
-                }
-                if (indexCoffeeItems >= _coffee.Count)
-                {
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonBlue;
-                    _itemPrice.text = "";
-                    coffeeCooldownActivated = true;
-                    ButtonBehaviour();
-                }
-            }
-            else if (itemType == Type.BCups)
-            {
-                GameManager.Instance.GoldAmount -= itemPrice;
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonGreen;
                 _itemPrice.text = "";
-                _playerMoney.text = "" + GameManager.Instance.GoldAmount;
+            }
 
-                _cups[itemIndex].SetActive(true);
+            _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantitySet + "</color>";
+        }
+        else if (itemType == Type.BMachine)
+        {
+            GameManager.Instance.GoldAmount -= machinePrice;
+
+            if (indexMachine < _machines.Count)
+            {
+                _machines[indexMachine].SetActive(true);
+                _machinesManagers[indexMachine].SetActive(true);
+
+                if (indexMachine == 2 || indexMachine == 4)
+                {
+                    _machinesShadows[indexMachineShadow].SetActive(true);
+                    indexMachineShadow++;
+                }
+
+                float itemOriginalPrice = itemPrice + itemPrice * indexMachine;
+                machinePrice = (int)itemOriginalPrice;
+
+                indexMachine++;
+                quantityMachine--;
+                PriceBehaviour(machinePrice);
+            }
+            if (indexMachine >= 6)
+            {
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonGreen;
+                _itemPrice.text = "";
+            }
+
+            _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + quantityMachine + "</color>";
+        }
+        else if (itemType == Type.BCoffee)
+        {
+            GameManager.Instance.GoldAmount -= coffeePrice;
+
+            if (indexCoffeeItems < _coffee.Count)
+            {
+                _coffee[indexCoffeeItems].SetActive(true);
+                indexCoffeeItems++;
+                actualQuantityCoffee--;
+                PriceBehaviour(coffeePrice);
+                _itemDescription.text = originalItemDescription + "\r\n<color=#98E5FF>Quantité : " + actualQuantityCoffee + "</color>";
+            }
+            if (indexCoffeeItems >= _coffee.Count)
+            {
                 _buyButton.interactable = false;
                 _buttonDisplay.sprite = _buttonBlue;
                 _itemPrice.text = "";
-
-                if (itemIndex == 0)
-                {
-                    sCupCooldownActivated = true;
-                }
-                else
-                {
-                    rCupCooldownActivated = true;
-                }
-
+                coffeeCooldownActivated = true;
                 ButtonBehaviour();
             }
+        }
+        else if (itemType == Type.BCups)
+        {
+            _playerMoney.text = "" + GameManager.Instance.GoldAmount;
+
+            _cups[itemIndex].SetActive(true);
+            _buyButton.interactable = false;
+            _buttonDisplay.sprite = _buttonBlue;
+            _itemPrice.text = "";
+
+            if (itemIndex == 0)
+            {
+                GameManager.Instance.GoldAmount -= sCupPrice;
+
+
+                sCupCooldownActivated = true;
+            }
+            else
+            {
+                GameManager.Instance.GoldAmount -= rCupPrice;
+
+                rCupCooldownActivated = true;
+            }
+
+            ButtonBehaviour();
         }
     }
     
     //003 : Level up a Worker
     public void LevelUpWorker()
     {
-        if (GameManager.Instance.GoldAmount >= itemPrice)
+        if (itemIndex == 0)
         {
-            if (itemIndex == 0)
+            GameManager.Instance.PlayerLvl += 1;
+            GameManager.Instance.PlayerCompetence += 1;
+
+            GameManager.Instance.GoldAmount -= playerLvlPrice;
+            float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.PlayerLvl;
+            playerLvlPrice = (int)itemOriginalPrice;
+
+            PriceBehaviour(playerLvlPrice);
+        }
+        if (itemIndex == 1)
+        {
+            GameManager.Instance.LouisCompetence -= 0.2f;
+
+            GameManager.Instance.GoldAmount -= louisLvlPrice;
+            float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LouisLvl;
+            louisLvlPrice = (int)itemOriginalPrice;
+            GameManager.Instance.LouisLvl++;
+
+            PriceBehaviour(louisLvlPrice);
+
+            if (GameManager.Instance.LouisCompetence <= 0.2f)
             {
-                GameManager.Instance.PlayerLvl += 1;
-                GameManager.Instance.PlayerCompetence += 1;
-
-                GameManager.Instance.GoldAmount -= playerLvlPrice;
-                float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.PlayerLvl;
-                playerLvlPrice = (int)itemOriginalPrice;
-
-                PriceBehaviour(playerLvlPrice);
+                GameManager.Instance.LouisCompetence = 0.2f;
+                _buyButton.interactable = false;
+                _buttonDisplay.sprite = _buttonBlue;
             }
-            if (itemIndex == 1)
+        }
+        if (itemIndex == 2)
+        {
+            if (canBuyJulesLvl)
             {
-                GameManager.Instance.LouisCompetence -= 0.2f;
+                GameManager.Instance.GoldAmount -= julesLvlPrice;
 
-                GameManager.Instance.GoldAmount -= louisLvlPrice;
-                float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LouisLvl;
-                louisLvlPrice = (int)itemOriginalPrice;
-                GameManager.Instance.LouisLvl++;
+                float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
+                julesLvlPrice = (int)itemOriginalPrice;
+                GameManager.Instance.JulesLvl++;
 
-                PriceBehaviour(louisLvlPrice);
 
-                if (GameManager.Instance.LouisCompetence <= 0.2f)
+                if (indexMachine > GameManager.Instance.JulesLvl && indexMachineJules != 6)
                 {
-                    GameManager.Instance.LouisCompetence = 0.2f;
-                    _buyButton.interactable = false;
-                    _buttonDisplay.sprite = _buttonBlue;
+                    _machinesManagers[indexMachineJules].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
+                    GameManager.Instance.JulesCompetence += 0.5f;
+                    indexMachineJules++;
+
+
                 }
-            }
-            if (itemIndex == 2)
-            {
-                if (canBuyJulesLvl)
+                else if (indexMachineJules <= GameManager.Instance.JulesLvl)
                 {
-                    GameManager.Instance.GoldAmount -= julesLvlPrice;
+                    GameManager.Instance.JulesV2 = true;
+                    GameManager.Instance.JulesCompetence -= 0.2f;
 
-                    float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
-                    julesLvlPrice = (int)itemOriginalPrice;
-                    GameManager.Instance.JulesLvl++;
-
-
-                    if (indexMachine > GameManager.Instance.JulesLvl && indexMachineJules != 6)
+                    if (GameManager.Instance.JulesCompetence <= 0.2f)
                     {
-                        _machinesManagers[indexMachineJules].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
-                        GameManager.Instance.JulesCompetence += 0.5f;
-                        indexMachineJules++;
-
-
+                        GameManager.Instance.JulesCompetence = 0.2f;
+                        _buyButton.interactable = false;
+                        _buttonDisplay.sprite = _buttonBlue;
                     }
-                    else if (indexMachineJules <= GameManager.Instance.JulesLvl)
-                    {
-                        GameManager.Instance.JulesV2 = true;
-                        GameManager.Instance.JulesCompetence -= 0.2f;
-
-                        if (GameManager.Instance.JulesCompetence <= 0.2f)
-                        {
-                            GameManager.Instance.JulesCompetence = 0.2f;
-                            _buyButton.interactable = false;
-                            _buttonDisplay.sprite = _buttonBlue;
-                        }
-                    }
+                }
                     
-                    ButtonLvlJules();
-                }
+                ButtonLvlJules();
             }
         }
     }
@@ -689,204 +725,202 @@ public class ShopGestion : MonoBehaviour
     //004 : Level up a Clicker
     public void LevelUpClickers()
     {
-        if (GameManager.Instance.GoldAmount >= itemPrice)
+        if (itemIndex == 0)
         {
-            if (itemIndex == 0)
+            GameManager.Instance.GoldAmount -= ovenLvlPrice;
+            float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.OvenLvl;
+            ovenLvlPrice = (int)itemOriginalPrice;
+
+            GameManager.Instance.OvenCompetence += 1;
+
+            _itemPrice.text = "" + ovenLvlPrice;
+            PriceBehaviour(ovenLvlPrice);
+            GameManager.Instance.OvenLvl++;
+        }
+
+        else if (itemIndex == 1)
+        {
+            if (!canBuyLaundryLvl)
             {
-                GameManager.Instance.GoldAmount -= ovenLvlPrice;
-                float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.OvenLvl;
-                ovenLvlPrice = (int)itemOriginalPrice;
-
-                GameManager.Instance.OvenCompetence += 1;
-
-                _itemPrice.text = "" + ovenLvlPrice;
-                PriceBehaviour(ovenLvlPrice);
-                GameManager.Instance.OvenLvl++;
+                ButtonLvlLaundry();
             }
-
-            else if (itemIndex == 1)
+            else
             {
-                if (!canBuyLaundryLvl)
+                GameManager.Instance.GoldAmount -= laundryLvlPrice;
+
+                float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LaundryLvl;
+                laundryLvlPrice = (int)itemOriginalPrice;
+                GameManager.Instance.LaundryCompetence += 1;
+
+                _itemPrice.text = "" + laundryLvlPrice;
+                PriceBehaviour(laundryLvlPrice);
+                GameManager.Instance.LaundryLvl++;
+
+                if (GameManager.Instance.LaundryLvl == 1)
                 {
-                    ButtonLvlLaundry();
-                }
-                else
-                {
-                    GameManager.Instance.GoldAmount -= laundryLvlPrice;
-
-                    float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.LaundryLvl;
-                    laundryLvlPrice = (int)itemOriginalPrice;
-                    GameManager.Instance.LaundryCompetence += 1;
-
-                    _itemPrice.text = "" + laundryLvlPrice;
-                    PriceBehaviour(laundryLvlPrice);
-                    GameManager.Instance.LaundryLvl++;
-
-                    if (GameManager.Instance.LaundryLvl == 1)
+                    int index = 0;
+                    while (index <= _machines.Count)
                     {
-                        int index = 0;
-                        while (index <= _machines.Count)
+                        if (index % 2 == 0)
                         {
-                            if (index % 2 == 0)
+                            _machines[index].GetComponent<Image>().sprite = _sprites[0];
+
+                            SpriteState spriteState = new SpriteState
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[0];
+                                highlightedSprite = _sprites[0],
+                                pressedSprite = _sprites[1]
+                            };
 
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[0],
-                                    pressedSprite = _sprites[1]
-                                };
+                            _machines[index].GetComponent<Button>().spriteState = spriteState;
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
+                            index += 1;
+                        }
+                        else
+                        {
+                            _machines[index].GetComponent<Image>().sprite = _sprites[2];
 
-                                index += 1;
-                            }
-                            else
+                            SpriteState spriteState = new SpriteState
                             {
-                                _machines[index].GetComponent<Image>().sprite = _sprites[2];
+                                highlightedSprite = _sprites[2],
+                                pressedSprite = _sprites[3]
+                            };
 
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[2],
-                                    pressedSprite = _sprites[3]
-                                };
+                            _machines[index].GetComponent<Button>().spriteState = spriteState;
 
-                                _machines[index].GetComponent<Button>().spriteState = spriteState;
-
-                                index += 1;
-                            }
+                            index += 1;
                         }
                     }
-
-                    else if (GameManager.Instance.LaundryLvl == 10)
-                    {
-                        indexSpriteMachine = 0;
-                        while (indexSpriteMachine != _machines.Count)
-                        {
-                            if (indexSpriteMachine % 2 == 0)
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[4];
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[4],
-                                    pressedSprite = _sprites[5]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                            else
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[6];
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[6],
-                                    pressedSprite = _sprites[7]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                        }
-                    }
-
-                    else if (GameManager.Instance.LaundryLvl == 20)
-                    {
-                        indexSpriteMachine = 0;
-                        while (indexSpriteMachine != _machines.Count)
-                        {
-                            _itemImage.SetNativeSize();
-                            if (indexSpriteMachine % 2 == 0)
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[8];
-
-                                if (indexMachineShadow == 2)
-                                {
-                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[2];
-                                }
-                                if (indexMachineShadow == 1)
-                                {
-                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[1];
-                                    indexMachineShadow++;
-                                }
-                                if (indexMachineShadow == 0)
-                                {
-                                    _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[0];
-                                    indexMachineShadow++;
-                                }
-
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[8],
-                                    pressedSprite = _sprites[9]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                            else
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[10];
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[10],
-                                    pressedSprite = _sprites[11]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                        }
-                    }
-
-                    else if (GameManager.Instance.LaundryLvl == 30)
-                    {
-                        indexSpriteMachine = 0;
-                        while (indexSpriteMachine != _machines.Count)
-                        {
-                            if (indexSpriteMachine % 2 == 0)
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[12];
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[12],
-                                    pressedSprite = _sprites[13]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                            else
-                            {
-                                _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[14];
-
-                                SpriteState spriteState = new SpriteState
-                                {
-                                    highlightedSprite = _sprites[14],
-                                    pressedSprite = _sprites[15]
-                                };
-
-                                _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
-
-                                indexSpriteMachine += 1;
-                            }
-                        }
-                    }
-
-                    _playerMoney.text = "" + GameManager.Instance.GoldAmount;
                 }
 
+                else if (GameManager.Instance.LaundryLvl == 10)
+                {
+                    indexSpriteMachine = 0;
+                    while (indexSpriteMachine != _machines.Count)
+                    {
+                        if (indexSpriteMachine % 2 == 0)
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[4];
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[4],
+                                pressedSprite = _sprites[5]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                        else
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[6];
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[6],
+                                pressedSprite = _sprites[7]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                    }
+                }
+
+                else if (GameManager.Instance.LaundryLvl == 20)
+                {
+                    indexSpriteMachine = 0;
+                    while (indexSpriteMachine != _machines.Count)
+                    {
+                        _itemImage.SetNativeSize();
+                        if (indexSpriteMachine % 2 == 0)
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[8];
+
+                            if (indexMachineShadow == 2)
+                            {
+                                _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[2];
+                            }
+                            if (indexMachineShadow == 1)
+                            {
+                                _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[1];
+                                indexMachineShadow++;
+                            }
+                            if (indexMachineShadow == 0)
+                            {
+                                _machinesShadows[indexMachineShadow].GetComponent<Image>().sprite = _spritesShadows[0];
+                                indexMachineShadow++;
+                            }
+
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[8],
+                                pressedSprite = _sprites[9]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                        else
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[10];
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[10],
+                                pressedSprite = _sprites[11]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                    }
+                }
+
+                else if (GameManager.Instance.LaundryLvl == 30)
+                {
+                    indexSpriteMachine = 0;
+                    while (indexSpriteMachine != _machines.Count)
+                    {
+                        if (indexSpriteMachine % 2 == 0)
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[12];
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[12],
+                                pressedSprite = _sprites[13]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                        else
+                        {
+                            _machines[indexSpriteMachine].GetComponent<Image>().sprite = _sprites[14];
+
+                            SpriteState spriteState = new SpriteState
+                            {
+                                highlightedSprite = _sprites[14],
+                                pressedSprite = _sprites[15]
+                            };
+
+                            _machines[indexSpriteMachine].GetComponent<Button>().spriteState = spriteState;
+
+                            indexSpriteMachine += 1;
+                        }
+                    }
+                }
+
+                _playerMoney.text = "" + GameManager.Instance.GoldAmount;
             }
+
         }
     }
+   
 }

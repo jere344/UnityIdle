@@ -37,7 +37,11 @@ public class ResourceDisplay : MonoBehaviour
         {
             _extraGoldGO.SetActive(true);
             ExtraGold += resourcePrice;
-            _extraGoldText.text = "" + ExtraGold + " Or";
+            _extraGoldText.text = "" + ExtraGold + " Pièces";
+            if (ExtraGold >= 1000)
+            {
+                _extraGoldText.text = "" + (ExtraGold/1000) + " Pièces";
+            }
         }
         else
         {
@@ -59,7 +63,7 @@ public class ResourceDisplay : MonoBehaviour
         {
             _extraGoldGO.SetActive(true);
             ExtraGold += resourcePrice;
-            _extraGoldText.text = "" + ExtraGold + " Or";
+            _extraGoldText.text = "" + ExtraGold + " Pièces";
         }
         else
         {

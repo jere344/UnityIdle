@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e6a7eedcc0704b8262d7b3ead38cf, type: 3}
   m_Name: W_Tristan
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 21300000, guid: e0ea7009c6905d94f80f6f16e4abb127, type: 3}
-  itemName: Tristan
-  itemDescription: "C'est toi, tu es pr\xEAt \xE0 tout pour sauver ton \xE9tablissement.\n<b>Ajoute
-    1 clic \xE0 chaque appui</b>"
-  itemPrice: 0
-  itemIndex: 0
-  itemGameObject: 0
+  ItemIndex: 0
+  ItemImage: {fileID: 21300000, guid: a4ffaa7cbbece7d439beb5c0029732a0, type: 3}
+  ItemName: Tristan
+  ItemDescription: "C'est toi, tu es pr\xEAt \xE0 tout pour sauver ton \xE9tablissement.\n<b>Ajoute
+    1 clic \xE0 chaque appui</b>\r"
+  ItemPrice: 0
+  ItemType: 0

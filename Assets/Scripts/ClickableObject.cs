@@ -5,6 +5,11 @@ using TMPro;
 
 public class ClickableObject : MonoBehaviour
 {
+    [Header("Audio")]
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioClip _sfxSound;
+
     [Header("Bar UI")]
     [SerializeField]
     private TextMeshProUGUI _barAmountText;
@@ -50,6 +55,8 @@ public class ClickableObject : MonoBehaviour
 
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+
         _bar.SetActive(true);
 
         _barText.text = "";
@@ -122,6 +129,7 @@ public class ClickableObject : MonoBehaviour
             GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
         }
 
+        audioManager.PlaySound(_sfxSound);
         yield return new WaitForSeconds(0.5f);
         ChangeResource();
         fillAmount = 0;
@@ -193,6 +201,7 @@ public class ClickableObject : MonoBehaviour
                         GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
                     }
 
+                    audioManager.PlaySound(_sfxSound);
                     yield return new WaitForSeconds(0.5f);
                     ChangeResource();
                     fillAmount = 0;
