@@ -42,9 +42,4 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void Update()
-    {
-        GoldAmount = 9999999;
-    }
 }

@@ -35,10 +35,10 @@ public class ClickableObject : MonoBehaviour
 
     [Header("Conditions & Routine")]
     public bool CanUseWorker;
-    //private bool playerResourceActivated;
-    public bool WorkerIsClicking, WorkerResourceActivated;
+    public bool WorkerIsClicking;
     private float workerCompetence;
     private Coroutine workerCoroutine;
+    private bool coroutineEnd;
 
     [Header ("Sprite logo")]
     [SerializeField]
@@ -95,9 +95,11 @@ public class ClickableObject : MonoBehaviour
         fillAmount += competence;
         _barText.text = resourceName;
 
-        if (fillAmount >= maxFillAmount)
+        if (fillAmount >= maxFillAmount && !coroutineEnd)
         {
+            coroutineEnd = true;
             _barAmountText.text = maxFillAmount + "/" + (maxFillAmount);
+            StartCoroutine(restartClicker());
         }
         else
         {
@@ -116,11 +118,6 @@ public class ClickableObject : MonoBehaviour
         {
             int playerCompetence = GameManager.Instance.PlayerCompetence;
             Clicker(playerCompetence);
-
-            if (fillAmount >= maxFillAmount && !WorkerResourceActivated)
-            {
-                StartCoroutine(restartClicker());
-            }
         }
     }
 
@@ -145,7 +142,7 @@ public class ClickableObject : MonoBehaviour
         _barText.text = "";
         _barAmountText.text = "";
         SetBackgroundImage(0);
-        //playerResourceActivated = false;
+        coroutineEnd = false;
     }
 
     // Worker (AutoClicker)
@@ -194,29 +191,6 @@ public class ClickableObject : MonoBehaviour
                 {
                     fillAmount = maxFillAmount - 1;
                 }
-
-                // if (fillAmount >= maxFillAmount && !playerResourceActivated)
-                // {
-                //     workerResourceActivated = true;
-                //     _barAmountText.text = "Termin� !";
-
-                //     if (ResourceIsFood)
-                //     {
-                //         GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, resourceNewImage, foodObject);
-                //     }
-                //     else
-                //     {
-                //         GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
-                //     }
-
-                //     audioManager.PlaySound(_sfxSound);
-                //     yield return new WaitForSeconds(0.5f);
-                //     ChangeResource();
-                //     fillAmount = 0;
-                //     _barAmountText.text = "";
-                //     SetBackgroundImage(0);
-                //     workerResourceActivated = false;
-                // }
             }
         }
     }
