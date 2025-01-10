@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int OvenCompetence;
     public int LaundryLvl;
     public int LaundryCompetence;
+    public bool julesIsAlreadyActivated;
 
     public TextMeshProUGUI text;
 
@@ -40,5 +41,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Update()
+    {
+        GoldAmount = 9999999;
     }
 }

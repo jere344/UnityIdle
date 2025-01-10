@@ -39,7 +39,6 @@ public class ShopGestion : MonoBehaviour
     private bool startTimerCoffee;
     private float endCooldownCoffee;
     private float cooldownCoffee;
-
     [SerializeField]
     private ItemScriptable _restartCoffeeItem;
 
@@ -62,7 +61,6 @@ public class ShopGestion : MonoBehaviour
     private bool startTimerRCup;
     private float endCooldownRCup;
     private float cooldownRCup;
-
     [SerializeField]
     private ItemScriptable _restartRCupItem;
 
@@ -115,6 +113,8 @@ public class ShopGestion : MonoBehaviour
     private Image _buttonDisplay;
     [SerializeField]
     private Button _buyButton;
+    [SerializeField]
+    private Button _julesButton;
 
     [Header("Item UI")]
     [SerializeField]
@@ -128,6 +128,7 @@ public class ShopGestion : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _playerMoney;
 
+
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -137,6 +138,8 @@ public class ShopGestion : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(GameManager.Instance.julesIsAlreadyActivated);
+
         if (coffeeButtonActivated)
         {
             startTimerCoffee = true;
@@ -151,6 +154,7 @@ public class ShopGestion : MonoBehaviour
         {
             startTimerSCup = true;
             _itemPrice.text = "" + (endCooldownSCup - cooldownSCup);
+
         }
         if (startTimerSCup)
         {
@@ -613,6 +617,7 @@ public class ShopGestion : MonoBehaviour
                     if (indexMachine == 2 || indexMachine == 4)
                     {
                         _machinesShadows[indexMachineShadow].SetActive(true);
+
                         indexMachineShadow++;
                     }
 
@@ -743,14 +748,27 @@ public class ShopGestion : MonoBehaviour
                     float itemOriginalPrice = itemPrice + itemPrice * GameManager.Instance.JulesLvl;
                     julesLvlPrice = (int)itemOriginalPrice;
                     GameManager.Instance.JulesLvl++;
-
-
-                    if (indexMachine > GameManager.Instance.JulesLvl && indexMachineJules != 6)
+                    int localIndex = 1;
+                    foreach (GameObject go in _machinesManagers)
                     {
-                        _machinesManagers[indexMachineJules].gameObject.GetComponent<ClickableObject>().CanUseWorker = true;
+                        if (localIndex++ <= GameManager.Instance.JulesLvl)
+                        {
+                            ClickableObject clicker = go.GetComponent<ClickableObject>();
+                            clicker.CanUseWorker = true; ;
+                            clicker.Worker(GameManager.Instance.julesIsAlreadyActivated);
+                        }
+                    }
+                    
+                    if (indexMachine == GameManager.Instance.JulesLvl && indexMachineJules != 6)
+                    {
                         GameManager.Instance.JulesCompetence += 0.5f;
                         indexMachineJules++;
 
+                        //if (GameManager.Instance.julesIsAlreadyActivated)
+                        //{
+                        //    _julesButton.GetComponent<Button>().onClick.Invoke();
+                        //    //_julesButton.GetComponent<Button>().onClick.Invoke();
+                        //}
 
                     }
                     else if (indexMachineJules <= GameManager.Instance.JulesLvl)

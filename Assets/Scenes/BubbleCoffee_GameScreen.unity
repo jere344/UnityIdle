@@ -348,6 +348,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13656657}
   m_CullTransparentMesh: 1
+--- !u!1 &24062613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24062615}
+  - component: {fileID: 24062614}
+  m_Layer: 0
+  m_Name: Audio_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &24062614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24062613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9924ea0ae1130ca448d2dd8c35fb16f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicSource: {fileID: 1046620975}
+  _sfxSource: {fileID: 393412743}
+  _music001: {fileID: 8300000, guid: fe3aa93a794f73346bc95b2db1ed831c, type: 3}
+  _music002: {fileID: 8300000, guid: 35d9b8e4887239d47b42b831ea3e4d50, type: 3}
+--- !u!4 &24062615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24062613}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1235.2902, y: 839.6301, z: -3.0966845}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1046620976}
+  - {fileID: 393412744}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &29303940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -43.5, y: -488.5}
+  m_AnchoredPosition: {x: -43.5, y: -159.5}
   m_SizeDelta: {x: 287, y: 319}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64079006
@@ -1136,6 +1186,9 @@ MonoBehaviour:
   - {fileID: 2063130537}
   - {fileID: 296835709}
   - {fileID: 393429328}
+  _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
+  _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
+  _imageAutoclickerLogo: {fileID: 219562677}
 --- !u!1 &70476036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,9 +2402,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1624069148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 390.99994, y: -77.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &261912786
@@ -3114,6 +3167,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 0
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -3455,6 +3510,134 @@ MonoBehaviour:
   _buttonImage: {fileID: 2049182574}
   _spriteBlank: {fileID: 21300000, guid: 22dbfd4ac3b149d40b75f197748e1fa2, type: 3}
   _spriteCross: {fileID: 21300000, guid: 9747394fe8f267641a2808fa9fa8d462, type: 3}
+--- !u!1 &393412742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393412744}
+  - component: {fileID: 393412743}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &393412743
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393412742}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -4520863977430128184, guid: 9da64c865f9b59d4e9296a2ae74378cb, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &393412744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393412742}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 24062615}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &393429328
 GameObject:
   m_ObjectHideFlags: 0
@@ -3509,6 +3692,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 0
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -5120,9 +5305,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1624069148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 629.6, y: -65.30005}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 159, y: 181}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541413078
@@ -6962,9 +7147,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1624069148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 839, y: -69.400024}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 157, y: 173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &652000931
@@ -9844,7 +10029,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -10101,6 +10286,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 1
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -11124,6 +11311,134 @@ MonoBehaviour:
   _minGold: 12
   _maxGold: 18
   objectIsASet: 0
+--- !u!1 &1046620974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046620976}
+  - component: {fileID: 1046620975}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1046620975
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046620974}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -6133236849209408909, guid: 9da64c865f9b59d4e9296a2ae74378cb, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1046620976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046620974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 24062615}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055575513
 GameObject:
   m_ObjectHideFlags: 0
@@ -11679,6 +11994,7 @@ MonoBehaviour:
   OvenCompetence: 0
   LaundryLvl: 1
   LaundryCompetence: 0
+  julesIsAlreadyActivated: 0
   text: {fileID: 0}
 --- !u!1 &1097405229
 GameObject:
@@ -12885,6 +13201,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 0
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -13090,7 +13408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1509434, g: 0.06006665, b: 0.021359894, a: 1}
+  m_Color: {r: 0.8313726, g: 0.7411765, b: 0.61960787, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14024,6 +14342,8 @@ MonoBehaviour:
   ResourceIsLaundry: 0
   ResourceMoney: 0
   CanUseWorker: 1
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 185776392}
@@ -14638,6 +14958,7 @@ MonoBehaviour:
   _buttonBlue: {fileID: 21300000, guid: 670a881e606154c4592b31b4ee20a83f, type: 3}
   _buttonDisplay: {fileID: 1244991654}
   _buyButton: {fileID: 1244991653}
+  _julesButton: {fileID: 64079006}
   _itemImage: {fileID: 808506572}
   _itemName: {fileID: 1395812777}
   _itemDescription: {fileID: 616078434}
@@ -14757,6 +15078,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 0
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -16475,6 +16798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624069148}
+  - component: {fileID: 1624069149}
   m_Layer: 5
   m_Name: Navigation
   m_TagString: Untagged
@@ -16505,6 +16829,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1624069149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624069147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 8
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
+  m_ReverseArrangement: 0
 --- !u!1 &1636302646
 GameObject:
   m_ObjectHideFlags: 0
@@ -18061,7 +18411,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1373759581}
         m_TargetAssemblyTypeName: ClickableObject, Assembly-CSharp
         m_MethodName: Worker
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18575,9 +18925,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1624069148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153.09995, y: -83.099976}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 158, y: 153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1992718205
@@ -19209,6 +19559,8 @@ MonoBehaviour:
   ResourceIsLaundry: 1
   ResourceMoney: 0
   CanUseWorker: 0
+  WorkerIsClicking: 0
+  WorkerResourceActivated: 0
   _checkmark: {fileID: 21300000, guid: 985174a8b592ef1448f3551d4d37912d, type: 3}
   _cross: {fileID: 21300000, guid: 1471a87af63b9654bb5cea28006f1144, type: 3}
   _imageAutoclickerLogo: {fileID: 219562677}
@@ -19633,3 +19985,4 @@ SceneRoots:
   - {fileID: 928326037}
   - {fileID: 574736953}
   - {fileID: 1999892947}
+  - {fileID: 24062615}

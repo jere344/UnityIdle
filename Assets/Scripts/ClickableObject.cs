@@ -36,7 +36,7 @@ public class ClickableObject : MonoBehaviour
     [Header("Conditions & Routine")]
     public bool CanUseWorker;
     //private bool playerResourceActivated;
-    private bool workerIsClicking, workerResourceActivated;
+    public bool WorkerIsClicking, WorkerResourceActivated;
     private float workerCompetence;
     private Coroutine workerCoroutine;
 
@@ -71,12 +71,12 @@ public class ClickableObject : MonoBehaviour
             _bar.SetActive(true);
             barTimer += Time.deltaTime;
         }
-        if (barTimer > 3 && !workerIsClicking)
+        if (barTimer > 3 && !WorkerIsClicking)
         {
             timerEnd = true;
             _bar.SetActive(false);
         }
-        if (workerIsClicking)
+        if (WorkerIsClicking)
         {
             timerEnd = true;
             _bar.SetActive(true);
@@ -94,7 +94,16 @@ public class ClickableObject : MonoBehaviour
     {
         fillAmount += competence;
         _barText.text = resourceName;
-        _barAmountText.text =  fillAmount + "/" + (maxFillAmount + 1);
+
+        if (fillAmount >= maxFillAmount)
+        {
+            _barAmountText.text = maxFillAmount + "/" + (maxFillAmount);
+        }
+        else
+        {
+            _barAmountText.text = fillAmount + "/" + (maxFillAmount);
+        }
+
         SetBackgroundImage(1f);
     }
 
@@ -108,7 +117,7 @@ public class ClickableObject : MonoBehaviour
             int playerCompetence = GameManager.Instance.PlayerCompetence;
             Clicker(playerCompetence);
 
-            if (fillAmount >= maxFillAmount && !workerResourceActivated)
+            if (fillAmount >= maxFillAmount && !WorkerResourceActivated)
             {
                 StartCoroutine(restartClicker());
             }
@@ -141,37 +150,33 @@ public class ClickableObject : MonoBehaviour
 
     // Worker (AutoClicker)
 
-    public void Worker()
+    public void Worker(bool activated)
     {
         if (CanUseWorker)
         {
-            workerIsClicking = !workerIsClicking;
-            _imageAutoclickerLogo.sprite = isCheckmark ? _checkmark : _cross;
-            isCheckmark = !isCheckmark;
 
             if (ResourceIsFood)
             {
+                WorkerIsClicking = !WorkerIsClicking;
+                _imageAutoclickerLogo.sprite = isCheckmark ? _checkmark : _cross;
+                isCheckmark = !isCheckmark;
+
                 workerCompetence = GameManager.Instance.LouisCompetence;
             }
             else if (ResourceIsLaundry)
             {
+                WorkerIsClicking = activated;
                 workerCompetence = GameManager.Instance.JulesCompetence;
             }
-
-            if (workerIsClicking)
+            if (workerCoroutine != null)
             {
-                if (workerCoroutine == null)
-                {
-                    workerCoroutine = StartCoroutine(workerRoutine(workerCompetence));
-                }
+                StopCoroutine(workerCoroutine);
+                workerCoroutine = null;
             }
-            else
+
+            if (WorkerIsClicking)
             {
-                if (workerCoroutine != null)
-                {
-                    StopCoroutine(workerCoroutine);
-                    workerCoroutine = null;
-                }
+                workerCoroutine = StartCoroutine(workerRoutine(workerCompetence));
             }
         }
     }
