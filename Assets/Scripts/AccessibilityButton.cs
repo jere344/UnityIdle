@@ -20,7 +20,9 @@ public class AccessibilityButton : MonoBehaviour
     [SerializeField]
     private GameObject _background_blank;
     [SerializeField]
-    private GameObject _background;
+    private GameObject _background_001;
+    [SerializeField]
+    private GameObject _background_002;
     [SerializeField]
     private GameObject _bookmarksButton;
     [SerializeField]
@@ -69,7 +71,8 @@ public class AccessibilityButton : MonoBehaviour
         if (isLeftHanded)
         {
             _background_blank.transform.localScale = new Vector3(-1f, 1f, 1f);
-            _background.transform.localScale = new Vector3(-1f, 1f, 1f);
+            _background_002.transform.localScale = new Vector3(-1f, 1f, 1f);
+            _background_001.transform.localScale = new Vector3(-1f, 1f, 1f);
             _bookmarksButton.transform.localScale = new Vector3(-1f, 1f, 1f);
             _buttonQuit.transform.localScale = new Vector3(-1f, 1f, 1f);
             _buttonWorkersDisplay.transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -89,7 +92,8 @@ public class AccessibilityButton : MonoBehaviour
         else
         {
             _background_blank.transform.localScale = new Vector3(1f, 1f, 1f);
-            _background.transform.localScale = new Vector3(1f, 1f, 1f);
+            _background_001.transform.localScale = new Vector3(1f, 1f, 1f);
+            _background_002.transform.localScale = new Vector3(1f, 1f, 1f);
             _bookmarksButton.transform.localScale = new Vector3(1f, 1f, 1f);
             _buttonQuit.transform.localScale = new Vector3(1f, 1f, 1f);
             _buttonWorkersDisplay.transform.localScale = new Vector3(1f, 1f, 1f);

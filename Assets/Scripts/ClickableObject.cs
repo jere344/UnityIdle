@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -35,7 +35,7 @@ public class ClickableObject : MonoBehaviour
 
     [Header("Conditions & Routine")]
     public bool CanUseWorker;
-    private bool playerResourceActivated;
+    //private bool playerResourceActivated;
     private bool workerIsClicking, workerResourceActivated;
     private float workerCompetence;
     private Coroutine workerCoroutine;
@@ -94,7 +94,7 @@ public class ClickableObject : MonoBehaviour
     {
         fillAmount += competence;
         _barText.text = resourceName;
-        _barAmountText.text =  fillAmount + "/" + maxFillAmount;
+        _barAmountText.text =  fillAmount + "/" + (maxFillAmount + 1);
         SetBackgroundImage(1f);
     }
 
@@ -117,8 +117,8 @@ public class ClickableObject : MonoBehaviour
 
     private IEnumerator restartClicker()
     {
-        playerResourceActivated = true;
-        _barText.text = "Terminé !";
+        //playerResourceActivated = true;
+        _barText.text = "TerminÃ© !";
 
         if (ResourceIsFood)
         {
@@ -136,7 +136,7 @@ public class ClickableObject : MonoBehaviour
         _barText.text = "";
         _barAmountText.text = "";
         SetBackgroundImage(0);
-        playerResourceActivated = false;
+        //playerResourceActivated = false;
     }
 
     // Worker (AutoClicker)
@@ -180,35 +180,38 @@ public class ClickableObject : MonoBehaviour
     {
         while (true)
         {
-
             if (fillAmount < maxFillAmount)
             {
+                yield return new WaitForSeconds(workerCompetence);
                 Clicker(1);
 
-                yield return new WaitForSeconds(workerCompetence);
-
-                if (fillAmount >= maxFillAmount && !playerResourceActivated)
+                if (fillAmount >= maxFillAmount)
                 {
-                    workerResourceActivated = true;
-                    _barAmountText.text = "Terminé !";
-
-                    if (ResourceIsFood)
-                    {
-                        GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, resourceNewImage, foodObject);
-                    }
-                    else
-                    {
-                        GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
-                    }
-
-                    audioManager.PlaySound(_sfxSound);
-                    yield return new WaitForSeconds(0.5f);
-                    ChangeResource();
-                    fillAmount = 0;
-                    _barAmountText.text = "";
-                    SetBackgroundImage(0);
-                    workerResourceActivated = false;
+                    fillAmount = maxFillAmount - 1;
                 }
+
+                // if (fillAmount >= maxFillAmount && !playerResourceActivated)
+                // {
+                //     workerResourceActivated = true;
+                //     _barAmountText.text = "Terminï¿½ !";
+
+                //     if (ResourceIsFood)
+                //     {
+                //         GameManager.Instance.DisplayResource.DisplayResourceFood(ResourceMoney, resourceNewImage, foodObject);
+                //     }
+                //     else
+                //     {
+                //         GameManager.Instance.DisplayResource.DisplayResource(ResourceMoney, resourceNewImage);
+                //     }
+
+                //     audioManager.PlaySound(_sfxSound);
+                //     yield return new WaitForSeconds(0.5f);
+                //     ChangeResource();
+                //     fillAmount = 0;
+                //     _barAmountText.text = "";
+                //     SetBackgroundImage(0);
+                //     workerResourceActivated = false;
+                // }
             }
         }
     }
@@ -255,6 +258,5 @@ public class ClickableObject : MonoBehaviour
         currentColor.a = alpha;
         _barBackground.color = currentColor;
     }
-
 }
 

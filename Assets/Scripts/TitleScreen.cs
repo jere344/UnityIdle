@@ -13,6 +13,12 @@ public class TitleScreen : MonoBehaviour
     [SerializeField]
     private GameObject _transitionObject;
 
+    void Start()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
+    }
+
     public void NextLevel()
     {
         DontDestroyOnLoad(_audioManager);

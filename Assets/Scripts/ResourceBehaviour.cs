@@ -33,7 +33,7 @@ public class ResourceBehaviour : MonoBehaviour
         _extraGoldAmount = GameManager.Instance.DisplayResource.ExtraGold;
         GameManager.Instance.DisplayMoney.GainGold(_extraGoldAmount);
         GameManager.Instance.DisplayResource.ExtraGold = 0;
-        objectToDeactivate.SetActive(false);
+
         gameObject.SetActive(false);
     }
 

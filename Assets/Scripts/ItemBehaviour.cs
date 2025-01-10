@@ -23,6 +23,7 @@ public class ItemBehaviour : MonoBehaviour
     private int gainGold;
 
     [Header("Information Object")]
+    [SerializeField]
     private bool objectIsASet;
 
     private void Start()
@@ -45,7 +46,7 @@ public class ItemBehaviour : MonoBehaviour
                 Timer = 0;
                 gameObject.SetActive(false);
             }
-            else
+            else if (objectIsASet)
             {
                 gainGold = Random.Range(_minGold, _maxGold);
                 GameManager.Instance.DisplayMoney.GainGold(gainGold);

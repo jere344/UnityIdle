@@ -43,16 +43,18 @@ public class GoalDisplay : MonoBehaviour
     private int seasonGoalBase = 50;
     private float seasonGoal;
     public int CurrentIndex;
+    public int PriceBase;
     public int PlayerGoalAmount;
 
 
     void Start()
     {
+        PlayerGoalAmount = 0;
+
         audioManager = FindObjectOfType<AudioManager>();
 
         GameManager.Instance.GestionResource = FindObjectOfType<ResourceGestion>();
 
-        PlayerGoalAmount = 0;
         _seasonText.text = seasonsText[CurrentIndex];
         newSeasonGoal = seasonGoalBase;
 
@@ -62,13 +64,13 @@ public class GoalDisplay : MonoBehaviour
     {
         if (goalCompleted == false)
         {
-            if (newSeasonGoal >= 1000)
+            if (newSeasonGoal >= 1000 && PlayerGoalAmount >= 1000)
+            {
+                _goalText.text = (PlayerGoalAmount / 1000) + " k / " + (newSeasonGoal / 1000) + " k";
+            }
+            else if (newSeasonGoal >= 1000)
             {
                 _goalText.text = PlayerGoalAmount.ToString("") + " / " + (newSeasonGoal / 1000) + " k";
-            }
-            else if (newSeasonGoal >= 1000 && PlayerGoalAmount >= 1000)
-            {
-                _goalText.text = (PlayerGoalAmount / 1000) + " k / " + (newSeasonGoal/1000) + " k";
             }
             else
             {
@@ -90,9 +92,15 @@ public class GoalDisplay : MonoBehaviour
         PlayerGoalAmount = 0;
 
         CurrentIndex += 1;
-        seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (CurrentIndex)));
+        PriceBase += 1;
+        seasonGoal = seasonGoalBase * (Mathf.Pow(1.5f, (PriceBase)));
         newSeasonGoal = (int)seasonGoal;
 
+
+        if (CurrentIndex == 4)
+        {
+            CurrentIndex = 0;
+        }
         _seasonText.text = seasonsText[CurrentIndex];
         _seasonDisplay.sprite = _seasonsSprites[CurrentIndex];
         _menuDisplay.sprite = _menuSprites[CurrentIndex];

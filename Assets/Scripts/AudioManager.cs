@@ -4,46 +4,64 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+
     [Header("AudioSources")]
-    [SerializeField]
-    private AudioSource _musicSource;
-    [SerializeField]
-    private AudioSource _sfxSource;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _sfxSource;
 
     [Header("AudioClips")]
-    [SerializeField]
-    private AudioClip _music001;
-    [SerializeField]
-    private AudioClip _music002;
+    [SerializeField] private AudioClip _music001;
+    [SerializeField] private AudioClip _music002;
 
-    private bool IsPlayingFirstMusic = true;
+    [Header("Conditions")]
+    private bool isPlayingFirstMusic = true;
 
-    void Start()
+    private void Start()
     {
-        _musicSource.clip = _music001;
-        _musicSource.Play();
+        PlayMusic(_music001);
     }
-    void Update()
+
+    private void Update()
     {
         if (!_musicSource.isPlaying)
         {
-            if (IsPlayingFirstMusic)
-            {
-                _musicSource.clip = _music001;
-            }
-            else
-            {
-                _musicSource.clip = _music002;
-            }
-
-            IsPlayingFirstMusic = !IsPlayingFirstMusic;
-            _musicSource.Play();
+            SwitchMusic();
         }
+    }
+
+    private void SwitchMusic()
+    {
+        if (isPlayingFirstMusic)
+        {
+            PlayMusic(_music002);
+        }
+        else
+        {
+            PlayMusic(_music001);
+        }
+
+        isPlayingFirstMusic = !isPlayingFirstMusic;
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        _musicSource.Stop();
+        _musicSource.clip = clip;
+        _musicSource.Play();
     }
 
     public void PlaySound(AudioClip sound)
     {
-        _sfxSource.clip = sound;
-        _sfxSource.Play();
+        _sfxSource.PlayOneShot(sound);
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (!pauseStatus && !_musicSource.isPlaying)
+        {
+            _musicSource.Play();
+        }
     }
 }
+
